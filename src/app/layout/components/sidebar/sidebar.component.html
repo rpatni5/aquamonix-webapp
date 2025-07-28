@@ -1,6 +1,5 @@
-<!-- Left Sidebar Start -->
 <div class="app-sidebar-menu">
-  <ngx-simplebar class="h-100">
+  <ngx-simplebar class="h-100 d-flex flex-column">
     <!--- Sidemenu -->
     <div id="sidebar-menu">
       <div class="logo-box">
@@ -54,11 +53,16 @@
           }
         }
       </ul>
-    </div>
-    <!-- End Sidebar -->
 
+      
+    </div>
     <div class="clearfix"></div>
+  
   </ngx-simplebar>
+  <div class="sidebar-stop-button-container mt-auto p-3">
+    <button class="sidebar-stop-button" (click)="onStopClick()">Stop</button>
+  </div>
+  
 </div>
 <!-- Left Sidebar End -->
 <ng-template #MenuItemLink let-menu="menu" let-className="className">

@@ -15,16 +15,16 @@ import { NgbCollapse, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap'
 import { findAllParent, findMenuItem } from '../../../helper/utils'
 
 @Component({
-    selector: 'app-sidebar',
-    imports: [
-        SimplebarAngularModule,
-        RouterModule,
-        CommonModule,
-        NgbCollapseModule,
-    ],
-    templateUrl: './sidebar.component.html',
-    styles: ``,
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  selector: 'app-sidebar',
+  imports: [
+    SimplebarAngularModule,
+    RouterModule,
+    CommonModule,
+    NgbCollapseModule,
+  ],
+  templateUrl: './sidebar.component.html',
+  styles: ``,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
   menuItems: MenuItemType[] = []
@@ -34,6 +34,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   //   basePath !== '' ? basePath + '/' : '',
   //   '/'
   // )
+
   constructor(
     private renderer: Renderer2,
     private el: ElementRef
@@ -51,6 +52,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.initMenu()
   }
+  
+  onStopClick(): void {
+    console.log('Stop button clicked');
+    // Add your stop logic here
+  }
+  
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -72,33 +79,37 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   _activateMenu(): void {
     const div = this.el.nativeElement.querySelector('.app-sidebar-menu')
-    let matchingMenuItem: any = null
+    let matchingMenuItem: HTMLElement | null = null
 
     if (div) {
       const items = div.getElementsByClassName('nav-link-ref')
       for (let i = 0; i < items.length; ++i) {
-     
-          matchingMenuItem = items[i]
+        const item = items[i] as HTMLElement
+        const itemUrl = item.getAttribute('ng-reflect-router-link') || item.getAttribute('href')
+
+        if (itemUrl && this.router.url.includes(itemUrl)) {
+          matchingMenuItem = item
           break
+        }
       }
+
       if (matchingMenuItem) {
         const mid = matchingMenuItem.getAttribute('aria-controls')
-        const activeMt = findMenuItem(this.menuItems, mid)
+        if (mid) {
+          const activeMt = findMenuItem(this.menuItems, mid)
+          if (activeMt) {
+            const matchingObjs = [activeMt.key, ...findAllParent(this.menuItems, activeMt)]
 
-        if (activeMt) {
-          const matchingObjs = [
-            activeMt['key'],
-            ...findAllParent(this.menuItems, activeMt),
-          ]
-
-          this.activeMenuItems = matchingObjs
-          this.menuItems.forEach((menu: MenuItemType) => {
-            menu.collapsed = !matchingObjs.includes(menu.key!)
-          })
+            this.activeMenuItems = matchingObjs
+            this.menuItems.forEach((menu: MenuItemType) => {
+              menu.collapsed = !matchingObjs.includes(menu.key!)
+            })
+          }
         }
       }
     }
   }
+
 
   /**
    * toggles open menu
@@ -108,6 +119,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   toggleMenuItem(menuItem: MenuItemType, collapse: NgbCollapse): void {
     collapse.toggle()
     let openMenuItems: string[]
+
     if (!menuItem.collapsed) {
       openMenuItems = [
         menuItem['key'],
