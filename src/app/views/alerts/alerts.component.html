@@ -3,8 +3,8 @@
   <div class="big-alert-card">
     <div class="alerts-list">
       <div class="alert-card" *ngFor="let alert of alerts">
-        <div class="alert-time">{{ alert.time }}</div>
-        <div class="alert-message">{{ alert.message }}</div>
+        <div class="alert-time">{{ alert.DateTimeUtc }}</div>
+        <div class="alert-message">{{ alert.Description }}</div>
       </div>
     </div>
   </div>
