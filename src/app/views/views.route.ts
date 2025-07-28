@@ -12,6 +12,22 @@ export const VIEWS_ROUTES: Route[] = [
     loadChildren: () =>
       import('./icons/icons.route').then((mod) => mod.ICONS_ROUTES),
   },
+  {
+    path: 'system-status',
+    loadComponent: () =>  import('./system-status/system-status.component').then(m => m.SystemStatusComponent),
+  },
+  {
+    path: 'alerts',
+    loadComponent: () =>  import('./alerts/alerts.component').then(m => m.AlertsComponent),
+  },
+  {
+    path: 'stations',
+    loadComponent: () =>  import('./stations/stations.component').then(m => m.StationsComponent),
+  },
+  {
+    path: 'programs',
+    loadComponent: () =>  import('./programs/programs.component').then(m => m.ProgramsComponent),
+  },
 
 
 ]

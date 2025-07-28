@@ -18,25 +18,25 @@ export const MENU_ITEMS: MenuItemType[] = [
     key: 'status',
     label: 'System Status',
     icon: 'home',
-    url: '/index',
+    url: '/system-status',
   },
   {
     key: 'alerts',
     label: 'Alerts',
     icon: 'alert-triangle',
-    url: '/index',
+    url: '/alerts',
   },
   {
     key: 'stations',
     label: 'Stations',
     icon: 'database',
-    url: '/index',
+    url: '/stations',
   },
   {
     key: 'program',
     label: 'Programs',
     icon: 'code',
-    url: '/index',
+    url: '/programs',
   }
   
 ]
