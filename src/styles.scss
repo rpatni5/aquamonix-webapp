@@ -10,3 +10,69 @@
     height: 72vh;
     overflow: auto;
 }
+
+
+.app-sidebar-menu {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-stop-button-container {
+    margin-top: auto;
+    padding: 1rem;
+}
+
+.sidebar-stop-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    width: 100%;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.sidebar-stop-button:hover {
+    background-color: #e55353;
+}
+
+.sidebar-stop-button-container {
+    margin-top: auto;
+    padding: 1rem;
+}
+
+.app-sidebar-menu ngx-simplebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#sidebar-menu {
+    flex: 1 1 auto;
+    display: flex;
+    margin-top: 22px;
+    flex-direction: column;
+    min-height: 0;
+}
+
+#side-menu {
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.sidebar-stop-button-container {
+    flex-shrink: 0;
+    margin-top: auto;
+    padding: 1rem;
+}
+
+.sidebar-collapsed .sidebar-stop-button-container {
+    display: none!important;
+  }
+  body.sidebar-collapsed .sidebar-stop-button-container {
+    display: none !important;
+  }
+  

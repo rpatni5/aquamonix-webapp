@@ -5,10 +5,10 @@
       *ngFor="let alert of alerts">
       <div>
         <div class="fw-bold alert-time">
-          {{ alert.time }}
+          {{ alert.DateTimeUtc }}
         </div>
         <div class="text-muted small alert-message">
-          {{ alert.message }}
+          {{ alert.Description }}
         </div>
       </div>
     </div>
