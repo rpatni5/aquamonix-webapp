@@ -4,7 +4,11 @@ export interface DeviceData {
             [deviceId: string]: ReticDevice;
         };
     };
-    Alerts: any;
+    Alerts: {
+        Items: {
+            [alertId: string]: AlertItem;
+        };
+    }
 }
 
 export interface ReticDevice {
@@ -83,7 +87,7 @@ export interface ReticDevice {
             };
         };
     };
-    SensorGroups: object;
+    SensorGroups: SensorGroups;
     Badges: object;
     IsUpdatingStatus: boolean;
     Status: object;
@@ -153,3 +157,39 @@ export interface Program {
         Visible: string;
     };
 }
+
+export interface AlertItem {
+    DateTimeUtc: string;
+    DeviceId: string;
+    Description: string;
+    Severity: string;
+    Active: boolean;
+    Category: string;
+}
+
+export interface SensorValueItem {
+    Value: string;
+    Visible: string;
+    Severity?: string;
+}
+
+export interface SensorValues {
+    Items: {
+        [id: string]: SensorValueItem;
+    };
+}
+export interface SensorItem {
+    Values: SensorValues;
+}
+export interface SensorGroupItems {
+    [sensorId: string]: SensorItem;
+}
+export interface SensorGroup {
+    Items: SensorGroupItems;
+}
+export interface SensorGroups {
+    Items: {
+        [groupName: string]: SensorGroup;
+    };
+}
+

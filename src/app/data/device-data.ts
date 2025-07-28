@@ -1401,7 +1401,511 @@ export const dummyData: DeviceData = {
                         Type: 'MPG',
                         Location: {},
                         Settings: {},
-                        SensorGroups: {},
+                        SensorGroups: {
+                            Items: {
+                                Sense: {
+                                    Name: "Output Sense",
+                                    Items: {
+                                        MPG101_SENSE: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Local Sense"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_TWIN_CURRENT_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Module 1 Sense"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_TWIN_CURRENT_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Module 2 Sense"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_TWIN_CURRENT_3: {
+                                            Values: {
+                                                Items: {
+                                                    1: {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Module 3 Sense"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_TWIN_CURRENT_4: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Module 4 Sense"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Sys: {
+                                    Name: 'System Sensors',
+                                    Items: {
+                                        MPG101_PRESSURE: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'kPa',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '2',
+                                                        Name: 'Pressure 1'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PRESSURE_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'kPa',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '2',
+                                                        Name: 'Pressure 2'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_FLOW: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'L/s',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '3',
+                                                        Name: 'Flow 1'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_FLOW_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'L/s',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '3',
+                                                        Name: 'Flow 2'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_FERT_FLOW: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'L/s',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '3',
+                                                        Name: 'Fert Flow'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_LEVEL: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Level 1'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_LEVEL_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Level 2'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_TEMPERATURE: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'C',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Temperature'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Pump: {
+                                    Name: 'Pumps',
+                                    Items: {
+                                        MPG101_PUMP_CURRENT_1: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'A',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '1',
+                                                        Name: 'Pump 1 Current'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_CURRENT_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'A',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '1',
+                                                        Name: 'Pump 2 Current'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_CURRENT_3: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'A',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '1',
+                                                        Name: 'Pump 3 Current'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_CURRENT_4: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'A',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '1',
+                                                        Name: 'Pump 4 Current'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_CURRENT_5: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'A',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '1',
+                                                        Name: 'Pump 5 Current'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_FAULT_1: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Pump 1 Fault'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_FAULT_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Pump 2 Fault'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_FAULT_3: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Pump 3 Fault'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_FAULT_4: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Pump 4 Fault'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PUMP_FAULT_5: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Pump 5 Fault'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                WaterUsage1: {
+                                    Name: 'Water Usage',
+                                    Items: {
+                                        MPG101_VOL_1_MONTH_TOTAL: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'kL',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Month Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_VOL_1_MONTH_PERCENT: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: '%',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Month %'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_VOL_1_YEAR_TOTAL: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'kL',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Year Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_VOL_1_YEAR_PERCENT: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: '%',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Year %'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Weather: {
+                                    Name: 'Weather',
+                                    Items: {
+                                        MPG101_W_PREV_ET: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'ET Yesterday'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_W_PREV_R: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Rain Yesterday'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_W_ET: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'ET Today'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_W_R: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Rain Today '
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Moisture: {
+                                    Name: 'Soil Moisture',
+                                    Items: {
+                                        MPG101_MOISTURE: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: '%',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Moisture 1'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_MOISTURE_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: '%',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Moisture 2'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PROBE_1: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Probe 1 Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PROBE_2: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Probe 2 Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PROBE_3: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Probe 3 Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PROBE_4: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Probe 4 Total'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_PROBE_5: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Units: 'mm',
+                                                        Type: 'Number',
+                                                        DecimalPlaces: '0',
+                                                        Name: 'Probe 5 Total'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Info: {
+                                    Name: 'Information',
+                                    Items: {
+                                        MPG101_MODEL: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Model'
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPG101_VERSION: {
+                                            Values: {
+                                                Items: {
+                                                    '1': {
+                                                        Type: 'String',
+                                                        Name: 'Firmware'
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         Name: 'MPG',
                     },
                     TimeStamp: '1753687010',
@@ -1420,7 +1924,296 @@ export const dummyData: DeviceData = {
                         }
                     }
                 },
-                SensorGroups: {},
+                SensorGroups: {
+                    Items: {
+                        Info: {
+                            Items: {
+                                MPG101_MODEL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_VERSION: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "v250128",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Moisture: {
+                            Items: {
+                                MPG101_MOISTURE: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_MOISTURE_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Pump: {
+                            Items: {
+                                MPG101_PUMP_CURRENT_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PUMP_CURRENT_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PUMP_CURRENT_3: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PUMP_CURRENT_4: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PUMP_CURRENT_5: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Sense: {
+                            Items: {
+                                MPG101_SENSE: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_TWIN_CURRENT_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_TWIN_CURRENT_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "-1",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_TWIN_CURRENT_3: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_TWIN_CURRENT_4: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Sys: {
+                            Items: {
+                                MPG101_FERT_FLOW: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_FLOW: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_FLOW_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_LEVEL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_LEVEL_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PRESSURE: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_PRESSURE_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_TEMPERATURE: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        WaterUsage1: {
+                            Items: {
+                                MPG101_VOL_1_MONTH_PERCENT: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Severity: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_VOL_1_MONTH_TOTAL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_VOL_1_YEAR_PERCENT: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Severity: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPG101_VOL_1_YEAR_TOTAL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "106509",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 Badges: {},
                 IsUpdatingStatus: false,
                 Status: {},
@@ -1428,5 +2221,184 @@ export const dummyData: DeviceData = {
             },
         },
     },
-    Alerts: DUMMY_ALERTS,
+    Alerts: {
+        Items: {
+            "17": {
+                DateTimeUtc: "1752818750",
+                DeviceId: "MPG101",
+                Description: "New Firmware Loaded",
+                Severity: "0",
+                Active: false,
+                Category: "0"
+            },
+            "18": {
+                DateTimeUtc: "1752818768",
+                DeviceId: "MPG101",
+                Description: "Rain Switch On",
+                Severity: "0",
+                Active: false,
+                Category: "0"
+            },
+            "19": {
+                DateTimeUtc: "1752818768",
+                DeviceId: "MPG101",
+                Description: "Controller Powered On",
+                Severity: "0",
+                Active: false,
+                Category: "0"
+            },
+            "20": {
+                DateTimeUtc: "1752818769",
+                DeviceId: "MPG101",
+                Description: "Door Open",
+                Severity: "0",
+                Active: false,
+                Category: "0"
+            },
+            "21": {
+                DateTimeUtc: "1752818868",
+                DeviceId: "MPG101",
+                Description: "TWIN / Module 2 Comms Error",
+                Severity: "4",
+                Active: false,
+                Category: "0"
+            },
+            "22": {
+                DateTimeUtc: "1752822000",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "23": {
+                DateTimeUtc: "1753167600",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "26": {
+                DateTimeUtc: "1753207200",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "27": {
+                DateTimeUtc: "1753228800",
+                DeviceId: "MPG101",
+                Description: "Program 8 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "28": {
+                DateTimeUtc: "1753232400",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "29": {
+                DateTimeUtc: "1753234500",
+                DeviceId: "MPG101",
+                Description: "Program 16 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "30": {
+                DateTimeUtc: "1753243200",
+                DeviceId: "MPG101",
+                Description: "Program 12 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "31": {
+                DateTimeUtc: "1753286400",
+                DeviceId: "MPG101",
+                Description: "Program 1 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "32": {
+                DateTimeUtc: "1753286400",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "33": {
+                DateTimeUtc: "1753297200",
+                DeviceId: "MPG101",
+                Description: "Program 1 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "34": {
+                DateTimeUtc: "1753297200",
+                DeviceId: "MPG101",
+                Description: "Program 10 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "35": {
+                DateTimeUtc: "1753300800",
+                DeviceId: "MPG101",
+                Description: "Program 11 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "36": {
+                DateTimeUtc: "1753304400",
+                DeviceId: "MPG101",
+                Description: "Program 10 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "37": {
+                DateTimeUtc: "1753304400",
+                DeviceId: "MPG101",
+                Description: "Program 11 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "38": {
+                DateTimeUtc: "1753320900",
+                DeviceId: "MPG101",
+                Description: "Program 16 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "39": {
+                DateTimeUtc: "1753340400",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "40": {
+                DateTimeUtc: "1753380000",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+        },
+    },
 };

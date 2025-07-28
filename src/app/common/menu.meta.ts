@@ -17,7 +17,7 @@ export const MENU_ITEMS: MenuItemType[] = [
   {
     key: 'status',
     label: 'System Status',
-    icon: 'home',
+    icon: 'activity', 
     url: '/system-status',
   },
   {
@@ -29,14 +29,20 @@ export const MENU_ITEMS: MenuItemType[] = [
   {
     key: 'stations',
     label: 'Stations',
-    icon: 'database',
+    icon: '/assets/images/aqua/stations2x.png',
     url: '/stations',
   },
   {
     key: 'program',
     label: 'Programs',
-    icon: 'code',
+    icon: 'share-2',
     url: '/programs',
+  },
+  {
+    key: 'settings',
+    label: 'Settings',
+    icon: 'settings',
+    url: '/settings',
   }
   
 ]

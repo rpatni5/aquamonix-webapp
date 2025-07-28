@@ -86,3 +86,21 @@ body.sidebar-collapsed .sidebar-stop-button-container {
     background-color: #CF6679;
     color: white;
 }
+
+.menu-icon {
+    width: 23px;
+    height: 23px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+
+#sidebar-menu > ul > li > a {
+    color: #007cb9;
+    display: block;
+    padding: 10px 20px;
+    position: relative;
+    transition: all 0.4s;
+    font-size: 16px !important;
+    font-weight: 500;
+}

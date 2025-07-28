@@ -50,15 +50,15 @@
         }
       </ul>
 
-      
+
     </div>
     <div class="clearfix"></div>
-  
+
   </ngx-simplebar>
   <div class="sidebar-stop-button-container mt-auto p-3">
     <button class="sidebar-stop-button" (click)="onStopClick()">Stop</button>
   </div>
-  
+
 </div>
 <!-- Left Sidebar End -->
 <ng-template #MenuItemLink let-menu="menu" let-className="className">
@@ -67,11 +67,16 @@
       disabled: menu.isDisabled,
     }" [attr.aria-controls]="menu.key">
     @if (menu.icon) {
+    @if (menu.icon.startsWith('/assets')) {
+    <img [src]="menu.icon" alt="{{ menu.label }}" class="menu-icon" />
+    } @else {
     <i [attr.data-feather]="menu.icon"></i>
+    }
     <span> {{ menu.label }} </span>
     } @else {
     {{ menu.label }}
     }
+
   </a>
 </ng-template>
 

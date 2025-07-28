@@ -1,38 +1,21 @@
-<div class="container-fluid alerts-container pt-2">
-    <h2 class="mb-3">System Status</h2>
-</div>
-<div class="card shadow-sm p-3 mb-4 rounded">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h6 class="mb-0 fw-bold">Device Details</h6>
-        <a href="#" class="text-primary text-decoration-none large fw-semibold">Update</a>
-    </div>
+<div class="container py-3">
+  <h2 class="mb-4">System Status</h2>
 
-    <div class="mb-3">
-        <div class="text-muted large mb-1">Output Sense:</div>
-        <div class="d-flex justify-content-between">
-            <span class="fw-semibold">{{ deviceStatus.outputSenseLabel }}</span>
-            <span>{{ deviceStatus.outputSenseValue }}</span>
-        </div>
-    </div>
+  <div *ngFor="let section of sensorSections" class="mb-4">
+    <ng-container *ngIf="getVisibleItemsBySection(section.key).length > 0">
+      <h5 class="text-primary border-bottom pb-2">{{ section.label }}</h5>
 
-    <div class="mb-3">
-        <div class="text-muted large mb-1">Water Usage:</div>
-        <div class="d-flex justify-content-between">
-            <span class="fw-semibold">Month Total</span>
-            <span>{{ deviceStatus.waterUsage.monthTotal }}</span>
+      <div
+        *ngFor="let item of getVisibleItemsBySection(section.key)"
+        class="d-flex justify-content-between align-items-center border-bottom py-2"
+      >
+        <div><strong>{{ item.name }}</strong></div>
+        <div>
+          <span [ngStyle]="{ color: severityColors[item.severity] || 'black' }">
+            {{ item.value }} {{ item.units }}
+          </span>
         </div>
-        <div class="d-flex justify-content-between">
-            <span class="fw-semibold">Year Total</span>
-            <span>
-                {{ deviceStatus.waterUsage.yearTotal }}</span>
-        </div>
-    </div>
-
-    <div>
-        <div class="text-muted large mb-1">Information:</div>
-        <div class="d-flex justify-content-between">
-            <span class="fw-semibold">Firmware</span>
-            <span>{{ deviceStatus.firmwareVersion }}</span>
-        </div>
-    </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
