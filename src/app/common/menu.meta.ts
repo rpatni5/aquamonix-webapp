@@ -27,9 +27,9 @@ export const MENU_ITEMS: MenuItemType[] = [
     url: '/index',
   },
   {
-    key: 'station',
-    label: 'Station',
-    icon: 'map-pin',
+    key: 'stations',
+    label: 'Stations',
+    icon: 'database',
     url: '/index',
   },
   {
@@ -37,13 +37,8 @@ export const MENU_ITEMS: MenuItemType[] = [
     label: 'Programs',
     icon: 'code',
     url: '/index',
-  },
-  {
-    key: 'stations',
-    label: 'Stations',
-    icon: 'database',
-    url: '/index',
   }
+  
 ]
 
 // export const MENU_ITEMS: MenuItemType[] = [
