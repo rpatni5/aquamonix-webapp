@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './system-status.component.scss'
 })
 export class SystemStatusComponent {
-  deviceStatus = {
+ deviceStatus = {
     outputSenseLabel: 'Local Sense',
     outputSenseValue: '0 mA',
     waterUsage: {

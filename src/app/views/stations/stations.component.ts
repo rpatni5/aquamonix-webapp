@@ -1,3 +1,5 @@
+import { dummyData } from '@/app/data/device-data';
+import { DeviceDataService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -9,17 +11,29 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './stations.component.scss'
 })
 export class StationsComponent {
-  stations = [
-    { name: 'Station 1 Description', status: 'Stopped', selected: false },
-    { name: 'Station 2 Description', status: 'Stopped', selected: false },
-    { name: 'Station 3 Description', status: 'Stopped', selected: false },
-    { name: 'Station 4 Description', status: 'Stopped', selected: false },
-    { name: 'Station 5 Description', status: 'Stopped', selected: false },
-    { name: 'Station 6 Description', status: 'Stopped', selected: false },
-    { name: 'Station 7 Description', status: 'Stopped', selected: false },
-    { name: 'Station 8 Description', status: 'Stopped', selected: false },
-  ];
+  data = Object.values(dummyData)
+  stations: { id: string, name: string, status: string, selected?: boolean }[] = [];
+  constructor(private deiceDataService: DeviceDataService) {
 
+  }
+  ngOnInit() {
+    this.init();
+  }
+  async init() {
+    let resp = await this.deiceDataService.getDeviceData();
+    const device = resp.Devices.Items['MPG101'];
+    const stationMeta = device.MetaData.Device.Stations.Items;
+    const stationStatus = device.Stations.Items;
+
+    this.stations = Object.keys(stationMeta).map(key => {
+      return {
+        id: key,
+        name: stationMeta[key].Name,
+        status: stationStatus[key]?.Status?.Value || 'Unknown',
+        selected: false
+      };
+    });
+  }
   startWatering() {
     const selectedStations = this.stations.filter((s) => s.selected);
     console.log('Starting watering for:', selectedStations);
