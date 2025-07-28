@@ -21,12 +21,6 @@ export const MENU_ITEMS: MenuItemType[] = [
     url: '/index',
   },
   {
-    key: 'sensor',
-    label: 'Sensor',
-    icon: 'home',
-    url: '/index',
-  },
-  {
     key: 'alerts',
     label: 'Alerts',
     icon: 'alert-triangle',
