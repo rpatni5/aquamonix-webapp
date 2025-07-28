@@ -1,10 +1,15 @@
-<div class="alerts-container">
-  <h2>Alerts</h2>
-  <div class="big-alert-card">
-    <div class="alerts-list">
-      <div class="alert-card" *ngFor="let alert of alerts">
-        <div class="alert-time">{{ alert.DateTimeUtc }}</div>
-        <div class="alert-message">{{ alert.Description }}</div>
+<div class="container-fluid alerts-container pt-2">
+  <h2 class="mb-3">Alerts</h2>
+  <div class="card-container">
+    <div class="program-card p-3 rounded shadow-sm bg-white mb-3 d-flex justify-content-between align-items-center"
+      *ngFor="let alert of alerts">
+      <div>
+        <div class="fw-bold alert-time">
+          {{ alert.DateTimeUtc }}
+        </div>
+        <div class="text-muted small alert-message">
+          {{ alert.Description }}
+        </div>
       </div>
     </div>
   </div>

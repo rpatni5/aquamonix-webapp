@@ -1,1 +1,24 @@
-<p>programs works!</p>
+<div class="container-fluid pt-2">
+    <h2 class="mb-3">Programs</h2>
+    <div class="card-container">
+        <div class="program-card p-3 rounded shadow-sm bg-white mb-3 d-flex justify-content-between align-items-center"
+            *ngFor="let program of programs; let i = index">
+            <div>
+                <div class="fw-bold text-primary">
+                    {{ i + 1 }} {{ program.name }}
+                </div>
+                <div class="text-muted small">
+                    Status: {{ program.status }}
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <i class="mdi mdi-24px mdi-clock-outline text-primary"></i>
+                <button class="btn btn-primary px-4 py-1 rounded-pill">
+                    Start
+                </button>
+                <i class="mdi mdi-24px mdi-chevron-right text-primary"></i>
+            </div>
+        </div>
+    </div>
+</div>
