@@ -70,9 +70,19 @@
 }
 
 .sidebar-collapsed .sidebar-stop-button-container {
-    display: none!important;
-  }
-  body.sidebar-collapsed .sidebar-stop-button-container {
     display: none !important;
-  }
-  
+}
+
+body.sidebar-collapsed .sidebar-stop-button-container {
+    display: none !important;
+}
+
+.success-btn {
+    background-color: $success;
+    color: white;
+}
+
+.error-btn {
+    background-color: $warning;
+    color: white;
+}
