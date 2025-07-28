@@ -15,6 +15,12 @@ export type MenuItemType = {
 }
 export const MENU_ITEMS: MenuItemType[] = [
   {
+    key: 'status',
+    label: 'System Status',
+    icon: 'home',
+    url: '/index',
+  },
+  {
     key: 'sensor',
     label: 'Sensor',
     icon: 'home',

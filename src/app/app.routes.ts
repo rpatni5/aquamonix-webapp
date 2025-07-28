@@ -1,7 +1,6 @@
 import { Router, Routes } from '@angular/router'
 import { LayoutComponent } from './layout/layout.component'
 import { ErrorLayoutComponent } from './error-layout/error-layout.component'
-import { AuthenticationService } from './services/auth.service'
 import { inject } from '@angular/core'
 
 export const routes: Routes = [
@@ -18,12 +17,7 @@ export const routes: Routes = [
     canActivate: [
       (url: any) => {
         const router = inject(Router)
-        const authService = inject(AuthenticationService)
-        if (!authService.session) {
-          return router.createUrlTree(['/auth/login'], {
-            queryParams: { returnUrl: url._routerState.url },
-          })
-        }
+       
         return true
       }
     ]

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core'
 import { RouterOutlet } from '@angular/router'
-import { TitleService } from './services/title.service'
 
 @Component({
     selector: 'app-root',
@@ -11,9 +10,7 @@ import { TitleService } from './services/title.service'
   })
 export class AppComponent {
   title = 'silva-angular'
-  private titleService = inject(TitleService)
 
   ngOnInit(): void {
-    this.titleService.init()
   }
 }

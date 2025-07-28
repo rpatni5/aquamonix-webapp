@@ -19,9 +19,6 @@ import {
 import { DecimalPipe } from '@angular/common'
 import { CookieService } from 'ngx-cookie-service'
 import { BrowserModule } from '@angular/platform-browser'
-import { rootReducer } from './store'
-import { AuthenticationEffects } from '@store/authentication/authentication.effects'
-import { CalendarEffects } from '@store/calendar/calendar.effects'
 import { provideEffects } from '@ngrx/effects'
 import { FakeBackendProvider } from './helper/fake-backend'
 import { JwtInterceptor } from './helper/jwt.interceptor'
@@ -45,10 +42,8 @@ export const appConfig: ApplicationConfig = {
       runCoalescing: false,
       ignoreChangesOutsideZone: true,}),
     provideRouter(routes,inMemoryScrollingFeatures),
-    provideStore(rootReducer, { metaReducers: [] }),
     importProvidersFrom(BrowserAnimationsModule, BrowserModule),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
-    provideEffects(AuthenticationEffects, CalendarEffects),
     provideHttpClient(withFetch(), withInterceptorsFromDi()),
   ],
 }
