@@ -1,0 +1,24 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <h5 class="card-title text-black mb-0">Top Session</h5>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div id="top-session" class="apex-charts mt-n3">
+      <apx-chart
+        [chart]="sessionChart.chart!"
+        [series]="sessionChart.series!"
+        [colors]="sessionChart.colors!"
+        [plotOptions]="sessionChart.plotOptions!"
+        [dataLabels]="sessionChart.dataLabels!"
+        [legend]="sessionChart.legend!"
+        [xaxis]="sessionChart.xaxis!"
+        [yaxis]="sessionChart.yaxis!"
+        [grid]="sessionChart.grid!"
+        [fill]="sessionChart.fill!"
+      />
+    </div>
+  </div>
+</div>

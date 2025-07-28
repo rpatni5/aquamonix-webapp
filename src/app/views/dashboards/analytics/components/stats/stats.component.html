@@ -1,0 +1,180 @@
+<div class="row g-3">
+  <div class="col-md-6 col-xl-6">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="fs-16 mb-1">Website Traffic</div>
+        </div>
+
+        <div class="d-flex align-items-baseline mb-2">
+          <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+          <div class="me-auto">
+            <span class="text-primary d-inline-flex align-items-center">
+              15%
+              <i
+                data-feather="trending-up"
+                class="ms-1"
+                style="height: 20px; width: 20px"
+              ></i>
+            </span>
+          </div>
+        </div>
+
+        <div id="website-traffic" class="apex-charts">
+          <apx-chart
+            [chart]="websiteTraffic.chart!"
+            [series]="websiteTraffic.series!"
+            [colors]="websiteTraffic.colors!"
+            [plotOptions]="websiteTraffic.plotOptions!"
+            [dataLabels]="websiteTraffic.dataLabels!"
+            [grid]="websiteTraffic.grid!"
+            [fill]="websiteTraffic.fill!"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="fs-16 mb-1">Conversion Rate</div>
+        </div>
+
+        <div class="d-flex align-items-baseline mb-2">
+          <div class="fs-22 mb-0 me-2 fw-semibold text-black">15%</div>
+          <div class="me-auto">
+            <span class="text-danger d-inline-flex align-items-center">
+              10%
+              <i
+                data-feather="trending-down"
+                class="ms-1"
+                style="height: 20px; width: 20px"
+              ></i>
+            </span>
+          </div>
+        </div>
+        <div id="conversion-visitors" class="apex-charts">
+          <apx-chart
+            [chart]="converationRate.chart!"
+            [series]="converationRate.series!"
+            [colors]="converationRate.colors!"
+            [plotOptions]="converationRate.plotOptions!"
+            [dataLabels]="converationRate.dataLabels!"
+            [grid]="converationRate.grid!"
+            [fill]="converationRate.fill!"
+            [xaxis]="converationRate.xaxis!"
+            [yaxis]="converationRate.yaxis!"
+            [stroke]="converationRate.stroke!"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="fs-16 mb-1">Session Duration</div>
+        </div>
+
+        <div class="d-flex align-items-baseline mb-2">
+          <div class="fs-22 mb-0 me-2 fw-semibold text-black">90 Sec</div>
+          <div class="me-auto">
+            <span class="text-primary d-inline-flex align-items-center">
+              25%
+              <i
+                data-feather="trending-up"
+                class="ms-1"
+                style="height: 20px; width: 20px"
+              ></i>
+            </span>
+          </div>
+        </div>
+        <div id="session-duration" class="apex-charts">
+          <apx-chart
+            [chart]="sessionDuration.chart!"
+            [series]="sessionDuration.series!"
+            [colors]="sessionDuration.colors!"
+            [plotOptions]="sessionDuration.plotOptions!"
+            [dataLabels]="sessionDuration.dataLabels!"
+            [grid]="sessionDuration.grid!"
+            [fill]="sessionDuration.fill!"
+            [xaxis]="sessionDuration.xaxis!"
+            [yaxis]="sessionDuration.yaxis!"
+            [stroke]="sessionDuration.stroke!"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="card mb-0">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="fs-16 mb-1">Active Users</div>
+        </div>
+
+        <div class="d-flex align-items-baseline mb-2">
+          <div class="fs-22 mb-0 me-2 fw-semibold text-black">2,986</div>
+          <div class="me-auto">
+            <span class="text-primary d-inline-flex align-items-center">
+              4%
+              <i
+                data-feather="trending-up"
+                class="ms-1"
+                style="height: 20px; width: 20px"
+              ></i>
+            </span>
+          </div>
+        </div>
+        <div id="active-users" class="apex-charts">
+          <apx-chart
+            [chart]="user.chart!"
+            [series]="user.series!"
+            [colors]="user.colors!"
+            [plotOptions]="user.plotOptions!"
+            [dataLabels]="user.dataLabels!"
+            [grid]="user.grid!"
+            [fill]="user.fill!"
+            [xaxis]="user.xaxis!"
+            [yaxis]="user.yaxis!"
+            [stroke]="user.stroke!"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-xl-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="fs-16 mb-1">Average Daily Sales</div>
+        </div>
+
+        <div class="d-flex align-items-baseline mb-2">
+          <div class="fs-22 mb-0 me-2 fw-semibold text-black">$28,450</div>
+        </div>
+
+        <div id="average-daily-sales" class="apex-charts">
+          <apx-chart
+            [chart]="dailySales.chart!"
+            [series]="dailySales.series!"
+            [colors]="dailySales.colors!"
+            [plotOptions]="dailySales.plotOptions!"
+            [dataLabels]="dailySales.dataLabels!"
+            [grid]="dailySales.grid!"
+            [fill]="dailySales.fill!"
+            [xaxis]="dailySales.xaxis!"
+            [yaxis]="dailySales.yaxis!"
+            [stroke]="dailySales.stroke!"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
