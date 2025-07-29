@@ -1,0 +1,21 @@
+.station-checkbox {
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    border: 2px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+}
+
+.floating-start-button {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    padding: 10px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}

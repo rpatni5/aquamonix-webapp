@@ -14,19 +14,19 @@ export const VIEWS_ROUTES: Route[] = [
   },
   {
     path: 'system-status',
-    loadComponent: () =>  import('./system-status/system-status.component').then(m => m.SystemStatusComponent),
+    loadComponent: () => import('./system-status/system-status.component').then(m => m.SystemStatusComponent),
   },
   {
     path: 'alerts',
-    loadComponent: () =>  import('./alerts/alerts.component').then(m => m.AlertsComponent),
+    loadComponent: () => import('./alerts/alerts.component').then(m => m.AlertsComponent),
   },
   {
     path: 'stations',
-    loadComponent: () =>  import('./stations/stations.component').then(m => m.StationsComponent),
+    loadChildren: () => import('./stations/station-routes').then(m => m.Station_Routes),
   },
   {
     path: 'programs',
-    loadComponent: () =>  import('./programs/programs.component').then(m => m.ProgramsComponent),
+    loadComponent: () => import('./programs/programs.component').then(m => m.ProgramsComponent),
   },
 
 

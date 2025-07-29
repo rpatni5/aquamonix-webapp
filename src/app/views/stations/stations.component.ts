@@ -3,6 +3,7 @@ import { DeviceDataService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stations',
@@ -12,8 +13,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class StationsComponent {
   data = Object.values(dummyData)
-  stations: { id: string, name: string, status: string, selected?: boolean }[] = [];
-  constructor(private deiceDataService: DeviceDataService) {
+  stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
+  constructor(private deiceDataService: DeviceDataService, private router: Router, private stationService: DeviceDataService) {
 
   }
   ngOnInit() {
@@ -24,19 +25,23 @@ export class StationsComponent {
     const device = resp.Devices.Items['MPG101'];
     const stationMeta = device.MetaData.Device.Stations.Items;
     const stationStatus = device.Stations.Items;
+    const pumps = device.MetaData.Device.Pumps;
 
     this.stations = Object.keys(stationMeta).map(key => {
       return {
         id: key,
         name: stationMeta[key].Name,
         status: stationStatus[key]?.Status?.Value || 'Unknown',
-        selected: false
+        selected: false,
+        pumps
       };
     });
   }
   startWatering() {
     const selectedStations = this.stations.filter((s) => s.selected);
     console.log('Starting watering for:', selectedStations);
+    this.stationService.setSelectedStations(selectedStations);
+    this.router.navigate(['stations', 'watering-timer']);
   }
   hasSelectedStations(): boolean {
     return this.stations.some(s => s.selected);
