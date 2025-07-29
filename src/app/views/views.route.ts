@@ -6,11 +6,6 @@ export const VIEWS_ROUTES: Route[] = [
     redirectTo: 'system-status',
     pathMatch: 'full',
   },
-   {
-    path: '**',
-    redirectTo: 'system-status',
-    pathMatch: 'full',
-  },
   {
     path: 'ui',
     loadChildren: () =>
@@ -41,6 +36,11 @@ export const VIEWS_ROUTES: Route[] = [
   {
     path: 'settings',
     loadComponent: () => import('./settings/settings.component').then(m => m.SettingsComponent),
+  },
+  {
+    path: '**',
+    redirectTo: 'system-status',
+    pathMatch: 'full'
   }
 
 
