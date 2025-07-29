@@ -18,7 +18,10 @@
   outline: none;
   position: relative;
 }
-
+.station-checkbox:checked {
+  background-color: #007bff;
+  border-color: #007bff;
+}
 .station-checkbox:checked::after {
   color: white;
   font-size: 14px;
@@ -48,7 +51,7 @@
   border-radius: 50%;
 }
 
-.floating-start-button {
+.floating-button {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -56,5 +59,4 @@
   z-index: 10;
   padding: 10px 20px;
   border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }

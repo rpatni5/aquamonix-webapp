@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './stations.component.scss'
 })
 export class StationsComponent {
-  data = Object.values(dummyData)
+  data = Object.values(dummyData);
+  selectedStations: any[] = [];
   stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
   constructor(private deiceDataService: DeviceDataService, private router: Router, private stationService: DeviceDataService) {
 
@@ -22,17 +23,19 @@ export class StationsComponent {
   }
   async init() {
     let resp = await this.deiceDataService.getDeviceData();
+    this.selectedStations = this.stationService.getSelectedStations();
     const device = resp.Devices.Items['MPG101'];
     const stationMeta = device.MetaData.Device.Stations.Items;
     const stationStatus = device.Stations.Items;
     const pumps = device.MetaData.Device.Pumps;
 
     this.stations = Object.keys(stationMeta).map(key => {
+      const selectedStation = this.selectedStations?.find(s => s.id === key);
       return {
         id: key,
         name: stationMeta[key].Name,
-        status: stationStatus[key]?.Status?.Value || 'Unknown',
-        selected: false,
+        status: selectedStation?.status || stationStatus[key]?.Status?.Value || 'Unknown',
+        selected: selectedStation?.selected ?? false,
         pumps
       };
     });
@@ -57,5 +60,15 @@ export class StationsComponent {
   getSelectedCount(): number {
     return this.stations.filter(station => station.selected).length;
   }
-
+  stopSelectedStations() {
+    this.selectedStations.forEach(station => {
+      station.status = 'Stopped';
+    });
+    this.stations.forEach(station => {
+      if (this.selectedStations.find(s => s.id === station.id)) {
+        station.status = 'Stopped';
+      }
+    });
+    this.selectedStations = [];
+  }
 }

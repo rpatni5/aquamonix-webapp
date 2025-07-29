@@ -2,6 +2,16 @@ import type { Route } from '@angular/router'
 
 export const VIEWS_ROUTES: Route[] = [
   {
+    path: '',
+    redirectTo: 'system-status',
+    pathMatch: 'full',
+  },
+   {
+    path: '**',
+    redirectTo: 'system-status',
+    pathMatch: 'full',
+  },
+  {
     path: 'ui',
     loadChildren: () =>
       import('./ui/ui-pages.route').then((mod) => mod.UI_PAGES_ROUTES),
@@ -28,6 +38,10 @@ export const VIEWS_ROUTES: Route[] = [
     path: 'programs',
     loadComponent: () => import('./programs/programs.component').then(m => m.ProgramsComponent),
   },
+  {
+    path: 'settings',
+    loadComponent: () => import('./settings/settings.component').then(m => m.SettingsComponent),
+  }
 
 
 ]
