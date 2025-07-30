@@ -18,10 +18,12 @@
   outline: none;
   position: relative;
 }
+
 .station-checkbox:checked {
   background-color: #007bff;
   border-color: #007bff;
 }
+
 .station-checkbox:checked::after {
   color: white;
   font-size: 14px;
@@ -59,4 +61,14 @@
   z-index: 10;
   padding: 10px 20px;
   border-radius: 6px;
+}
+
+.success-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.error-btn {
+  background-color: #e55353;
+  color: white;
 }

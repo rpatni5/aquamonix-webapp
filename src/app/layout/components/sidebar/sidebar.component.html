@@ -11,7 +11,7 @@
             <img src="assets/images/logo-light.png" alt="" height="24" />
           </span>
         </a>
-        <a routerLink="/" class="logo logo-dark">
+        <a routerLink="/" class="logo logo-dark" style="text-decoration: none;">
           <span class="logo-sm">
             <img src="assets/images/RmLogo.webp" alt="" height="26" />
           </span>
@@ -66,7 +66,7 @@
   <a [routerLink]="menu.url" [class]="className" [ngClass]="{
       active: activeMenuItems.includes(menu.key),
       disabled: menu.isDisabled,
-    }" [attr.aria-controls]="menu.key">
+    }" [attr.aria-controls]="menu.key"   style="text-decoration: none;">
     @if (menu.icon) {
     @if (menu.icon.startsWith('/assets')) {
     <img [src]="menu.icon" alt="{{ menu.label }}" class="menu-icon" />
