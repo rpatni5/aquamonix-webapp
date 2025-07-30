@@ -31,7 +31,7 @@ export const VIEWS_ROUTES: Route[] = [
   },
   {
     path: 'programs',
-    loadComponent: () => import('./programs/programs.component').then(m => m.ProgramsComponent),
+    loadChildren: () => import('./programs/program-route').then(m => m.Program_Routes),
   },
   {
     path: 'settings',

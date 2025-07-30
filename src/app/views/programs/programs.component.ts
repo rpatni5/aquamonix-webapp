@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import bootstrap from 'bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-programs',
@@ -18,12 +19,14 @@ export class ProgramsComponent {
   selectedValue = 1; // default to 01
   itemHeight = 40;
   visibleCount = 3;
-  groupNumbers: number[] = [];
-  @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
-  private scrollTimeout: any;
-  constructor(private programService: ProgramService) {
+    groupNumbers: number[] = [];
+    @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
+    private scrollTimeout: any;
+  constructor(
+    private programService: ProgramService,
+    private router: Router,
+  ) { }
 
-  }
   ngAfterViewInit() {
     // Scroll to default selected (01)
     this.scrollToIndex(this.selectedGroup);
@@ -127,5 +130,9 @@ export class ProgramsComponent {
 
   selectGroup(num: number) {
     this.selectedGroup = num;
+  }
+
+  open() {
+    this.router.navigate(['programs', 'program-description']);
   }
 }

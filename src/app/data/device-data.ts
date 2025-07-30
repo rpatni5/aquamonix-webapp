@@ -2055,7 +2055,7 @@ export const dummyData: DeviceData = {
                                         Items: {
                                             "1": {
                                                 Value: "-1",
-                                                Visible: "true"
+                                                Visible: "false"
                                             }
                                         }
                                     }

@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-stations',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './stations.component.html',
-  styleUrl: './stations.component.scss'
+  styleUrls: ['./stations.component.scss']
 })
 export class StationsComponent {
   data = Object.values(dummyData);
