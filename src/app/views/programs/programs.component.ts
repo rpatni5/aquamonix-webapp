@@ -19,9 +19,9 @@ export class ProgramsComponent {
   selectedValue = 1; // default to 01
   itemHeight = 40;
   visibleCount = 3;
-    groupNumbers: number[] = [];
-    @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
-    private scrollTimeout: any;
+  groupNumbers: number[] = [];
+  @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
+  private scrollTimeout: any;
   constructor(
     private programService: ProgramService,
     private router: Router,
@@ -104,6 +104,7 @@ export class ProgramsComponent {
     }
     this.programService.setSelectedPrograms(currentPrograms);
     this.programService.setShowStopButton(true);
+    console.log("selected group is:", this.selectedGroup);
     const modalElement = document.getElementById('confirmWateringModal') as HTMLElement;
     const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
     if (modal) {
@@ -134,5 +135,11 @@ export class ProgramsComponent {
 
   open() {
     this.router.navigate(['programs', 'program-description']);
+  }
+
+  onScrollMinute(event: Event) {
+    const element = event.target as HTMLElement;
+    const index = Math.round(element.scrollTop / 40);
+    this.selectedGroup = this.groupNumbers[index] ?? 0;
   }
 }
