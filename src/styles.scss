@@ -95,7 +95,7 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 }
 
 
-#sidebar-menu > ul > li > a {
+#sidebar-menu>ul>li>a {
     color: #007cb9;
     display: block;
     padding: 10px 20px;
@@ -103,4 +103,8 @@ body.sidebar-collapsed .sidebar-stop-button-container {
     transition: all 0.4s;
     font-size: 16px !important;
     font-weight: 500;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

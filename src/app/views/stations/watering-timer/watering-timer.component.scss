@@ -19,3 +19,24 @@
     border-radius: 6px;
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
 }
+
+.station-checkbox:checked {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.flatpickr-time-format-label {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 500;
+    color: #6c757d;
+}
+
+// .modal-header { 
+//     background-color: #007cb9;
+//     border-color: #007cb9;
+//     color: white;
+// }

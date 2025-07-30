@@ -6,18 +6,13 @@ import { inject } from '@angular/core'
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
     component: LayoutComponent,
     loadChildren: () =>
       import('./views/views.route').then((mod) => mod.VIEWS_ROUTES),
     canActivate: [
       (url: any) => {
         const router = inject(Router)
-       
+
         return true
       }
     ]

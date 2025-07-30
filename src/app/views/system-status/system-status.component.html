@@ -1,21 +1,23 @@
-<div class="container py-3">
-  <h2 class="mb-4">System Status</h2>
+<div class="container-fluid alerts-container pt-2">
+  <h2 class="mb-3">System Status</h2>
 
-  <div *ngFor="let section of sensorSections" class="mb-4">
-    <ng-container *ngIf="getVisibleItemsBySection(section.key).length > 0">
-      <h5 class="text-primary border-bottom pb-2">{{ section.label }}</h5>
+  <div class="card p-3 shadow-sm card card-container">
+    <div class="d-flex justify-content-between align-items-center my-2">
+      <h5 class="mb-0 fw-bold">Device Details</h5>
+      <a href="#" class="text-primary text-decoration-none fw-medium">Update</a>
+    </div>
+    <div *ngFor="let section of sensorSections" class="mb-1">
+      <ng-container *ngIf="getVisibleItemsBySection(section.key).length > 0">
+        <small class="text-muted my-1" style="font-size: 1rem;">{{ section.label }}</small>
 
-      <div
-        *ngFor="let item of getVisibleItemsBySection(section.key)"
-        class="d-flex justify-content-between align-items-center border-bottom py-2"
-      >
-        <div><strong>{{ item.name }}</strong></div>
-        <div>
+        <div *ngFor="let item of getVisibleItemsBySection(section.key)"
+          class="d-flex justify-content-between py-2 border-bottom">
+          <span class="fw-medium">{{ item.name }}</span>
           <span [ngStyle]="{ color: severityColors[item.severity] || 'black' }">
             {{ item.value }} {{ item.units }}
           </span>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
 </div>

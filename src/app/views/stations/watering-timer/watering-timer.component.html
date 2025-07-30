@@ -4,10 +4,11 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
-                    <a routerLink="/" class="text-decoration-none">Stations</a>
+                    <a routerLink="/stations" class="text-decoration-none cursor-pointer">Stations</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Watering Timer</li>
             </ol>
+
         </nav>
     </div>
     <div class="card-container">
@@ -15,7 +16,7 @@
         <div class="d-flex justify-content-center align-items-center px-3 py-2 border-bottom">
             <div class="fw-semibold m-3">Select Time -</div>
             <div>
-                <input type="time" class="form-control" [(ngModel)]="selectedTime" style="width: 200px;" />
+                <input id="customTimepicker" class="form-control" placeholder="Select Time">
             </div>
         </div>
 
@@ -55,7 +56,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-muted" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-success" (click)="confirmStartWatering()">Start</button>
+                <button type="button" class="btn btn-primary" (click)="confirmStartWatering()">Start</button>
             </div>
 
         </div>

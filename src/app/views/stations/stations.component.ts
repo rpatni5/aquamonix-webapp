@@ -1,5 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
-import { DeviceDataService } from '@/app/services/station.service';
+import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,27 +12,31 @@ import { Router } from '@angular/router';
   styleUrl: './stations.component.scss'
 })
 export class StationsComponent {
-  data = Object.values(dummyData)
+  data = Object.values(dummyData);
+  selectedStations: any[] = [];
   stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
-  constructor(private deiceDataService: DeviceDataService, private router: Router, private stationService: DeviceDataService) {
+  constructor(private router: Router, private stationService: StationService) {
 
   }
   ngOnInit() {
+    this.selectedStations = [];
     this.init();
   }
   async init() {
-    let resp = await this.deiceDataService.getDeviceData();
+    let resp = await this.stationService.getDeviceData();
+    this.selectedStations = this.stationService.getSelectedStations() ?? [];
     const device = resp.Devices.Items['MPG101'];
     const stationMeta = device.MetaData.Device.Stations.Items;
     const stationStatus = device.Stations.Items;
     const pumps = device.MetaData.Device.Pumps;
 
     this.stations = Object.keys(stationMeta).map(key => {
+      const selectedStation = this.selectedStations?.find(s => s.id === key);
       return {
         id: key,
         name: stationMeta[key].Name,
-        status: stationStatus[key]?.Status?.Value || 'Unknown',
-        selected: false,
+        status: selectedStation?.status || stationStatus[key]?.Status?.Value || 'Unknown',
+        selected: selectedStation?.selected ?? false,
         pumps
       };
     });
@@ -58,4 +62,16 @@ export class StationsComponent {
     return this.stations.filter(station => station.selected).length;
   }
 
+  stopWatering() {
+    this.selectedStations.forEach(station => {
+      station.status = 'Stopped';
+    });
+    this.stations.forEach(station => {
+      if (this.selectedStations.find(s => s.id === station.id)) {
+        station.status = 'Stopped';
+      }
+    });
+    this.selectedStations = [];
+    this.stationService.setSelectedStations(this.selectedStations);
+  }
 }
