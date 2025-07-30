@@ -11,7 +11,7 @@
         <small class="text-muted my-1" style="font-size: 1rem;">{{ section.label }}</small>
 
         <div *ngFor="let item of getVisibleItemsBySection(section.key)"
-          class="d-flex justify-content-between py-2 border-bottom">
+          class="d-flex justify-content-between py-2 ">
           <span class="fw-medium">{{ item.name }}</span>
           <span [ngStyle]="{ color: severityColors[item.severity] || 'black' }">
             {{ item.value }} {{ item.units }}
