@@ -12,6 +12,9 @@ import { Component } from '@angular/core';
 export class SystemStatusComponent {
   deviceDetails: any
   sensorGroup: any
+  objectKeys = Object.keys;
+  visibleItemsBySection: { [key: string]: any[] } = {};
+
   constructor(private stationService: StationService) { }
 
   sensorSections = [
@@ -36,16 +39,15 @@ export class SystemStatusComponent {
 
   async init() {
     const resp = await this.stationService.getDeviceData();
-    this.deviceDetails = resp?.Devices?.Items?.["MPG101"]?.MetaData?.Device?.SensorGroups
-    this.sensorGroup = resp?.Devices?.Items?.["MPG101"]?.SensorGroups
-    this.renderVisibleItems(this.sensorGroup, this.deviceDetails,);
+    this.deviceDetails = resp?.Devices?.Items?.["MPG101"]?.MetaData?.Device?.SensorGroups;
+    this.sensorGroup = resp?.Devices?.Items?.["MPG101"]?.SensorGroups;
+    this.sensorSections.forEach(section => {
+      this.visibleItemsBySection[section.key] = this.getVisibleItems(section.key);
+    });
   }
-
-  objectKeys = Object.keys;
-
-  getVisibleItemsBySection(sectionKey: string): any[] {
+  private getVisibleItems(sectionKey: string): any[] {
     const sectionData = this.sensorGroup?.Items?.[sectionKey]?.Items;
-    const metaData = this.deviceDetails?.[sectionKey]?.Items;
+    const metaData = this.deviceDetails?.Items[sectionKey]?.Items;
 
     if (!sectionData || typeof sectionData !== 'object') return [];
 
