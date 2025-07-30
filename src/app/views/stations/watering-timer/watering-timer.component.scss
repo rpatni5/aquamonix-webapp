@@ -41,11 +41,80 @@
 //     color: white;
 // }
 .success-btn {
-  background-color: #4CAF50;
-  color: white;
+    background-color: #4CAF50;
+    color: white;
 }
 
 .error-btn {
-  background-color: #CF6679;
-  color: white;
+    background-color: #CF6679;
+    color: white;
+}
+
+.picker-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.scroll-picker {
+    height: 120px;
+    width: 60px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.scroll-picker::-webkit-scrollbar {
+    display: none;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    min-width: 280px;
+    max-width: 320px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-picker {
+    height: 120px;
+    width: 60px;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+}
+
+.scroll-picker::-webkit-scrollbar {
+    display: none;
+}
+
+.picker-item {
+    scroll-snap-align: center;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.picker-item.selected {
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 20px ;
+}
+
+.spacer {
+    height: 40px;
 }
