@@ -13,6 +13,7 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { NgbCollapse, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap'
 import { findAllParent, findMenuItem } from '../../../helper/utils'
+import { ProgramService } from '@/app/services/program.service'
 
 @Component({
   selector: 'app-sidebar',
@@ -34,10 +35,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   //   basePath !== '' ? basePath + '/' : '',
   //   '/'
   // )
-
+  showStopButton: boolean = false;
   constructor(
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private programService: ProgramService
   ) {
     this.router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
@@ -50,14 +52,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     })
   }
   ngOnInit(): void {
-    this.initMenu()
+    this.programService.showStopButton$.subscribe((show) => {
+      this.showStopButton = show;
+    }); this.initMenu()
   }
-  
-  onStopClick(): void {
-    console.log('Stop button clicked');
-    // Add your stop logic here
-  }
-  
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -130,6 +128,20 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           menu.collapsed = true
         }
       })
+    }
+  }
+  onStopClick() {
+    const modalElement = document.getElementById('confirmStopIrrigationModal') as HTMLElement;
+    const modal = new (window as any).bootstrap.Modal(modalElement);
+    modal.show();
+  }
+
+  confirmStopIrrigation() {
+    this.programService.sendStopSignal();
+    const modalElement = document.getElementById('confirmStopIrrigationModal') as HTMLElement;
+    const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
+    if (modal) {
+      modal.hide();
     }
   }
 }

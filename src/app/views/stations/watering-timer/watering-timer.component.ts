@@ -1,4 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
+import { ProgramService } from '@/app/services/program.service';
 import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -8,7 +9,7 @@ import flatpickr from "flatpickr";
 
 @Component({
   selector: 'app-watering-timer',
-  imports: [FormsModule, CommonModule,RouterModule],
+  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './watering-timer.component.html',
   styleUrl: './watering-timer.component.scss'
 })
@@ -16,7 +17,7 @@ export class WateringTimerComponent {
   pumps: { pumpId: string, type: string, name: string, mode: string, selected?: boolean }[] = [];
   selectedTime: any;
   selectedStations: any[] = [];
-  constructor(private stationService: StationService, private router: Router) {
+  constructor(private stationService: StationService, private router: Router, private programService: ProgramService) {
 
   }
   ngAfterViewInit() {
@@ -54,6 +55,7 @@ export class WateringTimerComponent {
     this.selectedStations.forEach(station => {
       station.status = 'Running';
     });
+    this.programService.setShowStopButton(true);
     const modalElement = document.getElementById('confirmWateringModal') as HTMLElement;
     const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
     if (modal) {

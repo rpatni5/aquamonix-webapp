@@ -1,8 +1,9 @@
 import { dummyData } from '@/app/data/device-data';
 import { ProgramService } from '@/app/services/program.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import bootstrap from 'bootstrap';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,13 +16,55 @@ export class ProgramsComponent {
   programs: { id: string, name: string, status: string }[] = [];
   selectedProgram: any;
   selectedGroup: number = 1;
-  groupNumbers: number[] = [];
+  selectedValue = 1; // default to 01
+  itemHeight = 40;
+  visibleCount = 3;
+    groupNumbers: number[] = [];
+    @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
+    private scrollTimeout: any;
   constructor(
     private programService: ProgramService,
     private router: Router,
   ) { }
 
+  ngAfterViewInit() {
+    // Scroll to default selected (01)
+    this.scrollToIndex(this.selectedGroup);
+  }
+
+  scrollToIndex(index: number) {
+    const scrollTop = (index + 1) * this.itemHeight; // +1 for spacer
+    this.pickerContainer.nativeElement.scrollTop = scrollTop;
+  }
+
+  onWheel(event: WheelEvent) {
+    event.preventDefault();
+    const direction = event.deltaY > 0 ? 1 : -1;
+    this.moveSelection(direction);
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      this.moveSelection(1);
+    } else if (event.key === 'ArrowUp') {
+      this.moveSelection(-1);
+    }
+  }
+
+  moveSelection(delta: number) {
+    const newIndex = this.selectedGroup + delta;
+    if (newIndex >= 0 && newIndex < this.groupNumbers.length) {
+      this.selectedGroup = newIndex;
+      this.scrollToIndex(newIndex);
+    }
+  }
+
   ngOnInit() {
+    this.programService.stopSignal$.subscribe((stop) => {
+      if (stop) {
+        this.stopCurrentExecution();
+      }
+    });
     this.init();
     const device = dummyData.Devices.Items['MPG101'];
     const stationGroupItems = device.Programs.Items[1].StationGroups.Items;
@@ -43,30 +86,40 @@ export class ProgramsComponent {
       };
     });
   }
-
+  isProgramRunning(program: any): boolean {
+    return program.status?.toLowerCase() === 'running';
+  }
   confirmStartProgram(selectedProgram: any) {
     console.log(`Start ${selectedProgram.name} at group ${this.selectedGroup}`);
-    this.programService.setSelectedPrograms([{
-      ...selectedProgram,
-      status: "Running"
-    }]);
 
+    const currentPrograms = this.programService.getSelectedPrograms() ?? [];
+    const existingIndex = currentPrograms.findIndex(p => p.id === selectedProgram.id);
+    if (existingIndex !== -1) {
+      currentPrograms[existingIndex].status = "Running";
+    } else {
+      currentPrograms.push({
+        ...selectedProgram,
+        status: "Running"
+      });
+    }
+    this.programService.setSelectedPrograms(currentPrograms);
+    this.programService.setShowStopButton(true);
     const modalElement = document.getElementById('confirmWateringModal') as HTMLElement;
     const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
     if (modal) {
       modal.hide();
     }
     this.init();
-    setTimeout(() => {
-      const currentProgram = this.programService.getSelectedPrograms()?.find(p => p.id === selectedProgram.id);
-      if (currentProgram) {
-        currentProgram.status = "Stopped";
-        this.programService.setSelectedPrograms([currentProgram]);
-        this.init();
-      }
-    }, 5000);
   }
 
+  stopCurrentExecution() {
+    const currentProgram = this.programService.getSelectedPrograms();
+    if (currentProgram) {
+      currentProgram.forEach(e => e.status = "Stopped");
+      this.programService.setSelectedPrograms([currentProgram]);
+      this.init();
+    }
+  }
 
   startProgram(programName: any) {
     this.selectedProgram = programName;
