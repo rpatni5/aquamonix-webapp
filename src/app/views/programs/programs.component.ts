@@ -3,6 +3,7 @@ import { ProgramService } from '@/app/services/program.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-programs',
@@ -15,9 +16,10 @@ export class ProgramsComponent {
   selectedProgram: any;
   selectedGroup: number = 1;
   groupNumbers: number[] = [];
-  constructor(private programService: ProgramService) {
-
-  }
+  constructor(
+    private programService: ProgramService,
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.init();
@@ -75,5 +77,9 @@ export class ProgramsComponent {
 
   selectGroup(num: number) {
     this.selectedGroup = num;
+  }
+
+  open() {
+    this.router.navigate(['programs', 'program-description']);
   }
 }

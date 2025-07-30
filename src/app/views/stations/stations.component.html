@@ -1,12 +1,12 @@
 <div class="container-fluid alerts-container pt-2">
     <h2 class="mb-2 text-secondary">Stations</h2>
     <div class="floating-button w-100 d-flex justify-content-center gap-3">
-        <button class="btn success-btn px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold"
+        <button class="btn success-button px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold"
             (click)="startWatering()" *ngIf="hasSelectedStations()">
             <i class="mdi mdi-water mdi-18px"></i> Start Watering
         </button>
         <button *ngIf="selectedStations?.length"
-            class="btn error-btn px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold"
+            class="btn error-button px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold"
             (click)="stopWatering()">
             <i class="mdi mdi-stop mdi-18px"></i> Stop
         </button>

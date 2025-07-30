@@ -77,14 +77,14 @@ body.sidebar-collapsed .sidebar-stop-button-container {
     display: none !important;
 }
 
-.success-btn {
-    background-color: #4CAF50;
-    color: white;
+.success-button {
+    background-color: #4CAF50!important;
+    color: white!important;
 }
 
-.error-btn {
-    background-color: #CF6679;
-    color: white;
+.error-button {
+    background-color: #CF6679!important;
+    color: white!important;
 }
 
 .menu-icon {
@@ -107,4 +107,14 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.text-main{
+    color: #007cb9 !important;
+}
+
+.text-lightBold{
+    font-size: 1.08rem;
+    font-weight: 600 !important;
+    color: rgba(50, 47, 55, 0.4) !important;
 }
