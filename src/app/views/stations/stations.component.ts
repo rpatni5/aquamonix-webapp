@@ -1,5 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
-import { DeviceDataService } from '@/app/services/station.service';
+import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -15,15 +15,16 @@ export class StationsComponent {
   data = Object.values(dummyData);
   selectedStations: any[] = [];
   stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
-  constructor(private deiceDataService: DeviceDataService, private router: Router, private stationService: DeviceDataService) {
+  constructor(private router: Router, private stationService: StationService) {
 
   }
   ngOnInit() {
+    this.selectedStations = [];
     this.init();
   }
   async init() {
-    let resp = await this.deiceDataService.getDeviceData();
-    this.selectedStations = this.stationService.getSelectedStations();
+    let resp = await this.stationService.getDeviceData();
+    this.selectedStations = this.stationService.getSelectedStations() ?? [];
     const device = resp.Devices.Items['MPG101'];
     const stationMeta = device.MetaData.Device.Stations.Items;
     const stationStatus = device.Stations.Items;
@@ -60,7 +61,8 @@ export class StationsComponent {
   getSelectedCount(): number {
     return this.stations.filter(station => station.selected).length;
   }
-  stopSelectedStations() {
+
+  stopWatering() {
     this.selectedStations.forEach(station => {
       station.status = 'Stopped';
     });
@@ -70,5 +72,6 @@ export class StationsComponent {
       }
     });
     this.selectedStations = [];
+    this.stationService.setSelectedStations(this.selectedStations);
   }
 }

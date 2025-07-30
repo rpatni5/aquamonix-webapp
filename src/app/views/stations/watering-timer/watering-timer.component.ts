@@ -1,5 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
-import { DeviceDataService } from '@/app/services/station.service';
+import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,7 @@ export class WateringTimerComponent {
   pumps: { pumpId: string, type: string, name: string, mode: string, selected?: boolean }[] = [];
   selectedTime: any;
   selectedStations: any[] = [];
-  constructor(private stationService: DeviceDataService, private router: Router) {
+  constructor(private stationService: StationService, private router: Router) {
 
   }
   ngAfterViewInit() {

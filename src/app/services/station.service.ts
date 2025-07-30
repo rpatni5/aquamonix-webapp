@@ -5,7 +5,7 @@ import { dummyData } from '../data/device-data';
 @Injectable({
     providedIn: 'root'
 })
-export class DeviceDataService {
+export class StationService {
     private selectedStationsSource = new BehaviorSubject<any[]>([]);
     selectedStations$ = this.selectedStationsSource.asObservable();
     setSelectedStations(stations: any[]) {

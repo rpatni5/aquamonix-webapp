@@ -1,5 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
-import { DeviceDataService } from '@/app/services/station.service';
+import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 export class SystemStatusComponent {
   deviceDetails: any
   sensorGroup: any
-  constructor(private deviceDataService: DeviceDataService) { }
+  constructor(private stationService: StationService) { }
 
   sensorSections = [
     { key: 'Sense', label: 'Output Sense' },
@@ -35,7 +35,7 @@ export class SystemStatusComponent {
   }
 
   async init() {
-    const resp = await this.deviceDataService.getDeviceData();
+    const resp = await this.stationService.getDeviceData();
     this.deviceDetails = resp?.Devices?.Items?.["MPG101"]?.MetaData?.Device?.SensorGroups
     this.sensorGroup = resp?.Devices?.Items?.["MPG101"]?.SensorGroups
     this.renderVisibleItems(this.sensorGroup, this.deviceDetails,);
