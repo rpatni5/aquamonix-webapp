@@ -1,29 +1,40 @@
 <div class="container-fluid program-description-container pt-2">
-    <h2 class="mb-3 text-secondary">Program Description</h2>
+    <div class="d-flex justify-content-between align-items-center">
+        <h4 class="text-secondary">Program Description</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/programs" class="text-decoration-none cursor-pointer">Programs</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{program?.name}}</li>
+            </ol>
+
+        </nav>
+    </div>
 
     <div class="p-3 program-card rounded shadow-sm bg-white mb-3">
-        <div class="option d-flex justify-content-between align-items-center py-3 " (click)="onStartTimesClick()">
+        <div class="option d-flex justify-content-between align-items-center py-3 " >
             <div class="d-flex align-items-center">
                 <i class="mdi mdi-clock-outline mdi-24px me-2 text-main"></i>
                 <span class="fw-medium">Start times and days</span>
             </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
+            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onStartTimesClick(program)"></i>
         </div>
 
-        <div class="option d-flex justify-content-between align-items-center py-3 " (click)="onGroupsClick()">
+        <div class="option d-flex justify-content-between align-items-center py-3 " >
             <div class="d-flex align-items-center">
                 <i class="mdi mdi-account-group mdi-24px me-2 text-main"></i>
                 <span class="fw-medium">Groups</span>
             </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
+            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onGroupsClick(program)"></i>
         </div>
 
-        <div class="option d-flex justify-content-between align-items-center py-3 " (click)="onPumpSelectionClick()">
+        <div class="option d-flex justify-content-between align-items-center py-3 " >
             <div class="d-flex align-items-center">
                 <i class="mdi mdi-water-pump mdi-24px me-2 text-main"></i>
                 <span class="fw-medium">Pump Selection</span>
             </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
+            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onPumpSelectionClick(program)"></i>
         </div>
 
         <div class="d-flex align-items-center justify-content-between py-3">
@@ -69,11 +80,11 @@
     </div>
 
     <div class="d-flex justify-content-end gap-2">
-        <button class="btn success-button  px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold">
+        <button class="btn success-btn  px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold">
             Save
         </button>
 
-        <button class="btn error-button px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold">
+        <button class="btn error-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold">
             Discard
         </button>
     </div>

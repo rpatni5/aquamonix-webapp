@@ -1,9 +1,9 @@
 import { dummyData } from '@/app/data/device-data';
 import { ProgramService } from '@/app/services/program.service';
+import { SharedProgramService } from '@/app/utils/sharedService/sharedProgram';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import bootstrap from 'bootstrap';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,6 +25,7 @@ export class ProgramsComponent {
   constructor(
     private programService: ProgramService,
     private router: Router,
+    private sharedProgramService: SharedProgramService,
   ) { }
 
   ngAfterViewInit() {
@@ -132,7 +133,14 @@ export class ProgramsComponent {
     this.selectedGroup = num;
   }
 
-  open() {
-    this.router.navigate(['programs', 'program-description']);
+  open(program: any) {
+    const slug = this.slugify(program.name);
+    this.sharedProgramService.setProgram(program);
+    this.router.navigate(['programs', slug]);
   }
+  
+  slugify(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-');
+  }
+
 }

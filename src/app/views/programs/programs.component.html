@@ -1,5 +1,5 @@
 <div class="container-fluid pt-2">
-    <h2 class="mb-3 text-secondary">Programs</h2>
+    <h2 class="mb-3 text-secondary mb-3">Programs</h2>
     <div class="card-container mt-3">
         <div class="program-card p-3 rounded shadow-sm bg-white mb-3 d-flex justify-content-between align-items-center"
             *ngFor="let program of programs; let i = index">
@@ -17,7 +17,7 @@
                 <button class="btn btn-primary primary-btn px-4 py-1 rounded-pill" (click)="startProgram(program)">
                     Start
                 </button>
-                <i class="mdi mdi-24px mdi-chevron-right text-main" (click)="open()"></i>
+                <i class="mdi mdi-24px mdi-chevron-right text-main" (click)="open(program)"></i>
             </div>
         </div>
     </div>

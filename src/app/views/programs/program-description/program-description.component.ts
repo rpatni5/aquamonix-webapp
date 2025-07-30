@@ -1,39 +1,40 @@
+import { SharedProgramService } from '@/app/utils/sharedService/sharedProgram';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-program-description',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './program-description.component.html',
-  styleUrls: ['./program-description.component.scss'] 
+  styleUrls: ['./program-description.component.scss']
 })
 export class ProgramDescriptionComponent {
+
+  program: any;
   waterBoostSteps = [0, 25, 50, 75, 100, 125];
   rangeIndex = 0;
   waterBoost = this.waterBoostSteps[this.rangeIndex];
+
+  constructor(
+    private router: Router,
+    private sharedProgramService: SharedProgramService,
+  ) {}
+
+  ngOnInit() {
+    this.program = this.sharedProgramService.getProgram();
+  }
 
   onRangeChange() {
     this.waterBoost = this.waterBoostSteps[this.rangeIndex];
   }
 
-  onStartTimesClick() {
-    // Navigate or open modal
-  }
-
-  onGroupsClick() {
-    // Navigate or open modal
-  }
-
-  onPumpSelectionClick() {
-    // Navigate or open modal
-  }
   getSliderTrackColor(boostValue: number): string {
     const percent = (boostValue / 125) * 100;
     return `linear-gradient(to right, #adb5bd ${percent}%, #dee2e6 ${percent}%)`;
   }
-
 
   onWaterBoostInput(): void {
     const closestIndex = this.getClosestStepIndex(this.waterBoost);
@@ -65,4 +66,31 @@ export class ProgramDescriptionComponent {
   clamp(value: number, min: number, max: number): number {
     return Math.max(min, Math.min(max, value));
   }
+
+  onStartTimesClick(program: any) {
+    const slug = this.slugify(program.name);
+    this.sharedProgramService.setProgram(program);
+    this.router.navigate(['programs', slug, 'starttimes']);
+  }
+  
+  onGroupsClick(program: any) {
+    const slug = this.slugify(program.name);
+    this.sharedProgramService.setProgram(program);
+    this.router.navigate(['programs', slug, 'groups']);
+  }
+  
+  onPumpSelectionClick(program: any) {
+    const slug = this.slugify(program.name);
+    this.sharedProgramService.setProgram(program);
+    this.router.navigate(['programs', slug, 'pump']);
+  }
+  
+  slugify(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-');
+  }
+  
+  hasChanges(): boolean {
+    return this.sharedProgramService.hasStartTimesChanged();
+  }
+  
 }

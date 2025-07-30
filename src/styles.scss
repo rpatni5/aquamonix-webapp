@@ -117,3 +117,38 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 .text-main {
     color: #007cb9 !important;
 }
+
+.text-lightBold{
+    font-size: 1.08rem;
+    font-weight: 600 !important;
+    color: rgba(50, 47, 55, 0.4) !important;
+}
+
+
+.common-btn {
+    padding: 8px 20px;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 6px;
+    background-color: transparent;
+    border: 1px solid #ccc; 
+    color: #007cb9;
+    cursor: pointer;
+    min-width: 80px;
+  }
+  
+  .common-btn:hover {
+    background-color: #daebf5;
+    color: #007cb9;
+    transform: translateY(-1px);
+  }
+  
+  .common-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+  
+  .form-check-input:checked {
+    background-color: #007cb9 !important;
+    border-color: #007cb9 !important;
+}

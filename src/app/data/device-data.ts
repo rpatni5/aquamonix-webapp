@@ -53,27 +53,27 @@ export const dummyData: DeviceData = {
                                     "1": {
                                         Type: "Time",
                                         Enabled: true,
-                                        StartTimeInMinutes: "0"
+                                        StartTimeInMinutes: "03:00"
                                     },
                                     "2": {
                                         Type: "Time",
-                                        Enabled: true,
+                                        Enabled: false,
                                         StartTimeInMinutes: "0"
                                     },
                                     "3": {
                                         Type: "Time",
-                                        Enabled: true,
+                                        Enabled: false,
                                         StartTimeInMinutes: "0"
                                     },
                                     "4": {
                                         Type: "Time",
-                                        Enabled: true,
+                                        Enabled: false,
                                         StartTimeInMinutes: "0"
                                     },
                                     "5": {
                                         Type: "Time",
                                         Enabled: true,
-                                        StartTimeInMinutes: "0"
+                                        StartTimeInMinutes: "06:08"
                                     }
                                 }
                             },
@@ -167,7 +167,7 @@ export const dummyData: DeviceData = {
                                 Visible: "true"
                             },
                             DayTable: [
-                                false,
+                                true,
                                 false,
                                 false,
                                 false,

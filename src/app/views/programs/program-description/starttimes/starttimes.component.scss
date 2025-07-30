@@ -1,0 +1,84 @@
+.time-input {
+  width: 150px;
+  height: 38px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.time-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-top: 0;
+}
+
+.day-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.day-btn.selected {
+  background-color: white;
+  border-color: black;
+}
+
+.day-btn.current {
+  border-color: #007cb9;
+  color: #007cb9;
+}
+
+.day-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.day-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-label {
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.current-label {
+  color: #007cb9;
+}
+
+.day-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.day-box.selected {
+  background-color: #fff;
+  border-color: black;
+}
+
+.day-box.current {
+  border-color: #007cb9;
+}
+
+.day-box i {
+  font-size: 30px;
+
+}

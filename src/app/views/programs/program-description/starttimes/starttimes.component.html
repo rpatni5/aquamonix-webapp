@@ -1,1 +1,79 @@
-<p>starttimes works!</p>
+<div class="container-fluid program-description-container pt-2">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-secondary">Start times and Daytable</h4>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/programs" class="text-decoration-none cursor-pointer">Programs</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/programs/program-description" class="text-decoration-none cursor-pointer">
+                        {{ program?.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Start times and Daytable</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- Start Times Section -->
+    <div class=" p-3 program-card rounded shadow-sm bg-white mb-3">
+        <h5 class="fw-semibold mb-3">Start Times</h5>
+
+        <div *ngFor="let time of startTimes; let i = index" class="row align-items-center mb-3">
+            <div class="col-md-3 fw-bold text-secondary">
+                {{ time.label }}
+            </div>
+
+            <div class="col-md-9">
+                <div class="d-flex justify-content-end align-items-center gap-3">
+                    <input class="form-control time-input" [(ngModel)]="time.time" [disabled]="!time.enabled"
+                        (change)="markUnsaved()" />
+
+                    <input type="checkbox" class="form-check-input time-checkbox" [(ngModel)]="time.enabled"
+                        (change)="onToggleEnabled(time)" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Day Table Section -->
+    <div class="p-3 program-card rounded shadow-sm bg-white mb-3">
+        <h5 class="fw-semibold mb-3">Day Table</h5>
+
+        <div class="day-grid mb-2">
+            <div *ngFor="let day of days.slice(0, 7); let i = index" class="day-item">
+                <div class="day-label" [class.current-label]="isCurrentDay(i)">
+                    {{ day }}
+                </div>
+                <button type="button" class="day-box" [class.selected]="isSelected(i)" [class.current]="isCurrentDay(i)"
+                    (click)="toggleDay(i)">
+                    <i *ngIf="isSelected(i)" class="bi bi-check-lg text-success"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="day-grid mb-3">
+            <div *ngFor="let day of days.slice(7, 14); let i = index" class="day-item">
+                <div class="day-label" [class.current-label]="isCurrentDay(i + 7)">
+                    {{ day }}
+                </div>
+                <button type="button" class="day-box" [class.selected]="isSelected(i + 7)"
+                    [class.current]="isCurrentDay(i + 7)" (click)="toggleDay(i + 7)">
+                    <i *ngIf="isSelected(i + 7)" class="bi bi-check-lg text-success"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <button class="common-btn" (click)="selectAll()">All</button>
+            <button class="common-btn" (click)="selectOdd()">Odd</button>
+            <button class="common-btn" (click)="selectEven()">Even</button>
+            <button class="common-btn" (click)="clearSelection()">None</button>
+        </div>
+
+    </div>
+
+</div>
