@@ -1,4 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
+import { ProgramService } from '@/app/services/program.service';
 import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -15,11 +16,22 @@ export class StationsComponent {
   data = Object.values(dummyData);
   selectedStations: any[] = [];
   stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
-  constructor(private router: Router, private stationService: StationService) {
+  constructor(private router: Router, private stationService: StationService, private programService: ProgramService) {
 
   }
   ngOnInit() {
     this.selectedStations = [];
+    this.programService.stopSignal$.subscribe((stop) => {
+      if (stop) {
+        this.stations.forEach(station => {
+          if (station.status === 'Running') {
+            station.status = 'Stopped';
+          }
+        });
+        this.selectedStations = [];
+        this.programService.setSelectedPrograms([]);
+      }
+    });
     this.init();
   }
   async init() {
@@ -29,18 +41,24 @@ export class StationsComponent {
     const stationMeta = device.MetaData.Device.Stations.Items;
     const stationStatus = device.Stations.Items;
     const pumps = device.MetaData.Device.Pumps;
+    const programStation = this.programService.getSelectedPrograms();
 
-    this.stations = Object.keys(stationMeta).map(key => {
+    this.stations = Object.keys(stationMeta).map((key, index) => {
       const selectedStation = this.selectedStations?.find(s => s.id === key);
+      let status = selectedStation?.status || stationStatus[key]?.Status?.Value;
+      if (programStation?.length > 0 && index === 0) {
+        status = 'Running';
+      }
       return {
         id: key,
         name: stationMeta[key].Name,
-        status: selectedStation?.status || stationStatus[key]?.Status?.Value || 'Unknown',
+        status: status,
         selected: selectedStation?.selected ?? false,
         pumps
       };
     });
   }
+
   startWatering() {
     const selectedStations = this.stations.filter((s) => s.selected);
     console.log('Starting watering for:', selectedStations);

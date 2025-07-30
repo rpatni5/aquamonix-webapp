@@ -7,7 +7,7 @@
 @import "flatpickr/dist/flatpickr.css";
 
 .card-container {
-    height: 72vh;
+    height: calc(100vh - 180px);
     overflow: auto;
 }
 
@@ -78,13 +78,18 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 }
 
 .success-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #4CAF50 !important;
+    color: white !important;
+}
+
+.primary-btn {
+    background-color: #007cb9 !important;
+    color: white !important;
 }
 
 .error-btn {
-    background-color: #CF6679;
-    color: white;
+    background-color: #CF6679 !important;
+    color: white !important;
 }
 
 .menu-icon {
@@ -107,4 +112,8 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.text-main {
+    color: #007cb9 !important;
 }
