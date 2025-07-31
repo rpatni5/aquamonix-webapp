@@ -15,13 +15,18 @@ export const Program_Routes: Route[] = [
     },
     {
         path: ':programName/groups',
-        loadComponent: () =>
-            import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
-    },
-    {
-        path: 'group',
-        loadComponent: () =>
-            import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
+            },
+            {
+                path: ':group',
+                loadComponent: () =>
+                    import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
+            },
+        ]
     },
     {
         path: ':programName/pump',
@@ -32,7 +37,7 @@ export const Program_Routes: Route[] = [
         path: ':programName/starttimes',
         loadComponent: () =>
             import('./program-description/starttimes/starttimes.component').then(m => m.StarttimesComponent),
-        
+
     },
-   
+
 ]

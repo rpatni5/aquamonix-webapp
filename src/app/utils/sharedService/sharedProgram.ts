@@ -4,12 +4,28 @@ import { Injectable } from "@angular/core";
 export class SharedProgramService {
   private readonly storageKey = 'selectedProgram';
   private selectedProgram: any;
+  private selectedGroup: any;
 
   private startTimesChanged = false;
 
   setProgram(program: any) {
     this.selectedProgram = program;
     localStorage.setItem(this.storageKey, JSON.stringify(program));
+  }
+
+  setGroup(group: any) {
+    this.selectedGroup = group;
+    localStorage.setItem('selectedGroup', JSON.stringify(group));
+  }
+
+  getGroup() {
+    if (!this.selectedGroup) {
+      const stored = localStorage.getItem('selectedGroup');
+      if (stored) {
+        this.selectedGroup = JSON.parse(stored);
+      }
+    }
+    return this.selectedGroup;
   }
 
   getProgram() {

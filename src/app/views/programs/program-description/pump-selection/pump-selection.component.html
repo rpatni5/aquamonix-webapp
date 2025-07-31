@@ -1,6 +1,6 @@
 <div class="container-fluid program-description-container pt-2">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="text-secondary">Pumps</h4>
+        <h4 class="text-secondary">Pump Selection</h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
@@ -16,6 +16,24 @@
         </nav>
     </div>
 
+    <div class="card-container">
+        <div *ngIf="pumpCount === 0" class="no-pump text-muted">
+            No pump available for this device.
+        </div>
 
-
+        <div *ngFor="let pump of pumps; let i = index" class="card p-3 mb-2">
+            <div class="row align-items-center">
+                <div class="col">
+                    <span class="pump-name fw-bold">{{ pump?.Name }}</span>
+                </div>
+                <div class="col-auto">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="checkedPumps[i]"
+                            [id]="'pumpCheckbox' + i" />
+                        <label class="form-check-label" [for]="'pumpCheckbox' + i"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
