@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StationService } from '@/app/services/station.service';
+import { UnsavedChanges } from '@/app/models/unsaved-changes';
 @Component({
   selector: 'app-starttimes',
   standalone: true,
@@ -11,7 +12,8 @@ import { StationService } from '@/app/services/station.service';
   templateUrl: './starttimes.component.html',
   styleUrl: './starttimes.component.scss'
 })
-export class StarttimesComponent {
+
+export class StarttimesComponent implements UnsavedChanges {
   program: any;
   days: string[] = ['S', 'M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S'];
   selectedDays: boolean[] = new Array(14).fill(false);
@@ -19,7 +21,7 @@ export class StarttimesComponent {
   currentCycleDay: number = 1;
 
   originalStartTimes: any[] = [];
-originalSelectedDays: boolean[] = [];
+  originalSelectedDays: boolean[] = [];
 
 
   startTimes = [
@@ -30,18 +32,23 @@ originalSelectedDays: boolean[] = [];
     { label: 'Set Time of Day 5:', time: '00:00', enabled: true },
   ];
 
-  private convertMinutesToTime(minutes: number): string {
-    const hrs = Math.floor(minutes / 60).toString().padStart(2, '0');
-    const mins = (minutes % 60).toString().padStart(2, '0');
-    return `${hrs}:${mins}`;
-  }
-
   constructor(
     private router: Router,
     private sharedProgramService: SharedProgramService,
     private stationService: StationService
 
   ) { }
+
+  private convertMinutesToTime(minutes: number): string {
+    const hrs = Math.floor(minutes / 60).toString().padStart(2, '0');
+    const mins = (minutes % 60).toString().padStart(2, '0');
+    return `${hrs}:${mins}`;
+  }
+
+  private convertToMinutes(time: string): number {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+  }
 
   async ngOnInit() {
     this.program = this.sharedProgramService.getProgram();
@@ -69,15 +76,13 @@ originalSelectedDays: boolean[] = [];
         startTime.enabled !== original.enabled
       );
     });
-  
+
     const daysChanged = this.selectedDays.some((val, i) => val !== this.originalSelectedDays[i]);
-  
     const hasChanged = startTimesChanged || daysChanged;
-  
     this.hasUnsavedChanges = hasChanged;
     this.sharedProgramService.setStartTimesChanged(hasChanged);
   }
-  
+
 
   getProgramIdFromName(name: string): string {
     const match = name?.match(/\d+$/);
@@ -134,6 +139,7 @@ originalSelectedDays: boolean[] = [];
     this.selectedDays[index] = !this.selectedDays[index];
     this.checkForChanges();
   }
+
   isSelected(index: number): boolean {
     return this.selectedDays[index];
   }
@@ -191,8 +197,17 @@ originalSelectedDays: boolean[] = [];
 
   }
 
-  private convertToMinutes(time: string): number {
-    const [hours, minutes] = time.split(':').map(Number);
-    return hours * 60 + minutes;
+  markChangesSaved() {
+    this.hasUnsavedChanges = false;
+    this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+    this.originalSelectedDays = [...this.selectedDays];
+    this.sharedProgramService.setStartTimesChanged(false);
   }
+
+  hasChanges(): boolean {
+    this.checkForChanges();
+    return this.hasUnsavedChanges;
+  }
+
+
 }

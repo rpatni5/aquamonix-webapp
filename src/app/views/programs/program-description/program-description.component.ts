@@ -1,3 +1,4 @@
+import { UnsavedChanges } from '@/app/models/unsaved-changes';
 import { SharedProgramService } from '@/app/utils/sharedService/sharedProgram';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -11,7 +12,7 @@ import { Router, RouterModule } from '@angular/router';
   templateUrl: './program-description.component.html',
   styleUrls: ['./program-description.component.scss']
 })
-export class ProgramDescriptionComponent {
+export class ProgramDescriptionComponent implements UnsavedChanges {
 
   program: any;
   waterBoostSteps = [0, 25, 50, 75, 100, 125];
@@ -21,7 +22,7 @@ export class ProgramDescriptionComponent {
   constructor(
     private router: Router,
     private sharedProgramService: SharedProgramService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.program = this.sharedProgramService.getProgram();
@@ -72,25 +73,33 @@ export class ProgramDescriptionComponent {
     this.sharedProgramService.setProgram(program);
     this.router.navigate(['programs', slug, 'starttimes']);
   }
-  
+
   onGroupsClick(program: any) {
     const slug = this.slugify(program.name);
     this.sharedProgramService.setProgram(program);
     this.router.navigate(['programs', slug, 'groups']);
   }
-  
+
   onPumpSelectionClick(program: any) {
     const slug = this.slugify(program.name);
     this.sharedProgramService.setProgram(program);
     this.router.navigate(['programs', slug, 'pump']);
   }
-  
+
   slugify(name: string): string {
     return name.toLowerCase().replace(/\s+/g, '-');
   }
-  
+
   hasChanges(): boolean {
     return this.sharedProgramService.hasStartTimesChanged();
   }
-  
+
+  saveStartTimes(): void {
+    console.log('ProgramDescriptionComponent saveStartTimes() called.');
+  }
+
+  markChangesSaved() {
+    this.sharedProgramService.setStartTimesChanged(false);
+  }
+
 }
