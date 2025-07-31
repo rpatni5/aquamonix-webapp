@@ -1,6 +1,6 @@
 export interface UnsavedChanges {
     hasChanges(): boolean;
-    saveStartTimes(): void;
+    saveStartTimes?(): void;
     markChangesSaved?(): void;
   }
   

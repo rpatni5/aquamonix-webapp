@@ -5,10 +5,12 @@ import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { StationService } from '@/app/services/station.service';
 import { UnsavedChanges } from '@/app/models/unsaved-changes';
+import { TimerComponent } from '@/app/utils/timer/timer.component';
+
 @Component({
   selector: 'app-starttimes',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule],
+  imports: [RouterModule, CommonModule, FormsModule, TimerComponent],
   templateUrl: './starttimes.component.html',
   styleUrl: './starttimes.component.scss'
 })
@@ -19,6 +21,11 @@ export class StarttimesComponent implements UnsavedChanges {
   selectedDays: boolean[] = new Array(14).fill(false);
   hasUnsavedChanges: boolean = false;
   currentCycleDay: number = 1;
+  openPopup = false;
+  selectedTimeDisplay = '00:00';
+  selectedHour: number = 0;
+  selectedMinute: number = 0;
+  selectedTimeIndex: number = -1;
 
   originalStartTimes: any[] = [];
   originalSelectedDays: boolean[] = [];
@@ -60,12 +67,50 @@ export class StarttimesComponent implements UnsavedChanges {
     const programData = deviceData?.Devices?.Items?.MPG101?.Programs?.Items?.[programId];
 
     if (programData) {
-      this.patchStartTimes(programData.StartConditions?.Items || {});
-      this.selectedDays = programData.DayTable || new Array(14).fill(false);
+      const local = localStorage.getItem('savedStartTimes_' + programId);
+      const saved = local ? JSON.parse(local) : null;
+      if (saved && saved.programId === programId) {
+        this.startTimes = saved.startTimes;
+        this.selectedDays = saved.selectedDays;
+        this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+        this.originalSelectedDays = [...this.selectedDays];
+      } else {
+        this.patchStartTimes(programData.StartConditions?.Items || {});
+        this.selectedDays = programData.DayTable || new Array(14).fill(false);
+        this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+        this.originalSelectedDays = [...this.selectedDays];
+      }
 
       this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
       this.originalSelectedDays = [...this.selectedDays];
     }
+  }
+
+  confirmTime(event: { hour: string; minute: string }) {
+    const formatted = `${event.hour}:${event.minute}`;
+    if (this.selectedTimeIndex !== -1) {
+      this.startTimes[this.selectedTimeIndex].time = formatted;
+      if (formatted !== 'Off') {
+        this.startTimes[this.selectedTimeIndex].enabled = true;
+      }
+      this.markUnsaved();
+      this.saveToLocalStorage();
+    }
+    this.openPopup = false;
+  }
+
+  openTimePicker(index: number) {
+    const time = this.startTimes[index].time;
+    if (time !== 'Off') {
+      const [hour, minute] = time.split(':').map(Number);
+      this.selectedHour = hour;
+      this.selectedMinute = minute;
+    } else {
+      this.selectedHour = 0;
+      this.selectedMinute = 0;
+    }
+    this.selectedTimeIndex = index;
+    this.openPopup = true;
   }
 
   checkForChanges() {
@@ -137,7 +182,9 @@ export class StarttimesComponent implements UnsavedChanges {
 
   toggleDay(index: number): void {
     this.selectedDays[index] = !this.selectedDays[index];
+    this.saveToLocalStorage();
     this.checkForChanges();
+
   }
 
   isSelected(index: number): boolean {
@@ -150,22 +197,33 @@ export class StarttimesComponent implements UnsavedChanges {
 
   selectAll(): void {
     this.selectedDays = new Array(14).fill(true);
+    this.saveToLocalStorage();
     this.checkForChanges();
+
   }
 
   selectOdd(): void {
     this.selectedDays = this.selectedDays.map((_, i) => i % 2 === 0);
+    this.saveToLocalStorage();
     this.checkForChanges();
+
+
   }
 
   selectEven(): void {
     this.selectedDays = this.selectedDays.map((_, i) => i % 2 !== 0);
+    this.saveToLocalStorage();
     this.checkForChanges();
+
+
   }
 
   clearSelection(): void {
     this.selectedDays = new Array(14).fill(false);
+    this.saveToLocalStorage();
     this.checkForChanges();
+
+
   }
 
   markUnsaved() {
@@ -179,8 +237,11 @@ export class StarttimesComponent implements UnsavedChanges {
       time.previousTime = time.time;
       time.time = 'Off';
     } else if (time.time === 'Off' && time.previousTime) {
-      time.time = time.previousTime;
+      time.time = time.previousTime || '00:00';;
     }
+    this.saveToLocalStorage();
+    this.checkForChanges();
+
   }
 
   saveStartTimes() {
@@ -189,9 +250,6 @@ export class StarttimesComponent implements UnsavedChanges {
       enabled: item.enabled,
       startTimeInMinutes: item.enabled ? this.convertToMinutes(item.time) : null,
     }));
-
-    console.log('Saved Start Times:', savedData);
-    console.log('Selected Days:', this.selectedDays);
 
     this.checkForChanges();
 
@@ -207,6 +265,24 @@ export class StarttimesComponent implements UnsavedChanges {
   hasChanges(): boolean {
     this.checkForChanges();
     return this.hasUnsavedChanges;
+  }
+
+  saveToLocalStorage() {
+    const programId = this.getProgramIdFromName(this.program?.name);
+    const dataToSave = {
+      programId,
+      startTimes: this.startTimes.map(item => ({
+        label: item.label,
+        enabled: item.enabled,
+        time: item.time,
+      })),
+      selectedDays: this.selectedDays,
+    };
+    localStorage.setItem('savedStartTimes_' + programId, JSON.stringify(dataToSave));
+  }
+  
+  slugify(name: string | undefined): string {
+    return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
   }
 
 

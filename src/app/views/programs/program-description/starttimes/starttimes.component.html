@@ -7,9 +7,9 @@
                     <a routerLink="/programs" class="text-decoration-none cursor-pointer">Programs</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a routerLink="/programs/program-description" class="text-decoration-none cursor-pointer">
+                    <a [routerLink]="['/programs', slugify(program?.name)]" class="text-decoration-none cursor-pointer">
                         {{ program?.name }}
-                    </a>
+                      </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Start times and Daytable</li>
             </ol>
@@ -27,8 +27,10 @@
 
             <div class="col-md-9">
                 <div class="d-flex justify-content-end align-items-center gap-3">
-                    <input class="form-control time-input" [(ngModel)]="time.time" [disabled]="!time.enabled"
-                        (change)="markUnsaved()" />
+                    <div class="form-control time-input text-center" 
+                        (click)="openTimePicker(i)">
+                        {{ time.time }}
+                    </div>
 
                     <input type="checkbox" class="form-check-input time-checkbox" [(ngModel)]="time.enabled"
                         (change)="onToggleEnabled(time)" />
@@ -75,5 +77,10 @@
         </div>
 
     </div>
+
+    <app-timer [open]="openPopup" [initialHour]="selectedHour" [initialMinute]="selectedMinute"
+        (close)="openPopup = false" (confirm)="confirmTime($event)">
+    </app-timer>
+
 
 </div>
