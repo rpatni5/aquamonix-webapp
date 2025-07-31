@@ -8,8 +8,13 @@ export class ProgramService {
     selectedProgram$ = this.selectedProgramSource.asObservable();
     private stopSignalSubject = new BehaviorSubject<boolean>(false);
     stopSignal$ = this.stopSignalSubject.asObservable();
+
+    private commandSentSignalSubject = new BehaviorSubject<boolean>(false);
+    commandSentSignal$ = this.commandSentSignalSubject.asObservable();
+
     private showStopButtonSubject = new BehaviorSubject<boolean>(false);
     showStopButton$ = this.showStopButtonSubject.asObservable();
+
     setSelectedPrograms(programs: any[]) {
         this.selectedProgramSource.next(programs);
     }
@@ -32,5 +37,10 @@ export class ProgramService {
     getShowStopButtonValue() {
         return this.showStopButtonSubject.getValue();
     }
+
+    sendCommandSentSuccessfully() {
+        this.commandSentSignalSubject.next(true);
+    }
+    
 }
 

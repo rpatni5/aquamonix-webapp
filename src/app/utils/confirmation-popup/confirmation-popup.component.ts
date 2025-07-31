@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-confirmation-popup',
+  imports: [CommonModule],
   template: `
     <div class="modal-backdrop" (click)="onCancel()">
       <div class="modal-content p-4" (click)="$event.stopPropagation()">
@@ -11,10 +13,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         </div>
         <p class="text-center">{{ message }}</p>
         <div class="d-flex justify-content-around mt-4">
-          <button type="button" class="btn btn-light border rounded-pill px-4" (click)="onCancel()">Cancel</button>
-          <button type="button" class="btn btn-danger rounded-pill px-4" (click)="onDiscard()">Discard</button>
-          <button type="button" class="btn btn-success rounded-pill px-4" (click)="onSave()">Save</button>
-        </div>
+          <button *ngIf="mode === 'confirm' || mode === 'saveOnly'" type="button" class="btn btn-light border rounded-pill px-4" (click)="onCancel()">Cancel</button>
+          <button *ngIf="mode === 'confirm'" type="button" class="btn btn-danger rounded-pill px-4" (click)="onDiscard()">Discard</button>
+          <button *ngIf="mode === 'confirm' || mode === 'saveOnly'" type="button" class="btn btn-success rounded-pill px-4" (click)="onSave()">Save</button>
+          <button *ngIf="mode === 'alert'" type="button" class="btn btn-primary rounded-pill px-4" (click)="onCancel()">OK</button>
+</div>
+
+
       </div>
     </div>
   `,
@@ -23,6 +28,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ConfirmationPopupComponent {
   @Input() title: string = 'Unsaved Changes';
   @Input() message: string = 'You have unsaved changes. What would you like to do?';
+  @Input() mode: 'confirm' | 'alert' | 'saveOnly' = 'confirm';
 
   @Output() save = new EventEmitter<void>();
   @Output() discard = new EventEmitter<void>();

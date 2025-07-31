@@ -60,32 +60,31 @@ export class StarttimesComponent implements UnsavedChanges {
   async ngOnInit() {
     this.program = this.sharedProgramService.getProgram();
     this.currentCycleDay = this.getSystemCurrentDay();
-
     const programId = this.getProgramIdFromName(this.program?.name);
-
     const deviceData = await this.stationService.getDeviceData();
     const programData = deviceData?.Devices?.Items?.MPG101?.Programs?.Items?.[programId];
-
     if (programData) {
       const local = localStorage.getItem('savedStartTimes_' + programId);
       const saved = local ? JSON.parse(local) : null;
       if (saved && saved.programId === programId) {
         this.startTimes = saved.startTimes;
         this.selectedDays = saved.selectedDays;
-        this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
-        this.originalSelectedDays = [...this.selectedDays];
+        if (!this.sharedProgramService.hasStartTimesChanged()) {
+          this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+          this.originalSelectedDays = [...this.selectedDays];
+        }
       } else {
         this.patchStartTimes(programData.StartConditions?.Items || {});
         this.selectedDays = programData.DayTable || new Array(14).fill(false);
-        this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
-        this.originalSelectedDays = [...this.selectedDays];
+        if (!this.sharedProgramService.hasStartTimesChanged()) {
+          this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+          this.originalSelectedDays = [...this.selectedDays];
+        }
       }
-
-      this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
-      this.originalSelectedDays = [...this.selectedDays];
+      this.checkForChanges();
     }
   }
-
+  
   confirmTime(event: { hour: string; minute: string }) {
     const formatted = `${event.hour}:${event.minute}`;
     if (this.selectedTimeIndex !== -1) {

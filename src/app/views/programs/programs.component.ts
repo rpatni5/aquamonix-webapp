@@ -66,6 +66,11 @@ export class ProgramsComponent {
         this.stopCurrentExecution();
       }
     });
+    this.programService.commandSentSignal$.subscribe((sent) => {
+      if (sent) {
+        this.commandSentSuccessfulyExecution();
+      }
+    });
     this.init();
     const device = dummyData.Devices.Items['MPG101'];
     const stationGroupItems = device.Programs.Items[1].StationGroups.Items;
@@ -122,6 +127,15 @@ export class ProgramsComponent {
       this.init();
     }
   }
+  commandSentSuccessfulyExecution() {
+    const currentProgram = this.programService.getSelectedPrograms();
+    if (currentProgram && currentProgram.length > 0) {
+      currentProgram.forEach(e => e.status = "CommandSent");
+      this.programService.setSelectedPrograms(currentProgram);
+      this.init();
+    }
+  }
+  
 
   startProgram(programName: any) {
     this.selectedProgram = programName;
