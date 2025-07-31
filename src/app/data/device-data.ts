@@ -2227,7 +2227,7 @@ export const dummyData: DeviceData = {
                 DateTimeUtc: "1752818750",
                 DeviceId: "MPG101",
                 Description: "New Firmware Loaded",
-                Severity: "0",
+                Severity: "5",
                 Active: false,
                 Category: "0"
             },
@@ -2235,8 +2235,8 @@ export const dummyData: DeviceData = {
                 DateTimeUtc: "1752818768",
                 DeviceId: "MPG101",
                 Description: "Rain Switch On",
-                Severity: "0",
-                Active: false,
+                Severity: "1",
+                Active: true,
                 Category: "0"
             },
             "19": {
@@ -2251,8 +2251,8 @@ export const dummyData: DeviceData = {
                 DateTimeUtc: "1752818769",
                 DeviceId: "MPG101",
                 Description: "Door Open",
-                Severity: "0",
-                Active: false,
+                Severity: "3",
+                Active: true,
                 Category: "0"
             },
             "21": {

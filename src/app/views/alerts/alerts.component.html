@@ -2,14 +2,17 @@
   <h2 class="mb-3 text-secondary">Alerts</h2>
   <div class="card-container">
     <div class="program-card p-3 rounded shadow-sm bg-white mb-3 d-flex justify-content-between align-items-center"
-    *ngFor="let alert of alerts; let i = index">
+      *ngFor="let alert of alerts; let i = index">
       <div>
         <div class="alert-time">
-          {{ alert.DateTimeUtc}}
+          {{ alert.DateTimeUtc }}
         </div>
-        <div class="text-muted ">
+        <div [style.color]="getSeverityColor(alert.Severity)">
           {{ alert.Description }}
         </div>
+      </div>
+      <div class="severity-dot"
+        [ngStyle]="{ 'background-color': alert.Active ? getSeverityColor(alert.Severity) : '#808080' }">
       </div>
     </div>
   </div>

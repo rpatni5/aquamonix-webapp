@@ -5,6 +5,7 @@ import { DatePipes } from '@/app/helper/date';
 import { AlertItem } from '@/app/models/device-data.model';
 import { dummyData } from '@/app/data/device-data';
 import { StationService } from '@/app/services/station.service';
+import { severityColorMap } from '@/app/utils/sharedService/sharedcomponents/severity-color';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { StationService } from '@/app/services/station.service';
 
 export class AlertsComponent {
   data = Object.values(dummyData)
-  alerts: { id: string, DateTimeUtc: string, Description: string }[] = [];
+  alerts: { id: string, DateTimeUtc: string, Description: string, Severity: string, Active: boolean }[] = [];
+
   constructor(private stationService: StationService) {
 
   }
@@ -33,8 +35,14 @@ export class AlertsComponent {
       return {
         id: key,
         DateTimeUtc: new Date(parseInt(alert.DateTimeUtc) * 1000).toLocaleString(),
-        Description: alert.Description
+        Description: alert.Description,
+        Severity: alert.Severity,
+        Active: alert.Active,
       };
     });
+  }
+  getSeverityColor(severity: string | number | undefined): string {
+    const key = severity?.toString() ?? "undefined";
+    return severityColorMap[key] || severityColorMap["undefined"];
   }
 }
