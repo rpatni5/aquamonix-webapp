@@ -105,7 +105,21 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
   }
 
   saveStartTimes(): void {
-    console.log('ProgramDescriptionComponent saveStartTimes() called.');
+    if (!this.program) return;
+
+    this.programService.setSelectedPrograms([this.program]);
+    this.programService.sendCommandSentSuccessfully();
+  
+    this.notificationService?.notify('Program data has been saved successfully!', 3000, 'success');
+  
+    this.skipUnsavedCheck = true;
+    this.markChangesSaved();
+  
+    this.ngZone.run(() => {
+      setTimeout(() => {
+        this.router.navigate(['/programs']);
+      });
+    });
   }
 
   markChangesSaved() {
