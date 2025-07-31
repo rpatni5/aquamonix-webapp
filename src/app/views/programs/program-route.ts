@@ -7,11 +7,12 @@ export const Program_Routes: Route[] = [
         path: ':programName',
         loadComponent: () =>
             import('./program-description/program-description.component').then(m => m.ProgramDescriptionComponent),
-        canDeactivate: [UnsavedChangesGuard]
+        canDeactivate: [UnsavedChangesGuard], 
     },
     {
         path: '',
         loadComponent: () => import('./programs.component').then(m => m.ProgramsComponent),
+     
 
     },
     {

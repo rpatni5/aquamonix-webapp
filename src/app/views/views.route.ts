@@ -1,4 +1,5 @@
 import type { Route } from '@angular/router'
+import { UnsavedChangesGuard } from '../guard/unsaved-changes.guard'
 
 export const VIEWS_ROUTES: Route[] = [
   {
@@ -28,6 +29,7 @@ export const VIEWS_ROUTES: Route[] = [
   {
     path: 'stations',
     loadChildren: () => import('./stations/station-routes').then(m => m.Station_Routes),
+  
   },
   {
     path: 'programs',

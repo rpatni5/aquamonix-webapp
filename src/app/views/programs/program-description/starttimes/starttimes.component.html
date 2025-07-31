@@ -7,9 +7,9 @@
                     <a routerLink="/programs" class="text-decoration-none cursor-pointer">Programs</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a routerLink="/programs/program-description" class="text-decoration-none cursor-pointer">
+                    <a [routerLink]="['/programs', slugify(program?.name)]" class="text-decoration-none cursor-pointer">
                         {{ program?.name }}
-                    </a>
+                      </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Start times and Daytable</li>
             </ol>

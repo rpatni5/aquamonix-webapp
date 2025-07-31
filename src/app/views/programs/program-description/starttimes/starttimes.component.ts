@@ -10,7 +10,7 @@ import { TimerComponent } from '@/app/utils/timer/timer.component';
 @Component({
   selector: 'app-starttimes',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule,TimerComponent],
+  imports: [RouterModule, CommonModule, FormsModule, TimerComponent],
   templateUrl: './starttimes.component.html',
   styleUrl: './starttimes.component.scss'
 })
@@ -69,21 +69,17 @@ export class StarttimesComponent implements UnsavedChanges {
     if (programData) {
       const local = localStorage.getItem('savedStartTimes_' + programId);
       const saved = local ? JSON.parse(local) : null;
-      
       if (saved && saved.programId === programId) {
         this.startTimes = saved.startTimes;
         this.selectedDays = saved.selectedDays;
-      
         this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
         this.originalSelectedDays = [...this.selectedDays];
       } else {
         this.patchStartTimes(programData.StartConditions?.Items || {});
         this.selectedDays = programData.DayTable || new Array(14).fill(false);
-      
         this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
         this.originalSelectedDays = [...this.selectedDays];
       }
-      
 
       this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
       this.originalSelectedDays = [...this.selectedDays];
@@ -102,7 +98,6 @@ export class StarttimesComponent implements UnsavedChanges {
     }
     this.openPopup = false;
   }
-  
 
   openTimePicker(index: number) {
     const time = this.startTimes[index].time;
@@ -118,7 +113,6 @@ export class StarttimesComponent implements UnsavedChanges {
     this.openPopup = true;
   }
 
-  
   checkForChanges() {
     const startTimesChanged = this.startTimes.some((startTime, i) => {
       const original = this.originalStartTimes[i];
@@ -188,7 +182,6 @@ export class StarttimesComponent implements UnsavedChanges {
 
   toggleDay(index: number): void {
     this.selectedDays[index] = !this.selectedDays[index];
-   
     this.saveToLocalStorage();
     this.checkForChanges();
 
@@ -244,7 +237,7 @@ export class StarttimesComponent implements UnsavedChanges {
       time.previousTime = time.time;
       time.time = 'Off';
     } else if (time.time === 'Off' && time.previousTime) {
-      time.time = time.previousTime|| '00:00';;
+      time.time = time.previousTime || '00:00';;
     }
     this.saveToLocalStorage();
     this.checkForChanges();
@@ -288,5 +281,9 @@ export class StarttimesComponent implements UnsavedChanges {
     localStorage.setItem('savedStartTimes_' + programId, JSON.stringify(dataToSave));
   }
   
+  slugify(name: string | undefined): string {
+    return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
+  }
+
 
 }
