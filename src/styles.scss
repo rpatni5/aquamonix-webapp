@@ -7,7 +7,7 @@
 @import "flatpickr/dist/flatpickr.css";
 
 .card-container {
-    height: calc(100vh - 180px);
+    height: calc(100vh - 190px);
     overflow: auto;
 }
 
@@ -161,6 +161,6 @@ body.sidebar-collapsed .sidebar-stop-button-container {
     border-top: none !important;
 }
 
-.card{
+.card {
     border: none !important;
 }
