@@ -12,7 +12,8 @@
         </div>
       </div>
       <div class="severity-dot"
-        [ngStyle]="{ 'background-color': alert.Active ? getSeverityColor(alert.Severity) : '#808080' }">
+        [ngStyle]="{ 'background-color': alert.Active ? getSeverityColor(alert.Severity) : '#808080' }"
+        *ngIf="alert.Active">
       </div>
     </div>
   </div>
