@@ -34,8 +34,7 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@mdi/font/css/materialdesignicons.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
               "node_modules/feather-icons/dist/feather.min.js",
@@ -121,8 +120,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "node_modules/@mdi/font/css/materialdesignicons.min.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": []
           }
