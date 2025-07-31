@@ -16,6 +16,12 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
   ): Observable<boolean> | Promise<boolean> | boolean {
     const allowedRoutes = ['starttimes', 'groups', 'pump'];
     const goingToAllowedRoute = allowedRoutes.some(path => nextState?.url.includes(path));
+    const goingToProgramDescription = nextState?.url?.match(/\/programs\/[^\/]+$/);
+
+  if ((goingToAllowedRoute || goingToProgramDescription)) {
+    return true; 
+  }
+    
     if (!goingToAllowedRoute && component.hasChanges()) {
       return this.confirmService
         .confirm('Unsaved Changes', 'You have unsaved changes. Do you want to save before leaving?')
@@ -27,6 +33,12 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
             if (typeof component.markChangesSaved === 'function') {
               component.markChangesSaved();
             }
+            const program = (component as any)['program'];
+            if (program && program.name) {
+              const programId = program.name.match(/\d+$/)?.[0] || '1';
+              localStorage.removeItem('savedStartTimes_' + programId);
+            }
+
             return true;
           } else {
             return false;

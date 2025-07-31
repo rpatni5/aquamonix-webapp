@@ -11,27 +11,32 @@ export const Program_Routes: Route[] = [
     },
     {
         path: '',
-        loadComponent: () => import('./programs.component').then(m => m.ProgramsComponent)
+        loadComponent: () => import('./programs.component').then(m => m.ProgramsComponent),
+
     },
     {
         path: ':programName/groups',
         loadComponent: () =>
             import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
+        canDeactivate: [UnsavedChangesGuard],
     },
     {
         path: 'group',
         loadComponent: () =>
             import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
+        canDeactivate: [UnsavedChangesGuard],
     },
     {
         path: ':programName/pump',
         loadComponent: () =>
             import('./program-description/pump-selection/pump-selection.component').then(m => m.PumpSelectionComponent),
+        canDeactivate: [UnsavedChangesGuard],
     },
     {
         path: ':programName/starttimes',
         loadComponent: () =>
             import('./program-description/starttimes/starttimes.component').then(m => m.StarttimesComponent),
+        canDeactivate: [UnsavedChangesGuard],
         
     },
    

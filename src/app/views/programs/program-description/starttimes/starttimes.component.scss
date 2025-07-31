@@ -82,3 +82,13 @@
   font-size: 30px;
 
 }
+
+.time-input {
+  cursor: pointer;
+
+  &.disabled {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
