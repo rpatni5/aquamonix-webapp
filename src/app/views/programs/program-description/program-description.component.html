@@ -1,5 +1,5 @@
 <div class="container-fluid program-description-container pt-2">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center my-2">
         <h4 class="text-secondary">Program Description</h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
@@ -11,80 +11,83 @@
 
         </nav>
     </div>
-
-    <div class="p-3 program-card rounded shadow-sm bg-white mb-3">
-        <div class="option d-flex justify-content-between align-items-center py-3 " >
-            <div class="d-flex align-items-center">
-                <i class="mdi mdi-clock-outline mdi-24px me-2 text-main"></i>
-                <span class="fw-medium">Start times and days</span>
+    <div class="card-container">
+        <div class="p-3 program-card rounded shadow-sm bg-white mb-3">
+            <div class="option d-flex justify-content-between align-items-center py-3 "
+                (click)="onStartTimesClick(program)">
+                <div class="d-flex align-items-center">
+                    <i class="mdi mdi-clock-outline mdi-24px me-2 text-main"></i>
+                    <span class="fw-medium">Start times and days</span>
+                </div>
+                <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
             </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onStartTimesClick(program)"></i>
+
+            <div class="option d-flex justify-content-between align-items-center py-3 "
+                (click)="onGroupsClick(program)">
+                <div class="d-flex align-items-center">
+                    <i class="mdi mdi-account-group mdi-24px me-2 text-main"></i>
+                    <span class="fw-medium">Groups</span>
+                </div>
+                <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
+            </div>
+
+            <div class="option d-flex justify-content-between align-items-center py-3 "
+                (click)="onPumpSelectionClick(program)">
+                <div class="d-flex align-items-center">
+                    <i class="mdi mdi-water-pump mdi-24px me-2 text-main"></i>
+                    <span class="fw-medium">Pump Selection</span>
+                </div>
+                <i class="mdi mdi-chevron-right mdi-24px text-main"></i>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between py-3">
+                <div class="d-flex align-items-center me-3">
+                    <i class="mdi mdi-water mdi-24px me-2 text-main"></i>
+                    <span class="fw-medium">Water Boost</span>
+                </div>
+
+                <div class="flex-grow-1 mx-3 range-container">
+                    <input type="range" min="0" max="125" step="25" class="form-range custom-range w-100"
+                        [(ngModel)]="waterBoost" (ngModelChange)="onWaterBoostSliderChange()"
+                        [ngStyle]="{ background: getSliderTrackColor(waterBoost) }" />
+                </div>
+                <input type="number" class="form-control form-control-sm text-end ms-3" [(ngModel)]="waterBoost"
+                    [min]="0" [max]="125" [step]="25" (ngModelChange)="onWaterBoostInputChange()"
+                    style="width: 60px; margin-right: 15px;" />
+                %
+            </div>
+
         </div>
 
-        <div class="option d-flex justify-content-between align-items-center py-3 " >
-            <div class="d-flex align-items-center">
-                <i class="mdi mdi-account-group mdi-24px me-2 text-main"></i>
-                <span class="fw-medium">Groups</span>
+        <div class="p-4 status-card rounded shadow-sm bg-white mb-3">
+            <div class="d-flex justify-content-between">
+                <span class="fw-semibold">Status</span>
+                <span class="text-muted">Stopped</span>
             </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onGroupsClick(program)"></i>
+
+            <div class="  mt-3 text-lightBold">Program Flow</div>
+            <div class="d-flex justify-content-between mt-1">
+                <span class="fw-medium">Min / Max</span>
+                <span class="text-muted">0.0 / 0.0</span>
+            </div>
+
+            <div class=" mt-3 text-lightBold">Program Volume</div>
+            <div class="d-flex justify-content-between mt-1">
+                <span class="fw-medium">One Run</span>
+                <span class="text-muted">0</span>
+            </div>
+            <div class="d-flex justify-content-between mt-1">
+                <span class="fw-medium">Fortnight</span>
+                <span class="text-muted">0</span>
+            </div>
         </div>
-
-        <div class="option d-flex justify-content-between align-items-center py-3 " >
-            <div class="d-flex align-items-center">
-                <i class="mdi mdi-water-pump mdi-24px me-2 text-main"></i>
-                <span class="fw-medium">Pump Selection</span>
-            </div>
-            <i class="mdi mdi-chevron-right mdi-24px text-main" (click)="onPumpSelectionClick(program)"></i>
-        </div>
-
-        <div class="d-flex align-items-center justify-content-between py-3">
-            <div class="d-flex align-items-center me-3">
-                <i class="mdi mdi-water mdi-24px me-2 text-main"></i>
-                <span class="fw-medium">Water Boost</span>
-            </div>
-
-            <div class="flex-grow-1 mx-3 range-container">
-                <input type="range" min="0" max="125" step="25" class="form-range custom-range w-100"
-                    [(ngModel)]="waterBoost" (ngModelChange)="onWaterBoostSliderChange()"
-                    [ngStyle]="{ background: getSliderTrackColor(waterBoost) }" />
-            </div>
-            <input type="number" class="form-control form-control-sm text-end ms-3" [(ngModel)]="waterBoost" [min]="0"
-                [max]="125" [step]="25" (ngModelChange)="onWaterBoostInputChange()"
-                style="width: 60px; margin-right: 15px;" />
-            %
-        </div>
-
     </div>
-
-    <div class="p-4 status-card rounded shadow-sm bg-white mb-3">
-        <div class="d-flex justify-content-between">
-            <span class="fw-semibold">Status</span>
-            <span class="text-muted">Stopped</span>
-        </div>
-
-        <div class="  mt-3 text-lightBold">Program Flow</div>
-        <div class="d-flex justify-content-between mt-1">
-            <span class="fw-medium">Min / Max</span>
-            <span class="text-muted">0.0 / 0.0</span>
-        </div>
-
-        <div class=" mt-3 text-lightBold">Program Volume</div>
-        <div class="d-flex justify-content-between mt-1">
-            <span class="fw-medium">One Run</span>
-            <span class="text-muted">0</span>
-        </div>
-        <div class="d-flex justify-content-between mt-1">
-            <span class="fw-medium">Fortnight</span>
-            <span class="text-muted">0</span>
-        </div>
-    </div>
-
     <div class="d-flex justify-content-end gap-2">
-        <button class="btn success-btn  px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold" (click)="onSaveProgram(program)">
+        <button class="btn success-btn  px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn " (click)="onSaveProgram(program)">
             Save
         </button>
 
-        <button class="btn error-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold" (click)="discardChanges()">
+        <button class="btn error-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn" (click)="discardChanges()">
             Discard
         </button>
     </div>

@@ -17,15 +17,20 @@ export const Program_Routes: Route[] = [
     },
     {
         path: ':programName/groups',
-        loadComponent: () =>
-            import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
-        canDeactivate: [UnsavedChangesGuard],
-    },
-    {
-        path: 'group',
-        loadComponent: () =>
-            import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
-        canDeactivate: [UnsavedChangesGuard],
+        children: [
+            {
+                path: '',
+                loadComponent: () =>
+                    import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
+                canDeactivate: [UnsavedChangesGuard],
+            },
+            {
+                path: ':group',
+                loadComponent: () =>
+                    import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
+                canDeactivate: [UnsavedChangesGuard],
+            },
+        ]
     },
     {
         path: ':programName/pump',
@@ -40,5 +45,5 @@ export const Program_Routes: Route[] = [
         canDeactivate: [UnsavedChangesGuard],
         
     },
-   
+
 ]
