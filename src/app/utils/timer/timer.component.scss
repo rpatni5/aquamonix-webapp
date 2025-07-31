@@ -1,0 +1,51 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.picker-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.scroll-picker {
+  max-height: 120px;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll-picker::-webkit-scrollbar {
+  display: none;
+}
+
+.picker-item {
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  scroll-snap-align: center;
+  font-size: 16px;
+  color: #444;
+}
+
+.picker-item.selected {
+  font-weight: bold;
+  color: #000305;
+  font-size: 20px;
+}
+
+.spacer {
+  height: 40px;
+}

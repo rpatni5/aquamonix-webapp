@@ -5,7 +5,7 @@ import { DatePipes } from '@/app/helper/date';
 import { AlertItem } from '@/app/models/device-data.model';
 import { dummyData } from '@/app/data/device-data';
 import { StationService } from '@/app/services/station.service';
-import { severityColorMap } from '@/app/utils/sharedService/sharedcomponents/severity-color';
+import { severityColorMap } from '@/app/utils/sharedcomponents/severity-color';
 
 
 @Component({
