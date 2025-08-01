@@ -20,45 +20,16 @@ export class ProgramsComponent {
   itemHeight = 40;
   visibleCount = 3;
   groupNumbers: number[] = [];
-  @ViewChild('pickerContainer') pickerContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('minutePicker') pickerContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('hourPicker') hourPicker!: ElementRef;
+  selectedHour: number = 1;
+  hours: number[] = Array.from({ length: 20 }, (_, i) => i+1);
   private scrollTimeout: any;
   constructor(
     private programService: ProgramService,
     private router: Router,
     private sharedProgramService: SharedProgramService,
   ) { }
-
-  ngAfterViewInit() {
-    // Scroll to default selected (01)
-    this.scrollToIndex(this.selectedGroup);
-  }
-
-  scrollToIndex(index: number) {
-    const scrollTop = (index + 1) * this.itemHeight; // +1 for spacer
-    this.pickerContainer.nativeElement.scrollTop = scrollTop;
-  }
-
-  onWheel(event: WheelEvent) {
-    event.preventDefault();
-    const direction = event.deltaY > 0 ? 1 : -1;
-    this.moveSelection(direction);
-  }
-
-  onKeyDown(event: KeyboardEvent) {
-    if (event.key === 'ArrowDown') {
-      this.moveSelection(1);
-    } else if (event.key === 'ArrowUp') {
-      this.moveSelection(-1);
-    }
-  }
-
-  moveSelection(delta: number) {
-    const newIndex = this.selectedGroup + delta;
-    if (newIndex >= 0 && newIndex < this.groupNumbers.length) {
-      this.selectedGroup = newIndex;
-      this.scrollToIndex(newIndex);
-    }
-  }
 
   ngOnInit() {
     this.programService.stopSignal$.subscribe((stop) => {
@@ -92,9 +63,11 @@ export class ProgramsComponent {
       };
     });
   }
+
   isProgramRunning(program: any): boolean {
     return program.status?.toLowerCase() === 'running';
   }
+
   confirmStartProgram(selectedProgram: any) {
     console.log(`Start ${selectedProgram.name} at group ${this.selectedGroup}`);
 
@@ -127,6 +100,7 @@ export class ProgramsComponent {
       this.init();
     }
   }
+
   commandSentSuccessfulyExecution() {
     const currentProgram = this.programService.getSelectedPrograms();
     if (currentProgram && currentProgram.length > 0) {
@@ -135,7 +109,6 @@ export class ProgramsComponent {
       this.init();
     }
   }
-  
 
   startProgram(programName: any) {
     this.selectedProgram = programName;
@@ -158,9 +131,8 @@ export class ProgramsComponent {
     return name.toLowerCase().replace(/\s+/g, '-');
   }
 
-  onScrollMinute(event: Event) {
-    const element = event.target as HTMLElement;
-    const index = Math.round(element.scrollTop / 40);
-    this.selectedGroup = this.groupNumbers[index] ?? 0;
+  onScrollHour(event: any) {
+    const index = Math.round(event.target.scrollTop / 40);
+    this.selectedHour = this.hours[index] || 0;
   }
 }

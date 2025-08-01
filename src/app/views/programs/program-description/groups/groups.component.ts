@@ -7,9 +7,10 @@ import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-groups',
+  standalone: true,
   imports: [RouterModule, CommonModule, FormsModule],
   templateUrl: './groups.component.html',
-  styleUrl: './groups.component.scss'
+  styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
   program: any;

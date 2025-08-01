@@ -41,13 +41,15 @@
             <div class="picker-container text-center my-2">
                 <div class="d-flex justify-content-center align-items-center">
                     <p class="text-muted mb-1 mx-3" style="font-size: 16px;">Start at group:</p>
-                    <div class="picker scroll-picker mx-2 my-2" #minutePicker (scroll)="onScrollMinute($event)">
+                   
+                    <div class="picker scroll-picker my-2" #hourPicker (scroll)="onScrollHour($event)">
                         <div class="spacer"></div>
-                        <div *ngFor="let num of groupNumbers" class="picker-item"
-                            [ngClass]="{ 'selected': num === selectedGroup }">
-                            {{ num < 10 ? '0' + num : num }} </div>
+                        <div *ngFor="let hour of hours" class="picker-item"
+                            [ngClass]="{ 'selected': hour === selectedHour }">
+                            {{ hour < 10 ? '0' + hour : hour }} </div>
                                 <div class="spacer"></div>
                         </div>
+                     
                     </div>
                 </div>
                 <div class="d-flex justify-content-around mt-4">
@@ -59,3 +61,6 @@
                         Start
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>

@@ -1,12 +1,18 @@
 import { Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class SharedProgramService {
   private readonly storageKey = 'selectedProgram';
+  private waterBoostKey = 'waterBoost';
   private selectedProgram: any;
   private selectedGroup: any;
 
   private startTimesChanged = false;
+  private waterBoostSubject = new BehaviorSubject<number>(0);
+  waterBoost$ = this.waterBoostSubject.asObservable();
+
+
 
   setProgram(program: any) {
     this.selectedProgram = program;
@@ -53,6 +59,23 @@ export class SharedProgramService {
 
   resetStartTimesChanges() {
     this.startTimesChanged = false;
+  }
+
+  setWaterBoost(value: number) {
+    this.waterBoostSubject.next(value);
+    localStorage.setItem(this.waterBoostKey, JSON.stringify(value));
+  }
+
+  getCurrentWaterBoost(): number {
+    const stored = localStorage.getItem(this.waterBoostKey);
+    if (stored) {
+      const parsed = parseInt(stored, 10);
+      if (!isNaN(parsed)) {
+        this.waterBoostSubject.next(parsed); // update BehaviorSubject so subscribers still work
+        return parsed;
+      }
+    }
+    return 0;
   }
 
 }

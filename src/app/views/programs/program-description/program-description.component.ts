@@ -35,10 +35,13 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
   ngOnInit() {
     this.program = this.sharedProgramService.getProgram();
+    this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
+    this.rangeIndex = this.getClosestStepIndex(this.waterBoost);
   }
 
   onRangeChange() {
     this.waterBoost = this.waterBoostSteps[this.rangeIndex];
+    this.sharedProgramService.setWaterBoost(this.waterBoost);
   }
 
   getSliderTrackColor(boostValue: number): string {
@@ -67,10 +70,12 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
   onWaterBoostSliderChange() {
     this.waterBoost = this.clamp(this.waterBoost, 0, 125);
+    this.sharedProgramService.setWaterBoost(this.waterBoost);
   }
 
   onWaterBoostInputChange() {
     this.waterBoost = this.clamp(this.waterBoost, 0, 125);
+    this.sharedProgramService.setWaterBoost(this.waterBoost);
   }
 
   clamp(value: number, min: number, max: number): number {

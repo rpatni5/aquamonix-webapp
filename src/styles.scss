@@ -77,19 +77,46 @@ body.sidebar-collapsed .sidebar-stop-button-container {
     display: none !important;
 }
 
-.success-btn {
-    background-color: #4CAF50 !important;
-    color: white !important;
-}
-
 .primary-btn {
     background-color: #007cb9 !important;
     color: white !important;
 }
 
+.success-btn {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    border: none;
+    transition: background-color 0.2s ease !important;
+
+    &:hover,
+    &:active {
+        background-color: #4caf4fd3 !important;
+    }
+}
+
 .error-btn {
     background-color: #CF6679 !important;
     color: white !important;
+    border: none;
+    transition: background-color 0.2s ease !important;
+
+    &:hover,
+    &:active {
+        background-color: #cf6679e7 !important;
+    }
+}
+
+
+.cancel-btn {
+    background-color: #d4caca !important;
+    color: black !important;
+    border: none;
+    transition: background-color 0.2s ease !important;
+
+    &:hover,
+    &:active {
+        background-color: #d4caca !important;
+    }
 }
 
 .menu-icon {

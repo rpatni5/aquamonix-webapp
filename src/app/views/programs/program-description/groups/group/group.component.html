@@ -1,6 +1,6 @@
 <div class="container-fluid program-description-container pt-2">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="text-secondary">Groups</h4>
+    <div class="d-flex justify-content-between align-items-center my-2">
+        <h4 class="text-secondary">{{groupName}}</h4>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0">
                 <li class="breadcrumb-item">
@@ -18,9 +18,10 @@
             </ol>
         </nav>
     </div>
+
     <div class="card-container">
         <div class="card shadow-sm mb-3">
-            <div class="card-body">
+            <div class="card-body p-4">
                 <h5 class="card-title mb-4">Group Runtime</h5>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -31,53 +32,121 @@
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div>Actual</div>
-                    <div class="text-end">{{convertToDateTime(group.data)}}</div>
+                    <div class="text-end">{{ getFormattedTime() }}
+
+                    </div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="fw-semibold">Group Flowrate</div>
-                    <div class="text-end">0.0 L/s</div>
+                    <div class="text-end">{{ totalFlowRate.toFixed(1) }} L/s</div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="fw-semibold">Group Volume</div>
-                    <div class="text-end">0 kL</div>
+                    <div class="text-end">{{ getGroupVolume() | number:'1.0-0' }} kL</div>
+
                 </div>
             </div>
         </div>
 
 
-        <!-- Station Section -->
         <div class="card shadow-sm mb-5">
             <div class="card-body">
-                <button class="btn add-station" (click)="openStationModal()">
-                    Add Station <i class="mdi mdi-plus mdi-12px"></i>
-                </button>
-                <h5 class="card-title mb-2">Station</h5>
-                <p class="text-muted mb-0">No stations available.</p>
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <button class="btn add-station" (click)="openStationModal()">
+                        Add Station <i class="mdi mdi-plus mdi-12px"></i>
+                    </button>
+
+                    <ng-container
+                        *ngIf="selectedRowIndex !== null && selectedRowIndex !== undefined && selectedRowIndex >= 0">
+                        <button class="btn error-btn d-flex align-items-center gap-1"
+                            (click)="confirmDelete(selectedRowIndex!)">
+                            Delete
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+
+                    </ng-container>
+
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table station-table mb-0">
+                        <thead>
+                            <tr>
+                                <th style="width: 40px;"></th>
+                                <th>Station</th>
+                                <th *ngIf="hasFlowData">Flow</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="renderedStations.length > 0">
+                            <tr *ngFor="let station of safeRenderedStations; let i = index" (click)="selectRow(i)"
+                                [class.table-active]="selectedRowIndex === i" style="cursor: pointer;">
+                                <td>{{ station.index }}</td>
+                                <td style="padding-left: 6px;">{{ station.name }}</td>
+                                <td *ngIf="hasFlowData">{{ station.flow }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ng-container *ngIf="!safeRenderedStations?.length">
+                    <p class="text-muted mb-0">No stations selected.</p>
+                </ng-container>
+
             </div>
         </div>
-
     </div>
-</div>
 
-<app-timer [open]="openPopup" [initialHour]="selectedHour" [initialMinute]="selectedMinute"
-    (confirm)="confirmTime($event)" (close)="openPopup = false">
-</app-timer>
+    <app-timer [open]="openPopup" [initialHour]="selectedHour" [initialMinute]="selectedMinute"
+        (confirm)="confirmTime($event)" (close)="openPopup = false">
+    </app-timer>
 
-<div class="modal fade" id="stationModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header position-relative" style="background-color: #007cb9 !important; color: white;">
-                <h5 class="modal-title  position-absolute start-50 translate-middle-x m-0">Select Stations</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <div class="modal fade" id="stationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-3 overflow-hidden">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-primary text-white py-2">
+                    <h6 class="modal-title m-0">Select Stations</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body p-0">
+                    <div style="max-height: 250px; overflow-y: auto;" class="list-group list-group-flush">
+                        <label *ngFor="let station of stations; let i = index"
+                            class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ i + 1 }}. {{ station.name }}</span>
+                            <input type="checkbox" [(ngModel)]="station.selected" class="large-checkbox" />
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="modal-footer d-flex justify-content-between gap-2 px-3 pb-3 pt-2 mx-4">
+                    <button class="btn success-btn flex-fill" (click)="confirmStations()" data-bs-dismiss="modal">
+                        Select
+                    </button>
+                    <button class="btn error-btn flex-fill" data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+
             </div>
-            <div class="modal-body">
-                <app-stations [isPopup]="true"></app-stations>
-            </div>
-            <div class="modal-footer">
-                <button class="btn success-btn">Select</button>
-                <button class="btn error-btn" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+
+    <div *ngIf="showConfirmDialog" class="confirm-overlay">
+        <div class="confirm-box">
+            <h5 class="mb-2 text-center fw-bold">Confirm Delete</h5>
+            <p class="text-center">
+                Are you sure you want to delete
+                <strong>{{ safeRenderedStations[deleteIndex!]?.name }}</strong> station?
+            </p>
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn cancel-btn" (click)="cancelDelete()">Cancel</button>
+                <button class="btn error-btn" (click)="proceedDelete()">Delete</button>
             </div>
         </div>
     </div>
