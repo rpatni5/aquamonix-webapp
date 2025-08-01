@@ -84,8 +84,11 @@
 }
 
 .watering {
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding-left: 10px!important;
+  padding-right: 15px!important;
+  font-size: 14px;
 }
 
 .test-output-btn .icon {
