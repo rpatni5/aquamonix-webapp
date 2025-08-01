@@ -14,10 +14,12 @@
 
             <div class="d-flex align-items-center gap-2 ">
                 <i *ngIf="isProgramRunning(program)" class="mdi mdi-24px mdi-clock-outline text-main"></i>
-                <button class="btn btn-primary primary-btn px-4 py-1 rounded-pill" (click)="startProgram(program)">
+                <button class="btn btn-primary primary-btn px-4 py-1 rounded-pill"
+                    (click)="startProgram(program); $event.stopPropagation()">
                     Start
                 </button>
-                <i class="mdi mdi-24px mdi-chevron-right text-main" ></i>
+
+                <i class="mdi mdi-24px mdi-chevron-right text-main"></i>
             </div>
         </div>
     </div>
