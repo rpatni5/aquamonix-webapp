@@ -34,15 +34,47 @@ export class AlertsComponent {
       const alert = items[key];
       return {
         id: key,
-        DateTimeUtc: new Date(parseInt(alert.DateTimeUtc) * 1000).toLocaleString(),
+        DateTimeUtc: this.formatFriendlyDate(alert.DateTimeUtc),
         Description: alert.Description,
         Severity: alert.Severity,
         Active: alert.Active,
       };
     });
   }
+
   getSeverityColor(severity: string | number | undefined): string {
     const key = severity?.toString() ?? "undefined";
     return severityColorMap[key] || severityColorMap["undefined"];
   }
+
+  formatFriendlyDate(utcSeconds: string): string {
+    const alertDate = new Date(parseInt(utcSeconds) * 1000);
+    const now = new Date();
+  
+    const isToday = alertDate.toDateString() === now.toDateString();
+  
+    const yesterday = new Date();
+    yesterday.setDate(now.getDate() - 1);
+    const isYesterday = alertDate.toDateString() === yesterday.toDateString();
+  
+    const timeString = alertDate.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  
+    if (isToday) {
+      return `Today ${timeString}`;
+    } else if (isYesterday) {
+      return `Yesterday ${timeString}`;
+    } else {
+      const dateString = alertDate.toLocaleDateString('en-US', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
+      return `${dateString} ${timeString}`;
+    }
+  }
+  
 }
