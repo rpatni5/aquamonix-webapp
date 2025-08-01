@@ -191,3 +191,8 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 .card {
     border: none !important;
 }
+
+body[data-sidebar="hidden"] .sidebar-stop-button-container {
+    display: none !important;
+  }
+  
