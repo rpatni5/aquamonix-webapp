@@ -2,7 +2,7 @@ import { dummyData } from '@/app/data/device-data';
 import { ProgramService } from '@/app/services/program.service';
 import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./stations.component.scss']
 })
 export class StationsComponent {
+  @Input() isPopup: boolean = false;
   data = Object.values(dummyData);
   selectedStations: any[] = [];
   stations: { id: string, name: string, status: string, selected?: boolean, pumps?: [] }[] = [];
@@ -34,6 +35,9 @@ export class StationsComponent {
       }
     });
     this.init();
+  }
+  toggleSelection(station: any): void {
+    station.selected = !station.selected;
   }
   async init() {
     let resp = await this.stationService.getDeviceData();

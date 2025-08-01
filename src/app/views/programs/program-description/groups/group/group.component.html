@@ -14,7 +14,7 @@
                 <li class="breadcrumb-item active" aria-current="page"><a
                         [routerLink]="['/programs', program, 'groups']"
                         class="text-decoration-none cursor-pointer">Groups</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{group}}</li>
+                <li class="breadcrumb-item active" aria-current="page">{{groupName}}</li>
             </ol>
         </nav>
     </div>
@@ -24,13 +24,14 @@
                 <h5 class="card-title mb-4">Group Runtime</h5>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="fw-semibold">Set Run Time</div>
-                    <input type="text" class="form-control w-auto" placeholder="00:00:00" style="max-width: 150px;" />
+                    <div>Set Run Time</div>
+                    <input type="text" class="form-control w-auto text-center" style="max-width: 120px;"
+                        (click)="openPopup = true" [value]="selectedTimeDisplay" />
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <div class="fw-semibold">Actual</div>
-                    <div class="text-end">00:00:00</div>
+                    <div>Actual</div>
+                    <div class="text-end">{{convertToDateTime(group.data)}}</div>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -49,13 +50,35 @@
         <!-- Station Section -->
         <div class="card shadow-sm mb-5">
             <div class="card-body">
-                <button class="btn btn-outline-primary btn-sm mb-3">
-                    Add Station <i class="bi bi-plus"></i>
+                <button class="btn add-station" (click)="openStationModal()">
+                    Add Station <i class="mdi mdi-plus mdi-12px"></i>
                 </button>
                 <h5 class="card-title mb-2">Station</h5>
                 <p class="text-muted mb-0">No stations available.</p>
             </div>
         </div>
 
+    </div>
+</div>
+
+<app-timer [open]="openPopup" [initialHour]="selectedHour" [initialMinute]="selectedMinute"
+    (confirm)="confirmTime($event)" (close)="openPopup = false">
+</app-timer>
+
+<div class="modal fade" id="stationModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header position-relative" style="background-color: #007cb9 !important; color: white;">
+                <h5 class="modal-title  position-absolute start-50 translate-middle-x m-0">Select Stations</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <app-stations [isPopup]="true"></app-stations>
+            </div>
+            <div class="modal-footer">
+                <button class="btn success-btn">Select</button>
+                <button class="btn error-btn" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
     </div>
 </div>
