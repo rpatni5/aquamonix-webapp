@@ -16,14 +16,14 @@ export class ProgramsComponent {
   programs: { id: string, name: string, status: string }[] = [];
   selectedProgram: any;
   selectedGroup: number = 1;
-  selectedValue = 1; // default to 01
+  selectedValue = 1; 
   itemHeight = 40;
   visibleCount = 3;
   groupNumbers: number[] = [];
   @ViewChild('minutePicker') pickerContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('hourPicker') hourPicker!: ElementRef;
   selectedHour: number = 1;
-  hours: number[] = Array.from({ length: 20 }, (_, i) => i+1);
+  hours: number[] = Array.from({ length: 20 }, (_, i) => i + 1);
   private scrollTimeout: any;
   constructor(
     private programService: ProgramService,
@@ -126,7 +126,7 @@ export class ProgramsComponent {
     this.sharedProgramService.setProgram(program);
     this.router.navigate(['programs', slug]);
   }
-  
+
   slugify(name: string): string {
     return name.toLowerCase().replace(/\s+/g, '-');
   }

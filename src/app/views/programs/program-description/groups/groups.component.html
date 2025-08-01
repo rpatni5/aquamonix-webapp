@@ -25,4 +25,22 @@
             </div>
         </div>
     </div>
+
+    <div class="fixed-clear-button">
+        <button class="btn cancel-btn px-4 rounded-pill button" (click)="clearGroups()">Clear Group</button>
+
+    </div>
+
+    <!-- Clear Group Confirmation Modal -->
+    <div *ngIf="showClearConfirm" class="modal-backdrop-custom" (click)="closeModal()">
+        <div class="modal-content-custom" (click)="$event.stopPropagation()">
+            <h5 class="text-center mb-3 fw-bold">Clear Group</h5>
+            <p class="text-center">This will clear all group descriptions. Are you sure you want to clear?</p>
+            <div class="d-flex justify-content-center gap-3 mt-4">
+                <button class="btn error-btn  px-4" (click)="confirmClearGroups()">Save</button>
+                <button class="btn cancel-btn  px-4" (click)="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
 </div>

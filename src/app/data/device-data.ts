@@ -2224,7 +2224,7 @@ export const dummyData: DeviceData = {
     Alerts: {
         Items: {
             "17": {
-                DateTimeUtc: "1752818750",
+                DateTimeUtc: "1722518744",
                 DeviceId: "MPG101",
                 Description: "New Firmware Loaded",
                 Severity: "5",

@@ -33,6 +33,15 @@ export class PumpSelectionComponent implements UnsavedChanges {
       console.log("pumps", this.pumps)
       this.pumpCount = this.pumps.length;
       this.checkedPumps = new Array(this.pumpCount).fill(false);
+
+      const stored = localStorage.getItem('selectedPumps');
+      if (stored) {
+        const selectedPumps = JSON.parse(stored);
+        const selectedIndexes = Object.keys(selectedPumps.Pumps.Items).map(Number);
+        selectedIndexes.forEach(i => {
+          this.checkedPumps[i - 1] = true; 
+        });
+      }
     }
   }
 
@@ -44,8 +53,21 @@ export class PumpSelectionComponent implements UnsavedChanges {
   saveStartTimes() {
 
   }
+
   togglePumpChecked(index: number): void {
     this.checkedPumps[index] = !this.checkedPumps[index];
+  
+    const stored = localStorage.getItem('selectedPumps');
+    let selectedPumps = stored ? JSON.parse(stored) : { Pumps: { Items: {} } };
+  
+    if (this.checkedPumps[index]) {
+      selectedPumps.Pumps.Items[index + 1] = {}; 
+    } else {
+      delete selectedPumps.Pumps.Items[index + 1];
+    }
+  
+    localStorage.setItem('selectedPumps', JSON.stringify(selectedPumps));
   }
+  
 
 }

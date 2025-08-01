@@ -278,11 +278,32 @@ export class StarttimesComponent implements UnsavedChanges {
       selectedDays: this.selectedDays,
     };
     localStorage.setItem('savedStartTimes_' + programId, JSON.stringify(dataToSave));
+    localStorage.setItem('dayTableStruct_' + programId, JSON.stringify(this.selectedDays));
+
+    this.saveToLocalStorageStructFormat();
   }
   
   slugify(name: string | undefined): string {
     return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
   }
 
+  saveToLocalStorageStructFormat() {
+    const programId = this.getProgramIdFromName(this.program?.name);
+  
+    const items: { [key: string]: any } = {};
+  
+    this.startTimes.forEach((item, index) => {
+      items[(index + 1).toString()] = {
+        Type: 'Time',
+        Enabled: item.enabled,
+        StartTimeInMinutes: item.enabled ? this.convertToMinutes(item.time) : 'Off'
+      };
+    });
+  
+    const structFormat = { Items: items };
+  
+    localStorage.setItem('startTimesStruct_' + programId, JSON.stringify(structFormat));
+  }
+  
 
 }

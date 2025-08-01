@@ -45,6 +45,10 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
             if (program && program.name) {
               const programId = program.name.match(/\d+$/)?.[0] || '1';
               localStorage.removeItem('savedStartTimes_' + programId);
+              localStorage.removeItem('startTimesStruct_' + programId);
+              localStorage.removeItem('dayTableStruct_' + programId);
+              localStorage.removeItem('selectedPumps');
+              localStorage.removeItem('stationGroupDataAll');
             }
 
             return true;

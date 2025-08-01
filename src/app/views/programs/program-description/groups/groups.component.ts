@@ -16,6 +16,8 @@ export class GroupsComponent {
   program: any;
   groups: any[] = [];
   groupList: any[] = [];
+  showClearConfirm = false;
+
   constructor(
     private sharedProgramService: SharedProgramService,
     private router: Router
@@ -24,7 +26,9 @@ export class GroupsComponent {
   ngOnInit() {
     this.init();
     this.program = this.sharedProgramService.getProgram();
+    this.loadStoredGroupData();
   }
+
   init() {
     console.log("Initalize program component")
     const device = dummyData.Devices.Items['MPG101'];
@@ -49,5 +53,43 @@ export class GroupsComponent {
     return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
   }
 
+  loadStoredGroupData() {
+    const key = 'stationGroupDataAll';
+    const stored = localStorage.getItem(key);
+
+    if (stored) {
+      try {
+        const parsedData = JSON.parse(stored);
+        console.log('All Stored Station Group Data:', parsedData);
+
+        for (let i = 1; i <= 20; i++) {
+          const group = parsedData.Items[i];
+          if (group && group.Stations?.Items) {
+            console.log(` Group ${i} has data:`, group);
+          } else {
+            console.log(` Group ${i} has no data.`);
+          }
+        }
+      } catch (error) {
+        console.error(' Error parsing stationGroupDataAll:', error);
+      }
+    } else {
+      console.log('ℹ No data found for stationGroupDataAll in localStorage.');
+    }
+  }
+
+  clearGroups() {
+    this.showClearConfirm = true;
+  }
+
+  confirmClearGroups() {
+    localStorage.removeItem('stationGroupDataAll');
+    this.showClearConfirm = false;
+    // Optionally, refresh data or give feedback
+  }
+
+  closeModal() {
+    this.showClearConfirm = false;
+  }
 
 }

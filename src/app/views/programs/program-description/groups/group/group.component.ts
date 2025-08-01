@@ -34,29 +34,60 @@ export class GroupComponent {
     private route: ActivatedRoute,
     private sharedProgramService: SharedProgramService) { }
 
+  // ngOnInit() {
+  //   this.program = this.sharedProgramService.getProgram()?.name;
+  //   this.group = this.sharedProgramService.getGroup();
+  //   this.groupName = `Group ${this.group.groupNumber}`;
+  //   this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
+
+  //   this.init();
+  //   const stored = localStorage.getItem('selectedStations');
+  //   if (stored) {
+  //     try {
+  //       const parsed = JSON.parse(stored);
+  //       if (Array.isArray(parsed)) {
+  //         this.renderedStations = parsed;
+  //       } else {
+  //         this.renderedStations = [];
+  //       }
+  //     } catch {
+  //       this.renderedStations = [];
+  //     }
+  //   }
+
+  // }
+
   ngOnInit() {
     this.program = this.sharedProgramService.getProgram()?.name;
     this.group = this.sharedProgramService.getGroup();
     this.groupName = `Group ${this.group.groupNumber}`;
     this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
-
+  
     this.init();
-    const stored = localStorage.getItem('selectedStations');
+  
+    const key = 'stationGroupDataAll';
+    const stored = localStorage.getItem(key);
+  
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          this.renderedStations = parsed;
-        } else {
-          this.renderedStations = [];
+        const groupData = parsed.Items?.[this.group.groupNumber];
+        if (groupData) {
+          const stations = groupData.Stations?.Items || {};
+          this.renderedStations = Object.values(stations).map((station: any, index: number) => ({
+            index: index + 1,
+            name: station.Name,
+            flow: station.ExpectedFlow
+          }));
+  
+          this.selectedTimeDisplay = this.convertMinutesToHHMM(groupData.RuntTimeMinutes || 0);
         }
       } catch {
         this.renderedStations = [];
       }
     }
-
   }
-
+  
   async init() {
     await this.loadStations();
   }
@@ -134,8 +165,46 @@ export class GroupComponent {
     station.selected = !station.selected;
   }
 
+  // confirmStations(): void {
+  //   this.selectedStations = this.stations.filter(s => s.selected);
+  //   const stationsItems = this.selectedStations.reduce((acc, s, index) => {
+  //     acc[index + 1] = {
+  //       Name: s.name,
+  //       ExpectedFlow: s.flow,
+  //       Valves: { Items: {} }
+  //     };
+  //     return acc;
+  //   }, {} as any);
+
+  //   const stationGroup = {
+  //     StationGroups: {
+  //       Items: {
+  //         1: {
+  //           RuntTimeMinutes: this.selectedTimeDisplay !== '00:00'
+  //             ? this.selectedTimeDisplay
+  //             : this.convertMinutesToHHMM(this.group?.data?.RuntTimeMinutes ?? 0)
+  //           ,
+  //           Stations: { Items: stationsItems }
+  //         }
+  //       }
+  //     }
+  //   };
+
+  //   localStorage.setItem('stationGroupData', JSON.stringify(stationGroup));
+
+  //   this.renderedStations = this.selectedStations.map((s) => {
+  //     const originalIndex = this.stations.findIndex(st => st.id === s.id);
+  //     return {
+  //       index: originalIndex + 1,
+  //       name: s.name,
+  //       flow: s.flow
+  //     };
+  //   });
+  // }
+
   confirmStations(): void {
     this.selectedStations = this.stations.filter(s => s.selected);
+  
     const stationsItems = this.selectedStations.reduce((acc, s, index) => {
       acc[index + 1] = {
         Name: s.name,
@@ -144,23 +213,37 @@ export class GroupComponent {
       };
       return acc;
     }, {} as any);
-
-    const stationGroup = {
-      StationGroups: {
-        Items: {
-          1: {
-            RuntTimeMinutes: this.selectedTimeDisplay !== '00:00'
-              ? this.selectedTimeDisplay
-              : this.convertMinutesToHHMM(this.group?.data?.RuntTimeMinutes ?? 0)
-            ,
-            Stations: { Items: stationsItems }
-          }
-        }
-      }
+  
+    const [hoursStr, minutesStr] = this.selectedTimeDisplay.split(':');
+    const totalRuntime = parseInt(hoursStr) * 60 + parseInt(minutesStr);
+  
+    const groupNumber = this.group.groupNumber;
+    const key = 'stationGroupDataAll';
+  
+    // Retrieve global structure
+    const raw = localStorage.getItem(key);
+    let allGroupData: any = {
+      Items: {}
     };
-
-    localStorage.setItem('stationGroupData', JSON.stringify(stationGroup));
-
+  
+    if (raw) {
+      try {
+        allGroupData = JSON.parse(raw);
+      } catch (e) {
+        console.error("Failed to parse global group data from localStorage");
+      }
+    }
+  
+    // Update only current group
+    allGroupData.Items[groupNumber] = {
+      Stations: { Items: stationsItems },
+      RuntTimeMinutes: totalRuntime
+    };
+  
+    // Save back
+    localStorage.setItem(key, JSON.stringify(allGroupData));
+  
+    // Also update UI
     this.renderedStations = this.selectedStations.map((s) => {
       const originalIndex = this.stations.findIndex(st => st.id === s.id);
       return {
@@ -170,7 +253,7 @@ export class GroupComponent {
       };
     });
   }
-
+  
   get safeRenderedStations(): { index: number; name: string; flow: number }[] {
     return Array.isArray(this.renderedStations) ? this.renderedStations : [];
   }
