@@ -37,7 +37,7 @@ export class GroupsComponent {
   goToGroupDetail(program: any, group: any) {
     const programSlug = this.slugify(program.name);
     localStorage.removeItem('selectedGroup');
-    this.sharedProgramService.setGroup(`Group ${group.groupNumber}`)
+    this.sharedProgramService.setGroup(group)
     const groupSlug = `group-${group.groupNumber}`;
     this.router.navigate(['programs', programSlug, 'groups', groupSlug]);
   }

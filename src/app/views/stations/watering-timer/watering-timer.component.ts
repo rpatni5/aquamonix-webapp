@@ -47,7 +47,7 @@ export class WateringTimerComponent {
       selected: true
     }));
   }
-  
+
   confirmTime(event: any) {
     const hourStr = event.hour;
     const minStr = event.minute;
@@ -55,12 +55,16 @@ export class WateringTimerComponent {
     console.log("selected watering time is:", this.selectedTimeDisplay);
     this.openPopup = false;
   }
-  
+
   confirmWatering() {
     const modalElement = document.getElementById('confirmWateringModal') as HTMLElement;
     const modal = new (window as any).bootstrap.Modal(modalElement);
     modal.show();
   }
+  togglePumpSelection(pump: any): void {
+    pump.selected = !pump.selected;
+  }
+
 
   confirmStartWatering() {
     this.selectedStations = this.stationService.getSelectedStations();

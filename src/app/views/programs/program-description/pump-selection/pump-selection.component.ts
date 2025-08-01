@@ -44,4 +44,8 @@ export class PumpSelectionComponent implements UnsavedChanges {
   saveStartTimes() {
 
   }
+  togglePumpChecked(index: number): void {
+    this.checkedPumps[index] = !this.checkedPumps[index];
+  }
+
 }
