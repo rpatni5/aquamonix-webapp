@@ -14,8 +14,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
         <p class="text-center">{{ message }}</p>
         <div class="d-flex justify-content-around mt-4">
           <button *ngIf="mode === 'confirm' || mode === 'saveOnly'" type="button" class="btn btn-light border rounded-pill px-4" (click)="onCancel()">Cancel</button>
-          <button *ngIf="mode === 'confirm'" type="button" class="btn btn-danger rounded-pill px-4" (click)="onDiscard()">Discard</button>
-          <button *ngIf="mode === 'confirm' || mode === 'saveOnly'" type="button" class="btn btn-success rounded-pill px-4" (click)="onSave()">Save</button>
+          <button *ngIf="mode === 'confirm'" type="button" class="btn error-btn rounded-pill px-4" (click)="onDiscard()">Discard</button>
+          <button *ngIf="mode === 'confirm' || mode === 'saveOnly'" type="button" class="btn success-btn rounded-pill px-4" (click)="onSave()">Save</button>
           <button *ngIf="mode === 'alert'" type="button" class="btn btn-primary rounded-pill px-4" (click)="onCancel()">OK</button>
 </div>
 
