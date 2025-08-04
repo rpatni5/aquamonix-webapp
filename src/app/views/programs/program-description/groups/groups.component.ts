@@ -17,7 +17,8 @@ export class GroupsComponent {
   groups: any[] = [];
   groupList: any[] = [];
   showClearConfirm = false;
-  isValidRuntime : boolean = false;
+  isValidRuntime: boolean = false;
+  storedGroupData: any = {};
 
   constructor(
     private sharedProgramService: SharedProgramService,
@@ -37,8 +38,6 @@ export class GroupsComponent {
       groupNumber: +key,
       data: value
     }));
-    console.log('this.groupList:', this.groupList);
-   
   }
 
   goToGroupDetail(program: any, group: any) {
@@ -49,7 +48,6 @@ export class GroupsComponent {
     this.router.navigate(['programs', programSlug, 'groups', groupSlug]);
   }
 
-
   slugify(text: string | undefined | null): string {
     if (!text) return '';
     return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '');
@@ -58,29 +56,35 @@ export class GroupsComponent {
   loadStoredGroupData() {
     const key = 'stationGroupDataAll';
     const stored = localStorage.getItem(key);
-
     if (stored) {
       try {
         const parsedData = JSON.parse(stored);
-        this.isValidRuntime = Object.values(parsedData.Items).some((group: any) => group?.RuntTimeMinutes > 0);
-
-        console.log('All Stored Station Group Data:', parsedData);
-
+        this.storedGroupData = parsedData.Items || {};
+        this.isValidRuntime = Object.values(this.storedGroupData).some(
+          (group: any) => group?.RuntTimeMinutes > 0
+        );
         for (let i = 1; i <= 20; i++) {
           const group = parsedData.Items[i];
-          if (group ) {
+          if (group) {
             console.log(` Group ${i} has data:`, group);
           } else {
             console.log(` Group ${i} has no data.`);
           }
         }
-
       } catch (error) {
         console.error(' Error parsing stationGroupDataAll:', error);
       }
     } else {
       console.log('ℹ No data found for stationGroupDataAll in localStorage.');
     }
+  }
+
+  hasRuntime(groupNumber: number, group: any): boolean {
+    const runtimeLive = group?.data?.RuntTimeMinutes || 0;
+    const storedGroup = this.storedGroupData[groupNumber];
+    const runtimeStored = storedGroup?.RuntTimeMinutes || 0;
+
+    return runtimeLive > 0 || runtimeStored > 0;
   }
 
   clearGroups() {
@@ -90,7 +94,6 @@ export class GroupsComponent {
   confirmClearGroups() {
     localStorage.removeItem('stationGroupDataAll');
     this.showClearConfirm = false;
-    // Optionally, refresh data or give feedback
   }
 
   closeModal() {

@@ -82,7 +82,7 @@ export const dummyData: DeviceData = {
                                 Items: {
                                     "1": {
                                         Stations: {},
-                                        RuntTimeMinutes: 0
+                                        RuntTimeMinutes: 120
                                     },
                                     "2": {
                                         Stations: {},

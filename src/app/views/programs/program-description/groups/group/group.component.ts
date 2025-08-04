@@ -39,7 +39,7 @@ export class GroupComponent {
     this.group = this.sharedProgramService.getGroup();
     this.groupName = `Group ${this.group.groupNumber}`;
     this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
-
+    this.selectedTimeDisplay = this.convertMinutesToHHMM(this.group.data.RuntTimeMinutes);
     this.init();
 
     const key = 'stationGroupDataAll';
