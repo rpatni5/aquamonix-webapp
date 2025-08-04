@@ -34,40 +34,17 @@ export class GroupComponent {
     private route: ActivatedRoute,
     private sharedProgramService: SharedProgramService) { }
 
-  // ngOnInit() {
-  //   this.program = this.sharedProgramService.getProgram()?.name;
-  //   this.group = this.sharedProgramService.getGroup();
-  //   this.groupName = `Group ${this.group.groupNumber}`;
-  //   this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
-
-  //   this.init();
-  //   const stored = localStorage.getItem('selectedStations');
-  //   if (stored) {
-  //     try {
-  //       const parsed = JSON.parse(stored);
-  //       if (Array.isArray(parsed)) {
-  //         this.renderedStations = parsed;
-  //       } else {
-  //         this.renderedStations = [];
-  //       }
-  //     } catch {
-  //       this.renderedStations = [];
-  //     }
-  //   }
-
-  // }
-
   ngOnInit() {
     this.program = this.sharedProgramService.getProgram()?.name;
     this.group = this.sharedProgramService.getGroup();
     this.groupName = `Group ${this.group.groupNumber}`;
     this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
-  
+
     this.init();
-  
+
     const key = 'stationGroupDataAll';
     const stored = localStorage.getItem(key);
-  
+
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
@@ -79,7 +56,7 @@ export class GroupComponent {
             name: station.Name,
             flow: station.ExpectedFlow
           }));
-  
+
           this.selectedTimeDisplay = this.convertMinutesToHHMM(groupData.RuntTimeMinutes || 0);
         }
       } catch {
@@ -87,7 +64,7 @@ export class GroupComponent {
       }
     }
   }
-  
+
   async init() {
     await this.loadStations();
   }
@@ -165,46 +142,13 @@ export class GroupComponent {
     station.selected = !station.selected;
   }
 
-  // confirmStations(): void {
-  //   this.selectedStations = this.stations.filter(s => s.selected);
-  //   const stationsItems = this.selectedStations.reduce((acc, s, index) => {
-  //     acc[index + 1] = {
-  //       Name: s.name,
-  //       ExpectedFlow: s.flow,
-  //       Valves: { Items: {} }
-  //     };
-  //     return acc;
-  //   }, {} as any);
-
-  //   const stationGroup = {
-  //     StationGroups: {
-  //       Items: {
-  //         1: {
-  //           RuntTimeMinutes: this.selectedTimeDisplay !== '00:00'
-  //             ? this.selectedTimeDisplay
-  //             : this.convertMinutesToHHMM(this.group?.data?.RuntTimeMinutes ?? 0)
-  //           ,
-  //           Stations: { Items: stationsItems }
-  //         }
-  //       }
-  //     }
-  //   };
-
-  //   localStorage.setItem('stationGroupData', JSON.stringify(stationGroup));
-
-  //   this.renderedStations = this.selectedStations.map((s) => {
-  //     const originalIndex = this.stations.findIndex(st => st.id === s.id);
-  //     return {
-  //       index: originalIndex + 1,
-  //       name: s.name,
-  //       flow: s.flow
-  //     };
-  //   });
-  // }
+  slugify(name: string | undefined): string {
+    return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
+  }
 
   confirmStations(): void {
     this.selectedStations = this.stations.filter(s => s.selected);
-  
+
     const stationsItems = this.selectedStations.reduce((acc, s, index) => {
       acc[index + 1] = {
         Name: s.name,
@@ -213,19 +157,19 @@ export class GroupComponent {
       };
       return acc;
     }, {} as any);
-  
+
     const [hoursStr, minutesStr] = this.selectedTimeDisplay.split(':');
     const totalRuntime = parseInt(hoursStr) * 60 + parseInt(minutesStr);
-  
+
     const groupNumber = this.group.groupNumber;
     const key = 'stationGroupDataAll';
-  
+
     // Retrieve global structure
     const raw = localStorage.getItem(key);
     let allGroupData: any = {
       Items: {}
     };
-  
+
     if (raw) {
       try {
         allGroupData = JSON.parse(raw);
@@ -233,16 +177,16 @@ export class GroupComponent {
         console.error("Failed to parse global group data from localStorage");
       }
     }
-  
+
     // Update only current group
     allGroupData.Items[groupNumber] = {
       Stations: { Items: stationsItems },
       RuntTimeMinutes: totalRuntime
     };
-  
+
     // Save back
     localStorage.setItem(key, JSON.stringify(allGroupData));
-  
+
     // Also update UI
     this.renderedStations = this.selectedStations.map((s) => {
       const originalIndex = this.stations.findIndex(st => st.id === s.id);
@@ -253,7 +197,7 @@ export class GroupComponent {
       };
     });
   }
-  
+
   get safeRenderedStations(): { index: number; name: string; flow: number }[] {
     return Array.isArray(this.renderedStations) ? this.renderedStations : [];
   }
@@ -270,42 +214,42 @@ export class GroupComponent {
     const value = this.selectedTimeDisplay !== '00:00'
       ? this.selectedTimeDisplay
       : this.convertMinutesToHHMM(this.group?.data?.RuntTimeMinutes ?? 0);
-  
-      if (!value) return "00:00:00";
 
-      const numericValue = typeof value === 'string' ? parseFloat(value) : value;
-      const totalSeconds = this.waterBoost * numericValue * 60;
-    
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = Math.floor(totalSeconds % 60);
-    
-      return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+    if (!value) return "00:00:00";
+
+    const numericValue = typeof value === 'string' ? parseFloat(value) : value;
+    const totalSeconds = this.waterBoost * numericValue * 60;
+
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = Math.floor(totalSeconds % 60);
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   }
- 
+
   getGroupVolume(): number {
     const timeString = this.selectedTimeDisplay !== '00:00'
       ? this.selectedTimeDisplay
       : this.convertMinutesToHHMM(this.group?.data?.RuntTimeMinutes ?? 0);
-  
-    if (!timeString || !this.waterBoost ) {
+
+    if (!timeString || !this.waterBoost) {
       return 0;
     }
-  
+
     const [hoursStr, minutesStr] = timeString.split(':');
     const runtimeInMinutes = parseFloat(hoursStr) * 60 + parseFloat(minutesStr);
     const runtimeInSeconds = runtimeInMinutes * 60;
     const scaleFactor = this.waterBoost / 100;
 
-  
+
     if (isNaN(runtimeInSeconds) || isNaN(scaleFactor)) {
       return 0;
     }
-  
+
     const volumeKL = (this.totalFlowRate * runtimeInSeconds * scaleFactor) / 1000;
     return Math.round(volumeKL);
   }
-  
-  
+
+
 
 }

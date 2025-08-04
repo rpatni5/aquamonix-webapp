@@ -7,12 +7,13 @@
                     <a routerLink="/programs" class="text-decoration-none cursor-pointer">Programs</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a routerLink="/programs/program-description" class="text-decoration-none cursor-pointer">
+                    <a [routerLink]="['/programs', slugify(program)]" class="text-decoration-none cursor-pointer">
                         {{ program}}
-                    </a>
+                      </a>
+                   
                 </li>
                 <li class="breadcrumb-item active" aria-current="page"><a
-                        [routerLink]="['/programs', program, 'groups']"
+                        [routerLink]="['/programs', slugify(program), 'groups']"
                         class="text-decoration-none cursor-pointer">Groups</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{groupName}}</li>
             </ol>

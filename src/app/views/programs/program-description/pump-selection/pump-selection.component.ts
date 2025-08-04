@@ -44,7 +44,10 @@ export class PumpSelectionComponent implements UnsavedChanges {
       }
     }
   }
-
+  
+  slugify(name: string | undefined): string {
+    return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
+  }
 
   hasChanges(): boolean {
     return this.hasUnsavedChanges;
