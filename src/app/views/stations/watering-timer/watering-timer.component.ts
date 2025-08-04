@@ -14,6 +14,7 @@ import flatpickr from "flatpickr";
   templateUrl: './watering-timer.component.html',
   styleUrl: './watering-timer.component.scss'
 })
+
 export class WateringTimerComponent {
   pumps: { pumpId: string, type: string, name: string, mode: string, selected?: boolean }[] = [];
   selectedTime: any;
@@ -22,9 +23,13 @@ export class WateringTimerComponent {
   selectedTimeDisplay = '00:00';
   selectedHour: number = 0;
   selectedMinute: number = 0;
-  constructor(private stationService: StationService, private router: Router, private programService: ProgramService) {
 
+  constructor(
+    private stationService: StationService,
+    private router: Router,
+    private programService: ProgramService) {
   }
+
   ngAfterViewInit() {
     flatpickr("#customTimepicker", {
       enableTime: true,
@@ -36,6 +41,7 @@ export class WateringTimerComponent {
       minuteIncrement: 1
     });
   }
+
   ngOnInit() {
     const device = dummyData.Devices.Items['MPG101'];
     const pumpData = device.MetaData.Device.Pumps.Items;
@@ -46,25 +52,35 @@ export class WateringTimerComponent {
       name: pump.Name,
       selected: true
     }));
+    this.updateSelectedTimeDisplay();
   }
 
   confirmTime(event: any) {
     const hourStr = event.hour;
     const minStr = event.minute;
+  
     this.selectedTimeDisplay = `${hourStr}:${minStr}`;
-    console.log("selected watering time is:", this.selectedTimeDisplay);
+    this.selectedHour = +hourStr;
+    this.selectedMinute = +minStr;
+  
     this.openPopup = false;
   }
 
+  updateSelectedTimeDisplay() {
+    const h = String(this.selectedHour).padStart(2, '0');
+    const m = String(this.selectedMinute).padStart(2, '0');
+    this.selectedTimeDisplay = `${h}:${m}`;
+  }
+  
   confirmWatering() {
     const modalElement = document.getElementById('confirmWateringModal') as HTMLElement;
     const modal = new (window as any).bootstrap.Modal(modalElement);
     modal.show();
   }
+
   togglePumpSelection(pump: any): void {
     pump.selected = !pump.selected;
   }
-
 
   confirmStartWatering() {
     this.selectedStations = this.stationService.getSelectedStations();

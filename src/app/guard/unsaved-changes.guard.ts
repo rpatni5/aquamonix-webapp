@@ -59,6 +59,7 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
 
     return true;
   }
+
   private matchesAllowedPath(url: string): boolean {
     return /^\/(programs\/program-\d+|program-\d+\/groups\/group-\d+)$/.test(url);
   }
@@ -110,15 +111,13 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
   private extractProgramScreen(url: string): { programId: string; screen: string } | null {
     const cleanUrl = url.split('?')[0].split('#')[0].replace(/\/+$/, '');
 
-    // Match /program-1 or /program-1/starttimes
     let match = cleanUrl.match(/(?:programs\/)?(program-\d+)(?:\/([^\/]+))?/);
     if (match) {
       const programId = match[1];
-      const screen = match[2]?.toLowerCase() || 'root'; // ✅ special screen name for base route
+      const screen = match[2]?.toLowerCase() || 'root';
       return { programId, screen };
     }
 
-    // Match /program-1/groups/group-1
     match = cleanUrl.match(/(program-\d+)\/groups\/(group-\d+)/);
     if (match) {
       return {
@@ -129,7 +128,6 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
 
     return null;
   }
-
 
   private hasLocalStorageChanges(component: UnsavedChanges | null): boolean {
     const program = (component as any)['program'];

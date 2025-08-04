@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -25,9 +25,29 @@ export class TimerComponent {
   selectedHour: number = 0;
   selectedMinute: number = 0;
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['open'] && changes['open'].currentValue === true) {
+      setTimeout(() => this.scrollToSelected(), 0); 
+    }
+    this.selectedHour = this.initialHour;
+    this.selectedMinute = this.initialMinute;
+  }
+  
   ngOnInit(): void {
     this.selectedHour = this.initialHour;
     this.selectedMinute = this.initialMinute;
+  }
+
+  scrollToSelected(): void {
+    if (this.hourPicker?.nativeElement) {
+      const hourIndex = this.hours.indexOf(this.selectedHour);
+      this.hourPicker.nativeElement.scrollTop = hourIndex * 40; 
+    }
+  
+    if (this.minutePicker?.nativeElement) {
+      const minuteIndex = this.minutes.indexOf(this.selectedMinute);
+      this.minutePicker.nativeElement.scrollTop = minuteIndex * 40;
+    }
   }
 
   onScrollHour(event: any) {
