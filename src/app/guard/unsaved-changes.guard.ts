@@ -1,12 +1,20 @@
-import { Injectable } from '@angular/core';
-import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Injectable, NgZone } from '@angular/core';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UnsavedChanges } from '../models/unsaved-changes';
 import { ConfirmationDialogService } from '../utils/confirmation-popup/confirmation-dialog.service';
+import { ProgramService } from '../services/program.service';
+import { NotificationService } from '../utils/notification.service';
 
 @Injectable({ providedIn: 'root' })
 export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
-  constructor(private confirmService: ConfirmationDialogService) { }
+  constructor(private confirmService: ConfirmationDialogService,
+    private programService: ProgramService,
+    private notificationService: NotificationService,
+    private ngZone: NgZone,
+    private router: Router,
+    
+  ) { }
 
   canDeactivate(
     component: UnsavedChanges | null,
@@ -60,25 +68,26 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
       .confirm('Unsaved Changes', 'You have unsaved changes. Save or Discard before leaving?')
       .then((result) => {
         if (result === 'save') {
-          //       this.skipUnsavedCheck = true;
-          // this.confirmationDialogService
-          //   .confirm('Save Program', 'Do you want to save this program?', 'saveOnly')
-          //   .then((response) => {
-          //     if (response === 'save') {
-          //       this.programService.setSelectedPrograms([this.program]);
-          //       this.programService.sendCommandSentSuccessfully();
+          const program = (component as any)['program'];
+          const programId = program?.name?.match(/\d+$/)?.[0] || '1';
+  
+          this.programService.setSelectedPrograms([program]);
+          this.programService.sendCommandSentSuccessfully();
 
-          //       this.notificationService?.notify('Program data has been saved successfully!', 3000, 'success');
-
-          //       this.skipUnsavedCheck = true;
-          //       this.markChangesSaved();
-
-          //       setTimeout(() => {
-          //         this.router.navigate(['/programs']);
-          //       }, 0);
-          //     }
-          //   });
+          localStorage.removeItem('savedStartTimes_' + programId);
+          localStorage.removeItem('startTimesStruct_' + programId);
+          localStorage.removeItem('dayTableStruct_' + programId);
+          localStorage.removeItem('selectedPumps');
+          localStorage.removeItem('stationGroupDataAll');
+  
+          this.notificationService?.notify(
+            'Program data has been saved successfully!',
+            3000,
+            'success'
+          );
+          component.markChangesSaved?.();
           return true;
+  
         } else if (result === 'discard') {
           component.markChangesSaved?.();
 

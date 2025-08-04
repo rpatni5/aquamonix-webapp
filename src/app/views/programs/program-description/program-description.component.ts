@@ -5,7 +5,7 @@ import { GlobalNotificationComponent } from '@/app/utils/global-notification.com
 import { NotificationService } from '@/app/utils/notification.service';
 import { SharedProgramService } from '@/app/utils/sharedService/sharedProgram';
 import { CommonModule } from '@angular/common';
-import { Component, NgZone } from '@angular/core';
+import { Component, HostListener, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 
@@ -178,6 +178,13 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
           this.programService.sendCommandSentSuccessfully();
 
           this.notificationService?.notify('Program data has been saved successfully!', 3000, 'success');
+          const programId = program?.name?.match(/\d+$/)?.[0] || '1';
+  
+          localStorage.removeItem('savedStartTimes_' + programId);
+          localStorage.removeItem('startTimesStruct_' + programId);
+          localStorage.removeItem('dayTableStruct_' + programId);
+          localStorage.removeItem('selectedPumps');
+          localStorage.removeItem('stationGroupDataAll');
 
           this.skipUnsavedCheck = true;
           this.markChangesSaved();
@@ -220,34 +227,6 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
       this.maxGroupFlow = Math.max(...groupFlows);
     }
   }
-
-  // calculateActualProgramVolume(parsedGroups: any): void {
-  //   const groupItems = parsedGroups?.Items;
-  //   if (!groupItems) return;
-
-  //   const waterBoostMultiplier = this.waterBoost / 100;
-  //   let totalVolumeKL = 0;
-
-  //   Object.values(groupItems).forEach((group: any) => {
-  //     let groupFlowLps = 0; // Liters per second
-
-  //     const stationItems = group?.Stations?.Items || {};
-  //     Object.values(stationItems).forEach((station: any) => {
-  //       const expectedFlow = parseFloat(station?.ExpectedFlow || '0');
-  //       if (!isNaN(expectedFlow)) {
-  //         groupFlowLps += expectedFlow;
-  //       }
-  //     });
-
-  //     const runtimeMinutes = parseFloat(group?.RuntTimeMinutes || '0');
-  //     const runtimeSeconds = runtimeMinutes * 60;
-
-  //     const groupVolumeKL = (groupFlowLps * runtimeSeconds * waterBoostMultiplier) / 1000;
-  //     totalVolumeKL += groupVolumeKL;
-  //   });
-
-  //   this.actualProgramVolume = parseFloat(totalVolumeKL.toFixed(2));
-  // }
 
   calculateActualProgramVolume(parsedGroups: any): void {
     const groupItems = parsedGroups?.Items;
