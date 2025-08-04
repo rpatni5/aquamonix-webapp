@@ -29,7 +29,7 @@ export class GroupComponent {
   showConfirmDialog = false;
   deleteIndex: number | null = null;
   waterBoost = 0;
-
+  savedMinutes: number = 0;
   constructor(private stationService: StationService,
     private route: ActivatedRoute,
     private sharedProgramService: SharedProgramService) { }
@@ -39,6 +39,7 @@ export class GroupComponent {
     this.group = this.sharedProgramService.getGroup();
     this.groupName = `Group ${this.group.groupNumber}`;
     this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
+    this.updateSelectedTimeDisplay();
     this.selectedTimeDisplay = this.convertMinutesToHHMM(this.group.data.RuntTimeMinutes);
     this.init();
 
@@ -88,7 +89,6 @@ export class GroupComponent {
     return `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
   }
 
-
   get hasFlowData(): boolean {
     return this.safeRenderedStations.some(station => station.flow);
   }
@@ -99,7 +99,6 @@ export class GroupComponent {
       return sum + (isNaN(flow) ? 0 : flow);
     }, 0);
   }
-
 
   openStationModal(): void {
     const modalElement = document.getElementById('stationModal') as HTMLElement;
@@ -201,19 +200,21 @@ export class GroupComponent {
   confirmTime(event: any) {
     const hourStr = event.hour;
     const minStr = event.minute;
+
     this.selectedTimeDisplay = `${hourStr}:${minStr}`;
-    console.log("selected watering time is:", this.selectedTimeDisplay);
+    this.selectedHour = +hourStr;
+    this.selectedMinute = +minStr;
     this.openPopup = false;
-  
+
     const totalRuntime = parseInt(hourStr) * 60 + parseInt(minStr);
     const groupNumber = this.group.groupNumber;
     const key = 'stationGroupDataAll';
-  
+
     const raw = localStorage.getItem(key);
     let allGroupData: any = {
       Items: {}
     };
-  
+
     if (raw) {
       try {
         allGroupData = JSON.parse(raw);
@@ -221,16 +222,23 @@ export class GroupComponent {
         console.error("Failed to parse global group data from localStorage");
       }
     }
-  
+
     if (!allGroupData.Items[groupNumber]) {
       allGroupData.Items[groupNumber] = {};
     }
-  
+
     allGroupData.Items[groupNumber].RuntTimeMinutes = totalRuntime;
-  
+
     localStorage.setItem(key, JSON.stringify(allGroupData));
   }
-  
+
+
+  updateSelectedTimeDisplay() {
+    const h = String(this.selectedHour).padStart(2, '0');
+    const m = String(this.selectedMinute).padStart(2, '0');
+    this.selectedTimeDisplay = `${h}:${m}`;
+  }
+
   getFormattedTime(): string {
     const value = this.selectedTimeDisplay !== '00:00'
       ? this.selectedTimeDisplay
@@ -269,6 +277,25 @@ export class GroupComponent {
 
     const volumeKL = (this.totalFlowRate * runtimeInSeconds * scaleFactor) / 1000;
     return Math.round(volumeKL);
+  }
+
+
+  loadSavedTime(): void {
+    const key = 'stationGroupDataAll';
+    const raw = localStorage.getItem(key);
+    if (raw) {
+      const allGroupData = JSON.parse(raw);
+      this.savedMinutes = allGroupData.Items?.[this.group.groupNumber]?.RuntTimeMinutes || this.group.data.RuntTimeMinutes;
+    } else {
+      this.savedMinutes = this.group.data.RuntTimeMinutes;
+    }
+
+    if (typeof this.savedMinutes === 'number') {
+      this.selectedHour = Math.floor(this.savedMinutes / 60);
+      this.selectedMinute = this.savedMinutes % 60;
+      this.updateSelectedTimeDisplay();
+      this.openPopup = true;
+    }
   }
 
 
