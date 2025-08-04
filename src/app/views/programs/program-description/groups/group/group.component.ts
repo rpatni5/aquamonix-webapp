@@ -164,7 +164,6 @@ export class GroupComponent {
     const groupNumber = this.group.groupNumber;
     const key = 'stationGroupDataAll';
 
-    // Retrieve global structure
     const raw = localStorage.getItem(key);
     let allGroupData: any = {
       Items: {}
@@ -178,16 +177,13 @@ export class GroupComponent {
       }
     }
 
-    // Update only current group
     allGroupData.Items[groupNumber] = {
       Stations: { Items: stationsItems },
       RuntTimeMinutes: totalRuntime
     };
 
-    // Save back
     localStorage.setItem(key, JSON.stringify(allGroupData));
 
-    // Also update UI
     this.renderedStations = this.selectedStations.map((s) => {
       const originalIndex = this.stations.findIndex(st => st.id === s.id);
       return {
@@ -208,8 +204,33 @@ export class GroupComponent {
     this.selectedTimeDisplay = `${hourStr}:${minStr}`;
     console.log("selected watering time is:", this.selectedTimeDisplay);
     this.openPopup = false;
+  
+    const totalRuntime = parseInt(hourStr) * 60 + parseInt(minStr);
+    const groupNumber = this.group.groupNumber;
+    const key = 'stationGroupDataAll';
+  
+    const raw = localStorage.getItem(key);
+    let allGroupData: any = {
+      Items: {}
+    };
+  
+    if (raw) {
+      try {
+        allGroupData = JSON.parse(raw);
+      } catch (e) {
+        console.error("Failed to parse global group data from localStorage");
+      }
+    }
+  
+    if (!allGroupData.Items[groupNumber]) {
+      allGroupData.Items[groupNumber] = {};
+    }
+  
+    allGroupData.Items[groupNumber].RuntTimeMinutes = totalRuntime;
+  
+    localStorage.setItem(key, JSON.stringify(allGroupData));
   }
-
+  
   getFormattedTime(): string {
     const value = this.selectedTimeDisplay !== '00:00'
       ? this.selectedTimeDisplay

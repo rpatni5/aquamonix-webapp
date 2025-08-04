@@ -41,6 +41,6 @@ export class ProgramService {
     sendCommandSentSuccessfully() {
         this.commandSentSignalSubject.next(true);
     }
-    
+
 }
 

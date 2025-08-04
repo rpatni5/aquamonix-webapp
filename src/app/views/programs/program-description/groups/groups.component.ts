@@ -17,6 +17,7 @@ export class GroupsComponent {
   groups: any[] = [];
   groupList: any[] = [];
   showClearConfirm = false;
+  isValidRuntime : boolean = false;
 
   constructor(
     private sharedProgramService: SharedProgramService,
@@ -30,13 +31,14 @@ export class GroupsComponent {
   }
 
   init() {
-    console.log("Initalize program component")
     const device = dummyData.Devices.Items['MPG101'];
     this.groups = device.Programs.Items[1].StationGroups.Items as any;
     this.groupList = Object.entries(this.groups).map(([key, value]) => ({
       groupNumber: +key,
       data: value
     }));
+    console.log('this.groupList:', this.groupList);
+   
   }
 
   goToGroupDetail(program: any, group: any) {
@@ -60,16 +62,19 @@ export class GroupsComponent {
     if (stored) {
       try {
         const parsedData = JSON.parse(stored);
+        this.isValidRuntime = Object.values(parsedData.Items).some((group: any) => group?.RuntTimeMinutes > 0);
+
         console.log('All Stored Station Group Data:', parsedData);
 
         for (let i = 1; i <= 20; i++) {
           const group = parsedData.Items[i];
-          if (group && group.Stations?.Items) {
+          if (group ) {
             console.log(` Group ${i} has data:`, group);
           } else {
             console.log(` Group ${i} has no data.`);
           }
         }
+
       } catch (error) {
         console.error(' Error parsing stationGroupDataAll:', error);
       }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, firstValueFrom, Observable, of } from 'rxjs';
-import { dummyData } from '../data/device-data';
+import { dummyData, secondSetOfDummyData } from '../data/device-data';
 
 @Injectable({
     providedIn: 'root'
@@ -19,4 +19,9 @@ export class StationService {
     async getDeviceData(): Promise<any> {
         return await firstValueFrom(of(dummyData));
     }
+
+    async getMPSDeviceData(): Promise<any> {
+        return await firstValueFrom(of(secondSetOfDummyData));
+    }
+    
 }

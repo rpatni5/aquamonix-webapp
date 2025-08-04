@@ -2228,6 +2228,2145 @@ export const dummyData: DeviceData = {
                 DeviceId: "MPG101",
                 Description: "New Firmware Loaded",
                 Severity: "5",
+                Active: true,
+                Category: "0"
+            },
+            "18": {
+                DateTimeUtc: "1753920000",
+                DeviceId: "MPG101",
+                Description: "Rain Switch On",
+                Severity: "1",
+                Active: true,
+                Category: "0"
+            },
+            "19": {
+                DateTimeUtc: "1752818768",
+                DeviceId: "MPG101",
+                Description: "Controller Powered On",
+                Severity: "0",
+                Active: false,
+                Category: "0"
+            },
+            "20": {
+                DateTimeUtc: "1752818769",
+                DeviceId: "MPG101",
+                Description: "Door Open",
+                Severity: "3",
+                Active: true,
+                Category: "0"
+            },
+            "21": {
+                DateTimeUtc: "1752818868",
+                DeviceId: "MPG101",
+                Description: "TWIN / Module 2 Comms Error",
+                Severity: "4",
+                Active: true,
+                Category: "0"
+            },
+            "22": {
+                DateTimeUtc: "1752822000",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "23": {
+                DateTimeUtc: "1753167600",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "26": {
+                DateTimeUtc: "1753207200",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "27": {
+                DateTimeUtc: "1753228800",
+                DeviceId: "MPG101",
+                Description: "Program 8 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "28": {
+                DateTimeUtc: "1753232400",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "29": {
+                DateTimeUtc: "1753234500",
+                DeviceId: "MPG101",
+                Description: "Program 16 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "30": {
+                DateTimeUtc: "1753243200",
+                DeviceId: "MPG101",
+                Description: "Program 12 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "31": {
+                DateTimeUtc: "1753286400",
+                DeviceId: "MPG101",
+                Description: "Program 1 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "32": {
+                DateTimeUtc: "1753286400",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "33": {
+                DateTimeUtc: "1753297200",
+                DeviceId: "MPG101",
+                Description: "Program 1 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "34": {
+                DateTimeUtc: "1753297200",
+                DeviceId: "MPG101",
+                Description: "Program 10 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "35": {
+                DateTimeUtc: "1753300800",
+                DeviceId: "MPG101",
+                Description: "Program 11 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "36": {
+                DateTimeUtc: "1753304400",
+                DeviceId: "MPG101",
+                Description: "Program 10 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "37": {
+                DateTimeUtc: "1753304400",
+                DeviceId: "MPG101",
+                Description: "Program 11 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "38": {
+                DateTimeUtc: "1753320900",
+                DeviceId: "MPG101",
+                Description: "Program 16 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "39": {
+                DateTimeUtc: "1753340400",
+                DeviceId: "MPG101",
+                Description: "Program 15 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+            "40": {
+                DateTimeUtc: "1753380000",
+                DeviceId: "MPG101",
+                Description: "Program 9 Not Started (Rainswitch)",
+                Severity: "0",
+                Active: true,
+                Category: "0"
+            },
+        },
+    },
+};
+
+
+export const secondSetOfDummyData: DeviceData = {
+    Devices: {
+        Items: {
+            MPS102: {
+                $type: 'RS.E.ReticDevice, RemoteScada',
+                Stations: {
+                    Summary: {
+                        Texts: {
+                            Items: {
+                                '1': {
+                                    Value: 'None active'
+                                }
+                            }
+                        },
+                        BriefTexts: {}
+                    },
+                    Items: {
+                        '1': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '2': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '3': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '4': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '5': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '6': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '7': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '8': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '9': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '10': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '11': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '12': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '13': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '14': { Status: { Value: 'Stopped', Visible: 'true' } },
+                        '15': { Status: { Value: 'Stopped', Visible: 'true' } }
+                    }
+                },
+                Programs: {
+                    Summary: {
+                        Texts: {
+                            Items: {
+                                '1': {
+                                    Value: 'No irrigation programs running'
+                                }
+                            }
+                        }
+                    },
+                    Items: {
+                        "1": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "03:00"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: false,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: false,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: false,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "06:08"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 180
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 220
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                true,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "2": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "3": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "4": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "5": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "6": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "7": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "8": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "9": {
+                            SetToRun: false,
+                            StartConditions: {
+                                Items: {
+                                    "1": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "2": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "3": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "4": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    },
+                                    "5": {
+                                        Type: "Time",
+                                        Enabled: true,
+                                        StartTimeInMinutes: "0"
+                                    }
+                                }
+                            },
+                            Pumps: {},
+                            StationGroups: {
+                                Items: {
+                                    "1": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "2": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "3": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "4": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "5": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "6": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "7": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "8": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "9": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "10": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "11": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "12": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "13": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "14": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "15": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "16": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "17": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "18": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "19": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    },
+                                    "20": {
+                                        Stations: {},
+                                        RuntTimeMinutes: 0
+                                    }
+                                }
+                            },
+                            ScaleFactor: {
+                                Value: "0",
+                                Visible: "true"
+                            },
+                            DayTable: [
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false,
+                                false
+                            ],
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+
+                    }
+                },
+                Pumps: {
+                    Items: {
+                        "1": {
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        },
+                        "2": {
+                            Status: {
+                                Value: "Stopped",
+                                Visible: "true"
+                            }
+                        }
+                    }
+                },
+                MetaData: {
+                    Device: {
+                        $type: 'RS.E.ReticDevice, RemoteScada',
+                        Stations: {
+                            Items: {
+                                '1': { Valves: { Items: {} }, ExpectedFlow: '50', Name: 'Station 1 Description' },
+                                '2': { Valves: { Items: {} }, ExpectedFlow: '30', Name: 'Station 2 Description' },
+                                '3': { Valves: { Items: {} }, ExpectedFlow: '80', Name: 'Station 3 Description' },
+                                '4': { Valves: { Items: {} }, ExpectedFlow: '70', Name: 'Station 4 Description' },
+                                '5': { Valves: { Items: {} }, ExpectedFlow: '20', Name: 'Station 5 Description' },
+                                '6': { Valves: { Items: {} }, ExpectedFlow: '70', Name: 'Station 6 Description' },
+                                '7': { Valves: { Items: {} }, ExpectedFlow: '70', Name: 'Station 7 Description' },
+                                '8': { Valves: { Items: {} }, ExpectedFlow: '60', Name: 'Station 8 Description' },
+                                '9': { Valves: { Items: {} }, ExpectedFlow: '70', Name: 'Station 9 Description' },
+                                '10': { Valves: { Items: {} }, ExpectedFlow: '70', Name: 'Station 10 Description' },
+                                '11': { Valves: { Items: {} }, ExpectedFlow: '69.9000015258789', Name: 'Station 11 Description' },
+                                '12': { Valves: { Items: {} }, ExpectedFlow: '0', Name: 'Station 12 Description' },
+                                '13': { Valves: { Items: {} }, ExpectedFlow: '0', Name: 'Station 13 Description' },
+                                '14': { Valves: { Items: {} }, ExpectedFlow: '0', Name: 'Station 14 Description' },
+                                '15': { Valves: { Items: {} }, ExpectedFlow: '0', Name: 'Station 15 Description' }
+                            }
+                        },
+                        Programs: {
+                            Items: {
+                                '1': { Type: 'MPG.Grouping', Name: 'Program 1' },
+                                '2': { Type: 'MPG.Grouping', Name: 'Program 2' },
+                                '3': { Type: 'MPG.Grouping', Name: 'Program 3' },
+                                '4': { Type: 'MPG.Grouping', Name: 'Program 4' },
+                                '5': { Type: 'MPG.Grouping', Name: 'Program 5' },
+                                '6': { Type: 'MPG.Grouping', Name: 'Program 6' },
+                                '7': { Type: 'MPG.Grouping', Name: 'Program 7' },
+                                '8': { Type: 'MPG.Grouping', Name: 'Program 8' },
+                                '9': { Type: 'MPG.Grouping', Name: 'Program 9' },
+                                // '10': { Type: 'MPG.Grouping', Name: 'Program 10' },
+                                // '11': { Type: 'MPG.Grouping', Name: 'Program 11' },
+                                // '12': { Type: 'MPG.Grouping', Name: 'Program 12' },
+                                // '13': { Type: 'MPG.Grouping', Name: 'Program 13' },
+                                // '14': { Type: 'MPG.Grouping', Name: 'Program 14' },
+                                // '15': { Type: 'MPG.Grouping', Name: 'Program 15' },
+                                // '16': { Type: 'MPG.Looping', Name: 'Looping Program' },
+                                // '17': { Type: 'MPG.Frost', Name: 'Frost Protection Program' },
+                                // '18': { Type: 'MPG.Heat', Name: 'Heat Protection Program' },
+                                // '19': { Type: 'MPG.Fertigation', Name: 'Fertigation Program' },
+                                // '20': { Type: 'MPG.Filter', Name: 'Filter Flush Program' },
+                                // '21': { Type: 'MPG.Current', Name: 'Current Profile Program' },
+                                // '22': { Type: 'MPG.Fill', Name: 'Pond Fill Program' }
+                            }
+                        },
+                        Pumps: {
+                            Items: {
+                                "1": {
+                                    Type: "Pump",
+                                    Mode: "Manual",
+                                    Name: "Pump 1"
+                                },
+                                "2": {
+                                    Type: "Pump",
+                                    Mode: "Manual",
+                                    Name: "Pump 2"
+                                }
+                            }
+                        },
+                        Number: '101',
+                        Features: {},
+                        Type: 'MPS',
+                        Location: {},
+                        Settings: {},
+                        SensorGroups: {
+                            Items: {
+                                Sense: {
+                                    Name: "Output Sense",
+                                    Items: {
+                                        MPS102_CURRENT_SENSE: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Local Sense"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_TWIN_CURRENT: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mA",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "TWiN Sense"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Sys1: {
+                                    Name: "System 1 Sensors",
+                                    Items: {
+                                        MPS102_PRESSURE_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "kPa",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "2",
+                                                        Name: "Pressure 1"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_CURRENT_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "A",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "1",
+                                                        Name: "Current 1"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_FLOW_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "L/m",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "5",
+                                                        Name: "Flow 1"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Sys2: {
+                                    Name: "System 2 Sensors",
+                                    Items: {
+                                        MPS102_PRESSURE_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "kPa",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "2",
+                                                        Name: "Pressure 2"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_CURRENT_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "A",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "1",
+                                                        Name: "Current 2"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_FLOW_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "L/m",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "5",
+                                                        Name: "Flow 2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Aux: {
+                                    Name: "Auxilary Sensors",
+                                    Items: {
+                                        MPS102_MOISTURE_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Auxilary 1"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_MOISTURE_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Auxilary 2"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                WaterUsage1: {
+                                    Name: "Water Usage",
+                                    Items: {
+                                        MPS102_VOL_1_MONTH_TOTAL: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "kL",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Month Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_VOL_1_MONTH_PERCENT: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "%",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Month %"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_VOL_1_YEAR_TOTAL: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "kL",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Year Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_VOL_1_YEAR_PERCENT: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "%",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Year %"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Weather: {
+                                    Name: "Weather",
+                                    Items: {
+                                        MPS102_W_PREV_ET: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "ET Yesterday"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_W_PREV_R: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Rain Yesterday"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_W_ET: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "ET Today"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_W_R: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Rain Today "
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Moisture: {
+                                    Name: "Soil Moisture",
+                                    Items: {
+                                        MPS102_PROBE_1: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Probe 1 Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_PROBE_2: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Probe 2 Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_PROBE_3: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Probe 3 Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_PROBE_4: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Probe 4 Total"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_PROBE_5: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Units: "mm",
+                                                        Type: "Number",
+                                                        DecimalPlaces: "0",
+                                                        Name: "Probe 5 Total"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                Info: {
+                                    Name: "Information",
+                                    Items: {
+                                        MPS102_MODEL: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Type: "String",
+                                                        Name: "Model"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        MPS102_VERSION: {
+                                            Values: {
+                                                Items: {
+                                                    "1": {
+                                                        Type: "String",
+                                                        Name: "Firmware"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Name: 'MPS',
+                    },
+
+                    TimeStamp: '1753687010',
+                },
+                Settings: {
+                    Items: {
+                        ProgramDisable: {
+                            Values: {
+                                Items: {
+                                    ProgramDisable: {
+                                        Value: "1",
+                                        Visible: "true"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                SensorGroups: {
+                    Items: {
+                        Aux: {
+                            Items: {
+                                MPS102_MOISTURE_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_MOISTURE_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Info: {
+                            Items: {
+                                MPS102_MODEL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "Mp Sequential",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_VERSION: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "v221102",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Sense: {
+                            Items: {
+                                MPS102_CURRENT_SENSE: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_TWIN_CURRENT: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Sys1: {
+                            Items: {
+                                MPS102_CURRENT_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_FLOW_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_PRESSURE_1: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        Sys2: {
+                            Items: {
+                                MPS102_CURRENT_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_FLOW_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_PRESSURE_2: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        WaterUsage1: {
+                            Items: {
+                                MPS102_VOL_1_MONTH_PERCENT: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Severity: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_VOL_1_MONTH_TOTAL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_VOL_1_YEAR_PERCENT: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "",
+                                                Severity: "",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                },
+                                MPS102_VOL_1_YEAR_TOTAL: {
+                                    Values: {
+                                        Items: {
+                                            "1": {
+                                                Value: "0",
+                                                Visible: "true"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                Badges: {},
+                IsUpdatingStatus: false,
+                Status: {},
+                SubTexts: {},
+            },
+        },
+    },
+    Alerts: {
+        Items: {
+            "17": {
+                DateTimeUtc: "1754006400",
+                DeviceId: "MPG101",
+                Description: "New Firmware Loaded",
+                Severity: "5",
                 Active: false,
                 Category: "0"
             },

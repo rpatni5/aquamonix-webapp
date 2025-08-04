@@ -1,4 +1,5 @@
 import { dummyData } from '@/app/data/device-data';
+import { ProgramService } from '@/app/services/program.service';
 import { StationService } from '@/app/services/station.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
@@ -15,7 +16,9 @@ export class SystemStatusComponent {
   objectKeys = Object.keys;
   visibleItemsBySection: { [key: string]: any[] } = {};
 
-  constructor(private stationService: StationService) { }
+  constructor(private stationService: StationService, private programService: ProgramService
+
+  ) { }
 
   sensorSections = [
     { key: 'Sense', label: 'Output Sense' },
@@ -32,19 +35,31 @@ export class SystemStatusComponent {
     '1': 'orange',
     '2': 'red'
   };
+  showStopButton: boolean = false;
 
   ngOnInit() {
-    this.init();
+    this.programService.showStopButton$.subscribe((show) => {
+      this.showStopButton = show;
+      this.init();
+    });
+   
   }
 
   async init() {
-    const resp = await this.stationService.getDeviceData();
-    this.deviceDetails = resp?.Devices?.Items?.["MPG101"]?.MetaData?.Device?.SensorGroups;
-    this.sensorGroup = resp?.Devices?.Items?.["MPG101"]?.SensorGroups;
+    if (this.showStopButton) {
+      const secondDataResp = await this.stationService.getMPSDeviceData();
+      this.deviceDetails = secondDataResp?.Devices?.Items?.["MPS102"]?.MetaData?.Device?.SensorGroups;
+      this.sensorGroup = secondDataResp?.Devices?.Items?.["MPS102"]?.SensorGroups;
+    } else {
+      const resp = await this.stationService.getDeviceData();
+      this.deviceDetails = resp?.Devices?.Items?.["MPG101"]?.MetaData?.Device?.SensorGroups;
+      this.sensorGroup = resp?.Devices?.Items?.["MPG101"]?.SensorGroups;
+    }
     this.sensorSections.forEach(section => {
       this.visibleItemsBySection[section.key] = this.getVisibleItems(section.key);
     });
   }
+
   private getVisibleItems(sectionKey: string): any[] {
     const sectionData = this.sensorGroup?.Items?.[sectionKey]?.Items;
     const metaData = this.deviceDetails?.Items[sectionKey]?.Items;

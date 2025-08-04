@@ -129,12 +129,15 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
     this.skipUnsavedCheck = true;
     this.markChangesSaved();
 
-    this.ngZone.run(() => {
+    this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        this.router.navigate(['/programs']);
-      });
+        this.ngZone.run(() => {
+          this.router.navigate(['/programs']);
+        });
+      }, 50);
     });
   }
+
 
   markChangesSaved() {
     this.sharedProgramService.setStartTimesChanged(false);
@@ -166,12 +169,12 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
   }
 
   onSaveProgram(program: any) {
+    this.skipUnsavedCheck = true;
     this.confirmationDialogService
       .confirm('Save Program', 'Do you want to save this program?', 'saveOnly')
       .then((response) => {
         if (response === 'save') {
           this.programService.setSelectedPrograms([this.program]);
-
           this.programService.sendCommandSentSuccessfully();
 
           this.notificationService?.notify('Program data has been saved successfully!', 3000, 'success');
@@ -179,11 +182,9 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
           this.skipUnsavedCheck = true;
           this.markChangesSaved();
 
-          this.ngZone.run(() => {
-            setTimeout(() => {
-              this.router.navigate(['/programs']);
-            });
-          });
+          setTimeout(() => {
+            this.router.navigate(['/programs']);
+          }, 0);
         }
       });
   }
@@ -292,14 +293,14 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
     let daysInTable = 0;
     const savedDayTable = localStorage.getItem('dayTableStruct_' + programId);
-    
+
     if (savedDayTable) {
       const parsedTable = JSON.parse(savedDayTable);
       daysInTable = parsedTable.filter(Boolean).length;
     } else {
       daysInTable = (this.program?.DayTable || []).filter(Boolean).length;
     }
-    
+
     const fortnightVolume = totalVolumeKL * enabledStartConditions * daysInTable;
 
     this.actualProgramVolumeFortnight = parseFloat(fortnightVolume.toFixed(2));

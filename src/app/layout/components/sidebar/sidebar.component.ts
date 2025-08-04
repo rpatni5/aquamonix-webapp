@@ -54,7 +54,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.programService.showStopButton$.subscribe((show) => {
       this.showStopButton = show;
-    }); this.initMenu()
+    });
+    this.initMenu()
   }
 
   ngAfterViewInit() {

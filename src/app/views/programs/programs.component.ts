@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './programs.component.scss'
 })
 export class ProgramsComponent {
-  programs: { id: string, name: string, status: string }[] = [];
+  programs: { id: string, name: string, status: string , setToRun: boolean }[] = [];
   selectedProgram: any;
   selectedGroup: number = 1;
   selectedValue = 1; 
@@ -49,20 +49,35 @@ export class ProgramsComponent {
   }
 
   init() {
-    console.log("Initalize program component")
     const device = dummyData.Devices.Items['MPG101'];
     const programsMeta = device.MetaData.Device.Programs.Items;
     const ProgramStatus = device.Programs.Items;
     this.selectedProgram = this.programService.getSelectedPrograms() ?? [];
+  
     this.programs = Object.keys(programsMeta).map(key => {
+      const meta = programsMeta[key];
+      const progStatus = ProgramStatus[key];
       const selectedProgram = this.selectedProgram?.find((s: any) => s.id === key);
+  
+      const startConditions = progStatus?.StartConditions?.Items || {};
+      const dayTable = progStatus?.DayTable || [];
+  
+      const hasValidStartTime = Object.values(startConditions).some((item: any) =>
+        item?.Enabled && item?.StartTimeInMinutes !== '0'
+      );
+      const hasSelectedDay = dayTable.some((day: boolean) => day === true);
+  
+      const setToRun = hasValidStartTime && hasSelectedDay;
+  
       return {
         id: key,
-        name: programsMeta[key].Name,
-        status: selectedProgram?.status || ProgramStatus[key]?.Status?.Value || 'Unknown',
+        name: meta.Name,
+        status: selectedProgram?.status || progStatus?.Status?.Value || 'Unknown',
+        setToRun 
       };
     });
   }
+  
 
   isProgramRunning(program: any): boolean {
     return program.status?.toLowerCase() === 'running';
