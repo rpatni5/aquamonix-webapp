@@ -198,7 +198,8 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
           localStorage.removeItem('waterBoost');
           localStorage.removeItem('stationGroupDataAll');
 
-
+          this.waterBoost = 0;
+          this.rangeIndex = this.getClosestStepIndex(0);
           this.router.navigate(['/programs', this.slugify(this.program?.name)]);
         }
       });

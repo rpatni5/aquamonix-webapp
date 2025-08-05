@@ -6,6 +6,7 @@ import { ConfirmationDialogService } from '../utils/confirmation-popup/confirmat
 import { ProgramService } from '../services/program.service';
 import { NotificationService } from '../utils/notification.service';
 import { PreviousRouteService } from '../services/previous-route.service';
+import { dummyData } from '../data/device-data';
 
 
 @Injectable({ providedIn: 'root' })
@@ -60,15 +61,25 @@ export class AuthGuard implements CanActivate {
           } else {
             let returnUrl = this.previousRouteService.getCurrentUrl();
 
+            const validSlugs = this.getValidProgramSlugs();
+
             if (!returnUrl || returnUrl === '/') {
               const match = this.router.url.match(/program-(\d+)/);
               const programId = match ? match[1] : '1';
               returnUrl = `/programs/program-${programId}`;
             }
 
-            this.ngZone.run(() => {
-              this.router.navigateByUrl(returnUrl!);
-            });
+            const slugMatch = returnUrl.match(/program-\d+/);
+            const slug = slugMatch ? slugMatch[0] : null;
+            
+            if (!slug || !validSlugs.includes(slug)) {
+              this.handleDiscard();
+            }else{
+              this.ngZone.run(() => {
+                this.router.navigateByUrl(returnUrl!);
+              });
+  
+            }
 
             return false;
           }
@@ -147,5 +158,26 @@ export class AuthGuard implements CanActivate {
     return null;
   }
 
+  getValidProgramSlugs(): string[] {
+    const device = dummyData.Devices.Items['MPG101'];
+    const programsMeta = device.MetaData.Device.Programs.Items;
+
+    return Object.values(programsMeta).map((p: any) =>
+      this.slugify(p.Name)
+    );
+  }
+
+  getProgramFromSlug(slug: string): any {
+    const device = dummyData.Devices.Items['MPG101'];
+    const programsMeta = device.MetaData.Device.Programs.Items;
+
+    return Object.entries(programsMeta).find(
+      ([, p]: any) => this.slugify(p.Name) === slug
+    )?.[1];
+  }
+
+  slugify(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-');
+  }
 }
 
