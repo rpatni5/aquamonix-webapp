@@ -82,9 +82,15 @@ export class StarttimesComponent implements UnsavedChanges {
         }
       }
       this.checkForChanges();
+      this.startTimes.forEach(time => {
+        if (time.time !== 'Off') {
+          time.enabled = true;
+        }
+      });
+
     }
   }
-  
+
   confirmTime(event: { hour: string; minute: string }) {
     const formatted = `${event.hour}:${event.minute}`;
     if (this.selectedTimeIndex !== -1) {
@@ -282,16 +288,16 @@ export class StarttimesComponent implements UnsavedChanges {
 
     this.saveToLocalStorageStructFormat();
   }
-  
+
   slugify(name: string | undefined): string {
     return name ? name.toLowerCase().replace(/\s+/g, '-') : '';
   }
 
   saveToLocalStorageStructFormat() {
     const programId = this.getProgramIdFromName(this.program?.name);
-  
+
     const items: { [key: string]: any } = {};
-  
+
     this.startTimes.forEach((item, index) => {
       items[(index + 1).toString()] = {
         Type: 'Time',
@@ -299,11 +305,11 @@ export class StarttimesComponent implements UnsavedChanges {
         StartTimeInMinutes: item.enabled ? this.convertToMinutes(item.time) : 'Off'
       };
     });
-  
+
     const structFormat = { Items: items };
-  
+
     localStorage.setItem('startTimesStruct_' + programId, JSON.stringify(structFormat));
   }
-  
+
 
 }
