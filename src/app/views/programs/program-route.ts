@@ -1,4 +1,4 @@
-import { UnsavedChangesGuard } from '@/app/guard/unsaved-changes.guard';
+import { AuthGuard } from '@/app/guard/unsaved-changes.guard';
 import { Component } from '@angular/core';
 import { Route } from '@angular/router';
 
@@ -7,12 +7,11 @@ export const Program_Routes: Route[] = [
         path: ':programName',
         loadComponent: () =>
             import('./program-description/program-description.component').then(m => m.ProgramDescriptionComponent),
-        canDeactivate: [UnsavedChangesGuard], 
     },
     {
         path: '',
         loadComponent: () => import('./programs.component').then(m => m.ProgramsComponent),
-     
+        canActivate: [AuthGuard],
 
     },
     {
@@ -22,13 +21,11 @@ export const Program_Routes: Route[] = [
                 path: '',
                 loadComponent: () =>
                     import('./program-description/groups/groups.component').then(m => m.GroupsComponent),
-                canDeactivate: [UnsavedChangesGuard],
             },
             {
                 path: ':group',
                 loadComponent: () =>
                     import('./program-description/groups/group/group.component').then(m => m.GroupComponent),
-                canDeactivate: [UnsavedChangesGuard],
             },
         ]
     },
@@ -36,13 +33,11 @@ export const Program_Routes: Route[] = [
         path: ':programName/pump',
         loadComponent: () =>
             import('./program-description/pump-selection/pump-selection.component').then(m => m.PumpSelectionComponent),
-        canDeactivate: [UnsavedChangesGuard],
     },
     {
         path: ':programName/starttimes',
         loadComponent: () =>
             import('./program-description/starttimes/starttimes.component').then(m => m.StarttimesComponent),
-        canDeactivate: [UnsavedChangesGuard],
         
     },
 

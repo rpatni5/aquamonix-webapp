@@ -1,5 +1,6 @@
 import type { Route } from '@angular/router'
-import { UnsavedChangesGuard } from '../guard/unsaved-changes.guard'
+import { AuthGuard } from '../guard/unsaved-changes.guard'
+
 
 export const VIEWS_ROUTES: Route[] = [
   {
@@ -21,14 +22,17 @@ export const VIEWS_ROUTES: Route[] = [
   {
     path: 'system-status',
     loadComponent: () => import('./system-status/system-status.component').then(m => m.SystemStatusComponent),
+    canActivate: [AuthGuard],
   },
   {
     path: 'alerts',
     loadComponent: () => import('./alerts/alerts.component').then(m => m.AlertsComponent),
+    canActivate: [AuthGuard],
   },
   {
     path: 'stations',
     loadChildren: () => import('./stations/station-routes').then(m => m.Station_Routes),
+    canActivate: [AuthGuard],
   
   },
   {
@@ -38,6 +42,7 @@ export const VIEWS_ROUTES: Route[] = [
   {
     path: 'settings',
     loadComponent: () => import('./settings/settings.component').then(m => m.SettingsComponent),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

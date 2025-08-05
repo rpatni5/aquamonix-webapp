@@ -1,111 +1,126 @@
 import { Injectable, NgZone } from '@angular/core';
-import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivate, GuardResult, MaybeAsync } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UnsavedChanges } from '../models/unsaved-changes';
 import { ConfirmationDialogService } from '../utils/confirmation-popup/confirmation-dialog.service';
 import { ProgramService } from '../services/program.service';
 import { NotificationService } from '../utils/notification.service';
+import { PreviousRouteService } from '../services/previous-route.service';
+
 
 @Injectable({ providedIn: 'root' })
-export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
+export class AuthGuard implements CanActivate {
+
   constructor(private confirmService: ConfirmationDialogService,
     private programService: ProgramService,
     private notificationService: NotificationService,
     private ngZone: NgZone,
     private router: Router,
-    
+    private previousRouteService: PreviousRouteService
+
   ) { }
 
-  canDeactivate(
-    component: UnsavedChanges | null,
-    currentRoute: ActivatedRouteSnapshot,
-    currentState: RouterStateSnapshot,
-    nextState: RouterStateSnapshot
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-
-    if (component && (component as any).skipUnsavedCheck) {
-      return true;
-    }
-    const currentUrl = currentState.url.toLowerCase();
-    const nextUrl = nextState.url.toLowerCase();
+    const currentUrl = this.router.url.toLowerCase();
+    const nextUrl = state.url.toLowerCase();
 
     const allowedScreens = ['starttimes', 'groups', 'group', 'pump', 'root'];
-
 
     const current = this.extractProgramScreen(currentUrl);
     const next = this.extractProgramScreen(nextUrl);
 
     const isSameProgramNavigation =
-      current && next && current.programId === next.programId && (
+      current &&
+      next &&
+      current.programId === next.programId &&
+      (
         allowedScreens.includes(current.screen) && allowedScreens.includes(next.screen) ||
         this.matchesAllowedPath(nextUrl)
       );
 
-    console.log('Current:', current);
-    console.log('Next:', next);
-    console.log('IsSameProgramNav:', isSameProgramNavigation);
-
-    if (isSameProgramNavigation) return true;
-
-    if (component && component.hasChanges && component.hasChanges()) {
-      return this.confirmDialog(component);
+    if (isSameProgramNavigation) {
+      return true;
     }
 
-    const hasLocalChanges = this.hasLocalStorageChanges(component);
-    if (hasLocalChanges && component) {
-      return this.confirmDialog(component);
-    }
+    const hasLocalChanges = this.hasLocalStorageChanges();
 
+    if (hasLocalChanges) {
+      return this.confirmService
+        .confirm('Unsaved Changes', 'You have unsaved changes. Save or Discard before leaving?')
+        .then((result) => {
+          if (result === 'save') {
+            this.handleSave();
+            return true;
+          } else if (result === 'discard') {
+            this.handleDiscard();
+            return true;
+          } else {
+            let returnUrl = this.previousRouteService.getCurrentUrl();
+
+            if (!returnUrl || returnUrl === '/') {
+              const match = this.router.url.match(/program-(\d+)/);
+              const programId = match ? match[1] : '1'; 
+              returnUrl = `/programs/program-${programId}`;
+            }
+
+            this.ngZone.run(() => {
+              this.router.navigateByUrl(returnUrl!);
+            });
+
+            return false;
+          }
+        });
+    }
 
     return true;
   }
 
-  private matchesAllowedPath(url: string): boolean {
-    return /^\/(programs\/program-\d+|program-\d+\/groups\/group-\d+)$/.test(url);
+  private hasLocalStorageChanges(): boolean {
+    const keysToCheck = [
+      'startTimesStruct_1',
+      'dayTableStruct_1',
+      'selectedPumps',
+      'stationGroupDataAll',
+    ];
+    return keysToCheck.some((key) => !!localStorage.getItem(key));
   }
 
-  private confirmDialog(component: UnsavedChanges): Promise<boolean> {
-    return this.confirmService
-      .confirm('Unsaved Changes', 'You have unsaved changes. Save or Discard before leaving?')
-      .then((result) => {
-        if (result === 'save') {
-          const program = (component as any)['program'];
-          const programId = program?.name?.match(/\d+$/)?.[0] || '1';
-  
-          this.programService.setSelectedPrograms([program]);
-          this.programService.sendCommandSentSuccessfully();
+  private handleSave(): void {
+    this.programService.sendCommandSentSuccessfully();
+    this.clearProgramLocalStorage();
+    this.notificationService?.notify(
+      'Program data has been saved successfully!',
+      3000,
+      'success'
+    );
+    this.ngZone.run(() => {
+      this.router.navigate(['/programs']);
+    });
+  }
 
-          localStorage.removeItem('savedStartTimes_' + programId);
-          localStorage.removeItem('startTimesStruct_' + programId);
-          localStorage.removeItem('dayTableStruct_' + programId);
-          localStorage.removeItem('selectedPumps');
-          localStorage.removeItem('stationGroupDataAll');
-  
-          this.notificationService?.notify(
-            'Program data has been saved successfully!',
-            3000,
-            'success'
-          );
-          component.markChangesSaved?.();
-          return true;
-  
-        } else if (result === 'discard') {
-          component.markChangesSaved?.();
+  private handleDiscard(): void {
+    this.clearProgramLocalStorage();
+    this.ngZone.run(() => {
+      this.router.navigate(['/programs']);
+    });
+  }
 
-          const program = (component as any)['program'];
-          const programId = program?.name?.match(/\d+$/)?.[0] || '1';
+  private clearProgramLocalStorage(): void {
+    const keys = [
+      'savedStartTimes_1',
+      'startTimesStruct_1',
+      'dayTableStruct_1',
+      'selectedPumps',
+      'stationGroupDataAll',
+    ];
+    keys.forEach((key) => localStorage.removeItem(key));
+  }
 
-          localStorage.removeItem('savedStartTimes_' + programId);
-          localStorage.removeItem('startTimesStruct_' + programId);
-          localStorage.removeItem('dayTableStruct_' + programId);
-          localStorage.removeItem('selectedPumps');
-          localStorage.removeItem('stationGroupDataAll');
-
-          return true;
-        } else {
-          return false;
-        }
-      });
+  private matchesAllowedPath(url: string): boolean {
+    return /^\/(programs\/program-\d+|program-\d+\/groups\/group-\d+)$/.test(url);
   }
 
   private extractProgramScreen(url: string): { programId: string; screen: string } | null {
@@ -129,24 +144,5 @@ export class UnsavedChangesGuard implements CanDeactivate<UnsavedChanges> {
     return null;
   }
 
-  private hasLocalStorageChanges(component: UnsavedChanges | null): boolean {
-    const program = (component as any)['program'];
-    const programId = program?.name?.match(/\d+$/)?.[0] || '1';
-
-    const keysToCheck = [
-      'startTimesStruct_' + programId,
-      'dayTableStruct_' + programId,
-      'selectedPumps',
-      'stationGroupDataAll',
-    ];
-
-    return keysToCheck.some((key) => {
-      const value = localStorage.getItem(key);
-      if (!value) return false;
-      return true;
-    });
-  }
 }
-
-
 
