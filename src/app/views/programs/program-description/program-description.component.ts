@@ -90,7 +90,7 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
   getSliderTrackColor(boostValue: number): string {
     const percent = (boostValue / 125) * 100;
-    return `linear-gradient(to right, #adb5bd ${percent}%, #dee2e6 ${percent}%)`;
+    return `linear-gradient(to right, #007cb9 ${percent}%, #dee2e6 ${percent}%)`;
   }
 
   onWaterBoostInput(): void {
