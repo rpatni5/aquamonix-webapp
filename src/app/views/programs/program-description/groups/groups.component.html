@@ -29,11 +29,14 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="fixed-clear-button">
-        <button class="btn cancel-btn px-4 rounded-pill button" (click)="clearGroups()">Clear Group</button>
-
+        <div class="d-flex justify-content-center align-items-center px-3 py-2">
+            <button
+                class="btn  floating-start-button cancel-btn  px-4 py-2 rounded-pill d-inline-flex align-items-center gap-2 fw-semibold button"
+                (click)="clearGroups()">
+                Clear Group
+            </button>
+        </div>
     </div>
 
     <div class="modal fade" id="clearGroupModal" tabindex="-1" aria-labelledby="clearGroupModalLabel"

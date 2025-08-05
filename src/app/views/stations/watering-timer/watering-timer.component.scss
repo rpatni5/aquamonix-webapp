@@ -9,16 +9,6 @@
     position: relative;
 }
 
-.floating-start-button {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    padding: 10px 20px;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-}
 
 .station-checkbox:checked {
     background-color: #007cb9;
@@ -35,11 +25,6 @@
     color: #6c757d;
 }
 
-// .modal-header { 
-//     background-color: #007cb9;
-//     border-color: #007cb9;
-//     color: white;
-// }
 .success-btn {
     background-color: #4CAF50;
     color: white;
