@@ -1,4 +1,4 @@
-.modal-body {
+#stationModal  .modal-body {
     padding: 0px !important;
     overflow-y: hidden !important;
 }
@@ -7,7 +7,7 @@
     padding: 0% !important;
 }
 
-.modal-footer {
+#stationModal  .modal-footer {
     padding: 5px !important;
 }
 
@@ -30,11 +30,11 @@
 }
 
 
-::ng-deep .modal-content {
+::ng-deep #stationModal  .modal-content {
     border-radius: 12px;
 }
 
-::ng-deep .modal-header {
+::ng-deep #stationModal  .modal-header {
     background-color: #007cb9 !important;
     color: white;
 }
@@ -44,7 +44,7 @@
     padding: 0.75rem 1rem;
 }
 
-::ng-deep .modal-footer {
+::ng-deep #stationModal  .modal-footer {
     padding: 0.75rem 1rem;
 }
 

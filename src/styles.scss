@@ -183,7 +183,7 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     }
 }
 
-.error-btn-colr{
+.error-btn-colr {
     background-color: #CF6679 !important;
     color: white !important;
     border: none;
@@ -206,6 +206,7 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     &:active {
         background-color: #d4caca !important;
     }
+
     .btn-light {
         --bs-btn-color: #000;
         --bs-btn-bg: #f8f9fa;
@@ -252,7 +253,7 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     padding: 10px 24px !important;
     font-size: 14px !important;
     font-weight: 500 !important;
-    border-radius: 999px !important; 
+    border-radius: 999px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -262,5 +263,27 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     text-align: center;
     transition: background-color 0.2s ease, transform 0.1s ease;
 
-   
+
+}
+
+.modal-body {
+    position: relative !important;
+    flex: 1 1 auto !important;
+    padding-left: 15px !important;
+    padding-right: 14px !important;
+    padding-bottom: 6px !important;
+    padding-top:0px !important
+
+}
+
+.modal-content[_ngcontent-ng-c1385427292] {
+    padding: 4px !important;
+}
+
+.modal-content {
+    background: white!important;
+    border-radius: 10px!important;
+    min-width: 280px!important;
+    max-width: 340px!important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)!important;
 }

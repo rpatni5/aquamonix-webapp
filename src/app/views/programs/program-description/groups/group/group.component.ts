@@ -9,7 +9,7 @@ import { StationsComponent } from '@views/stations/stations.component';
 
 @Component({
   selector: 'app-group',
-  standalone:true,
+  standalone: true,
   imports: [RouterModule, CommonModule, FormsModule, TimerComponent],
   templateUrl: './group.component.html',
   styleUrls: ['./group.component.scss']
@@ -32,7 +32,7 @@ export class GroupComponent {
   deleteIndex: number | null = null;
   waterBoost = 0;
   savedMinutes: number = 0;
-  
+
   constructor(private stationService: StationService,
     private route: ActivatedRoute,
     private sharedProgramService: SharedProgramService) { }
@@ -113,34 +113,14 @@ export class GroupComponent {
     this.selectedRowIndex = index;
   }
 
-  confirmDelete(index: number) {
-    this.deleteIndex = index;
-    this.showConfirmDialog = true;
-  }
-
-  cancelDelete() {
-    this.deleteIndex = null;
-    this.showConfirmDialog = false;
-  }
-
-  proceedDelete() {
-    if (this.deleteIndex !== null) {
-      const target = this.safeRenderedStations[this.deleteIndex];
-      if (!target) return;
-      this.renderedStations = this.renderedStations.filter((_, i) => i !== this.deleteIndex);
-      this.selectedRowIndex = null;
-      this.updateLocalStorageStations();
-    }
-    this.cancelDelete();
-  }
 
   private updateLocalStorageStations() {
     const groupNumber = this.group.groupNumber;
     const key = 'stationGroupDataAll';
-  
+
     const raw = localStorage.getItem(key);
     let allGroupData: any = { Items: {} };
-  
+
     if (raw) {
       try {
         allGroupData = JSON.parse(raw);
@@ -148,7 +128,7 @@ export class GroupComponent {
         console.error("Failed to parse global group data from localStorage");
       }
     }
-  
+
     const stationItems = this.renderedStations.reduce((acc, s, index) => {
       acc[index + 1] = {
         Name: s.name,
@@ -157,16 +137,16 @@ export class GroupComponent {
       };
       return acc;
     }, {} as any);
-  
+
     if (!allGroupData.Items[groupNumber]) {
       allGroupData.Items[groupNumber] = {};
     }
-  
+
     allGroupData.Items[groupNumber].Stations = { Items: stationItems };
-  
+
     localStorage.setItem(key, JSON.stringify(allGroupData));
   }
-  
+
 
   toggleSelection(station: any): void {
     station.selected = !station.selected;
@@ -329,6 +309,33 @@ export class GroupComponent {
     }
   }
 
+
+  confirmDelete(index: number) {
+    this.deleteIndex = index;
+    const modalElement = document.getElementById('confirmDeleteModal') as HTMLElement;
+    const modal = new (window as any).bootstrap.Modal(modalElement);
+    modal.show();
+  }
+
+  proceedDelete() {
+    if (this.deleteIndex !== null) {
+      const target = this.safeRenderedStations[this.deleteIndex];
+      if (!target) return;
+      this.renderedStations = this.renderedStations.filter((_, i) => i !== this.deleteIndex);
+      this.selectedRowIndex = null;
+      this.updateLocalStorageStations();
+    }
+    const modalElement = document.getElementById('confirmDeleteModal') as HTMLElement;
+    const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
+    if (modal) {
+      modal.hide();
+    }
+  }
+
+  cancelDelete() {
+    this.deleteIndex = null;
+    this.showConfirmDialog = false;
+  }
 
 
 }

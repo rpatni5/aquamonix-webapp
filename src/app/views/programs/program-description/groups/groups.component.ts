@@ -88,12 +88,18 @@ export class GroupsComponent {
   }
 
   clearGroups() {
-    this.showClearConfirm = true;
+    const modalElement = document.getElementById('clearGroupModal') as HTMLElement;
+    const modal = new (window as any).bootstrap.Modal(modalElement);
+    modal.show();
   }
 
   confirmClearGroups() {
     localStorage.removeItem('stationGroupDataAll');
-    this.showClearConfirm = false;
+    const modalElement = document.getElementById('clearGroupModal') as HTMLElement;
+    const modal = (window as any).bootstrap.Modal.getInstance(modalElement);
+    if (modal) {
+      modal.hide();
+    }
   }
 
   closeModal() {
