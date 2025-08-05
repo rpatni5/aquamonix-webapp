@@ -1,3 +1,4 @@
+import { dummyData } from '@/app/data/device-data';
 import { UnsavedChanges } from '@/app/models/unsaved-changes';
 import { ProgramService } from '@/app/services/program.service';
 import { ConfirmationDialogService } from '@/app/utils/confirmation-popup/confirmation-dialog.service';
@@ -7,7 +8,7 @@ import { SharedProgramService } from '@/app/utils/sharedService/sharedProgram';
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Route, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-program-description',
@@ -35,11 +36,27 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
     private confirmationDialogService: ConfirmationDialogService,
     private programService: ProgramService,
     private notificationService: NotificationService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    const slug = this.route.snapshot.paramMap.get('programName');
+    const validSlugs = this.getValidProgramSlugs();
+    if (!slug || !validSlugs.includes(slug)) {
+      this.router.navigate(['/programs']);
+      return;
+    }
     this.program = this.sharedProgramService.getProgram();
+    if (!this.program) {
+      this.program = this.getProgramFromSlug(slug);
+      this.sharedProgramService.setProgram(this.program); 
+    }
+    if (!this.program) {
+      this.router.navigate(['/programs']);
+      return;
+    }
+
     this.waterBoost = this.sharedProgramService.getCurrentWaterBoost();
     this.rangeIndex = this.getClosestStepIndex(this.waterBoost);
 
@@ -48,6 +65,24 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
   }
 
+  getValidProgramSlugs(): string[] {
+    const device = dummyData.Devices.Items['MPG101'];
+    const programsMeta = device.MetaData.Device.Programs.Items;
+  
+    return Object.values(programsMeta).map((p: any) =>
+      this.slugify(p.Name)
+    );
+  }
+  
+  getProgramFromSlug(slug: string): any {
+    const device = dummyData.Devices.Items['MPG101'];
+    const programsMeta = device.MetaData.Device.Programs.Items;
+  
+    return Object.entries(programsMeta).find(
+      ([, p]: any) => this.slugify(p.Name) === slug
+    )?.[1];
+  }
+  
   onRangeChange() {
     this.waterBoost = this.waterBoostSteps[this.rangeIndex];
     this.sharedProgramService.setWaterBoost(this.waterBoost);
