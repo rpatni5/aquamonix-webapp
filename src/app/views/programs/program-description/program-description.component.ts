@@ -146,12 +146,12 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
 
   discardChanges(): void {
     if (!this.hasChanges) {
-      this.router.navigate(['/programs', this.program?.name]);
+      this.router.navigate(['/programs', this.slugify(this.program?.name)]);
       return;
     }
 
     this.confirmationDialogService
-      .confirm('Unsaved Changes', 'You have unsaved changes. Save or Discard before leaving?')
+      .confirm('Unsaved Changes', 'This will cancel all changes. Are you sure you want to discard ?')
       .then((result) => {
         if (result === 'discard') {
           this.markChangesSaved();
@@ -160,10 +160,11 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
           localStorage.removeItem('startTimesStruct_' + programId);
           localStorage.removeItem('dayTableStruct_' + programId);
           localStorage.removeItem('selectedPumps');
+          localStorage.removeItem('waterBoost');
           localStorage.removeItem('stationGroupDataAll');
 
 
-          this.router.navigate(['/programs', this.program?.name]);
+          this.router.navigate(['/programs', this.slugify(this.program?.name)]);
         }
       });
   }
@@ -171,7 +172,7 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
   onSaveProgram(program: any) {
     this.skipUnsavedCheck = true;
     this.confirmationDialogService
-      .confirm('Save Program', 'Do you want to save this program?', 'saveOnly')
+      .confirm('Save Program Description', 'This will save all description. Are you sure you want to save ?', 'saveOnly')
       .then((response) => {
         if (response === 'save') {
           this.programService.setSelectedPrograms([this.program]);
@@ -184,6 +185,7 @@ export class ProgramDescriptionComponent implements UnsavedChanges {
           localStorage.removeItem('startTimesStruct_' + programId);
           localStorage.removeItem('dayTableStruct_' + programId);
           localStorage.removeItem('selectedPumps');
+          localStorage.removeItem('waterBoost');
           localStorage.removeItem('stationGroupDataAll');
 
           this.skipUnsavedCheck = true;

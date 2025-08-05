@@ -9,8 +9,8 @@
                 <li class="breadcrumb-item">
                     <a [routerLink]="['/programs', slugify(program)]" class="text-decoration-none cursor-pointer">
                         {{ program}}
-                      </a>
-                   
+                    </a>
+
                 </li>
                 <li class="breadcrumb-item active" aria-current="page"><a
                         [routerLink]="['/programs', slugify(program), 'groups']"
@@ -85,7 +85,9 @@
                                 [class.table-active]="selectedRowIndex === i" style="cursor: pointer;">
                                 <td>{{ station.index }}</td>
                                 <td style="padding-left: 6px;">{{ station.name }}</td>
-                                <td *ngIf="hasFlowData">{{ station.flow }}</td>
+                                <td *ngIf="hasFlowData">
+                                    {{ station.flow !== 0 ? (station.flow | number: '1.1-2') : '\u00A0' }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -107,12 +109,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-3 overflow-hidden">
 
-                <!-- Modal Header -->
                 <div class="modal-header bg-primary text-white py-2 d-flex justify-content-center position-relative">
                     <h6 class="modal-title m-0 text-center w-100">Select Stations</h6>
-                    <button type="button" class="btn-close btn-close-white position-absolute end-0 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                <!-- Modal Body -->
+                    <button type="button" class="btn-close btn-close-white position-absolute end-0 me-2"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
                 <div class="modal-body p-0">
                     <div style="max-height: 250px; overflow-y: auto;" class="list-group list-group-flush">
                         <label *ngFor="let station of stations; let i = index"
@@ -123,12 +124,11 @@
                     </div>
                 </div>
 
-                <!-- Modal Footer -->
                 <div class="modal-footer d-flex justify-content-between gap-2 px-3 pb-3 pt-2 mx-4">
-                    <button class="btn success-btn flex-fill" (click)="confirmStations()" data-bs-dismiss="modal">
+                    <button class="btn success-btn-colr flex-fill" (click)="confirmStations()" data-bs-dismiss="modal">
                         Select
                     </button>
-                    <button class="btn error-btn flex-fill" data-bs-dismiss="modal">
+                    <button class="btn error-btn-colr flex-fill" data-bs-dismiss="modal">
                         Cancel
                     </button>
                 </div>
@@ -145,8 +145,10 @@
                 <strong>{{ safeRenderedStations[deleteIndex!]?.name }}</strong> station?
             </p>
             <div class="d-flex justify-content-center gap-2">
-                <button class="btn cancel-btn" (click)="cancelDelete()">Cancel</button>
-                <button class="btn error-btn" (click)="proceedDelete()">Delete</button>
+                <button class="btn cancel-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn"
+                    (click)="cancelDelete()">Cancel</button>
+                <button class="btn error-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn"
+                    (click)="proceedDelete()">Delete</button>
             </div>
         </div>
     </div>

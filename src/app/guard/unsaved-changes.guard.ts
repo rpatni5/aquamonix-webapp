@@ -49,7 +49,7 @@ export class AuthGuard implements CanActivate {
 
     if (hasLocalChanges) {
       return this.confirmService
-        .confirm('Unsaved Changes', 'You have unsaved changes. Save or Discard before leaving?')
+        .confirm('Unsaved Changes', 'You have unsaved changes. Do you want to save before leaving?')
         .then((result) => {
           if (result === 'save') {
             this.handleSave();
@@ -62,7 +62,7 @@ export class AuthGuard implements CanActivate {
 
             if (!returnUrl || returnUrl === '/') {
               const match = this.router.url.match(/program-(\d+)/);
-              const programId = match ? match[1] : '1'; 
+              const programId = match ? match[1] : '1';
               returnUrl = `/programs/program-${programId}`;
             }
 
@@ -84,6 +84,8 @@ export class AuthGuard implements CanActivate {
       'dayTableStruct_1',
       'selectedPumps',
       'stationGroupDataAll',
+      'waterBoost',
+
     ];
     return keysToCheck.some((key) => !!localStorage.getItem(key));
   }
@@ -115,6 +117,7 @@ export class AuthGuard implements CanActivate {
       'dayTableStruct_1',
       'selectedPumps',
       'stationGroupDataAll',
+      'waterBoost',
     ];
     keys.forEach((key) => localStorage.removeItem(key));
   }

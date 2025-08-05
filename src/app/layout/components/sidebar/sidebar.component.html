@@ -134,24 +134,24 @@
 </ng-template>
 
 <div class="modal fade" id="confirmStopIrrigationModal" tabindex="-1" aria-labelledby="confirmStopIrrigationModal"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" >
+        <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="confirmStopIrrigationModalLabel">Stopping All Irrigation</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
+            <div class="modal-header">
+                <h5 class="modal-title m-0 text-center w-100" id="confirmStopIrrigationModalLabel">Stopping all irrigation</h5>
+            </div>
 
-      <div class="modal-body">
-        Stop all irrigation on this controller?
-      </div>
+            <div class="modal-body text-center">
+              Stop all irrigation on this controller?
+            </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-muted" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" class="btn primary-btn" (click)="confirmStopIrrigation()">Stop</button>
-      </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn cancel-btn fw-semibold" data-bs-dismiss="modal">Cancel</button>
+              <button type="button"class="btn error-btn fw-semibold"(click)="confirmStopIrrigation()">Stop</button>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
+

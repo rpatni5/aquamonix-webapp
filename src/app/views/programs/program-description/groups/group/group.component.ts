@@ -9,12 +9,14 @@ import { StationsComponent } from '@views/stations/stations.component';
 
 @Component({
   selector: 'app-group',
-  imports: [RouterModule, CommonModule, FormsModule, TimerComponent, StationsComponent],
+  standalone:true,
+  imports: [RouterModule, CommonModule, FormsModule, TimerComponent],
   templateUrl: './group.component.html',
-  styleUrl: './group.component.scss'
+  styleUrls: ['./group.component.scss']
 })
 
 export class GroupComponent {
+
   program: any;
   groupName: any;
   group: any;
@@ -30,6 +32,7 @@ export class GroupComponent {
   deleteIndex: number | null = null;
   waterBoost = 0;
   savedMinutes: number = 0;
+  
   constructor(private stationService: StationService,
     private route: ActivatedRoute,
     private sharedProgramService: SharedProgramService) { }
@@ -55,7 +58,7 @@ export class GroupComponent {
           this.renderedStations = Object.values(stations).map((station: any, index: number) => ({
             index: index + 1,
             name: station.Name,
-            flow: station.ExpectedFlow
+            flow: Number(station.ExpectedFlow) || 0
           }));
 
           this.selectedTimeDisplay = this.convertMinutesToHHMM(groupData.RuntTimeMinutes || 0);
@@ -78,7 +81,7 @@ export class GroupComponent {
     this.stations = Object.keys(stationMeta).map((key) => ({
       id: key,
       name: stationMeta[key].Name,
-      flow: stationMeta[key].ExpectedFlow,
+      flow: Number(stationMeta[key].ExpectedFlow),
       selected: false
     }));
   }
@@ -110,13 +113,6 @@ export class GroupComponent {
     this.selectedRowIndex = index;
   }
 
-  deleteStation(index: number) {
-    const target = this.safeRenderedStations[index];
-    if (!target) return;
-    this.renderedStations = this.renderedStations.filter((station, i) => i !== index);
-    this.selectedRowIndex = null;
-  }
-
   confirmDelete(index: number) {
     this.deleteIndex = index;
     this.showConfirmDialog = true;
@@ -133,9 +129,44 @@ export class GroupComponent {
       if (!target) return;
       this.renderedStations = this.renderedStations.filter((_, i) => i !== this.deleteIndex);
       this.selectedRowIndex = null;
+      this.updateLocalStorageStations();
     }
     this.cancelDelete();
   }
+
+  private updateLocalStorageStations() {
+    const groupNumber = this.group.groupNumber;
+    const key = 'stationGroupDataAll';
+  
+    const raw = localStorage.getItem(key);
+    let allGroupData: any = { Items: {} };
+  
+    if (raw) {
+      try {
+        allGroupData = JSON.parse(raw);
+      } catch (e) {
+        console.error("Failed to parse global group data from localStorage");
+      }
+    }
+  
+    const stationItems = this.renderedStations.reduce((acc, s, index) => {
+      acc[index + 1] = {
+        Name: s.name,
+        ExpectedFlow: Number(s.flow),
+        Valves: { Items: {} }
+      };
+      return acc;
+    }, {} as any);
+  
+    if (!allGroupData.Items[groupNumber]) {
+      allGroupData.Items[groupNumber] = {};
+    }
+  
+    allGroupData.Items[groupNumber].Stations = { Items: stationItems };
+  
+    localStorage.setItem(key, JSON.stringify(allGroupData));
+  }
+  
 
   toggleSelection(station: any): void {
     station.selected = !station.selected;

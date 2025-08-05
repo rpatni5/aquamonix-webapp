@@ -62,7 +62,7 @@
         <div class="p-4 status-card rounded shadow-sm bg-white mb-3">
             <div class="d-flex justify-content-between">
                 <span class="fw-semibold">Status</span>
-                <span class="text-muted">{{ program?.status  }}</span>
+                <span class="text-muted">{{ program?.status }}</span>
 
             </div>
 
@@ -84,13 +84,12 @@
         </div>
     </div>
     <div class="d-flex justify-content-end gap-2">
-        <button class="btn success-btn  px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn " (click)="onSaveProgram(program)">
+        <button class="btn success-btn fw-semibold" (click)="onSaveProgram(program)">
             Save
         </button>
 
-        <button class="btn error-btn px-4 py-2 d-inline-flex align-items-center gap-2 fw-semibold pill-btn" (click)="discardChanges()">
+        <button class="btn error-btn fw-semibold" (click)="discardChanges()">
             Discard
         </button>
     </div>
-
 </div>
