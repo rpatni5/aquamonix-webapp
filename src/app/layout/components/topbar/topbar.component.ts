@@ -44,12 +44,9 @@ export class TopbarComponent {
 
   updateBodyAttribute() {
     const body = this.el.nativeElement.ownerDocument.body
-    if (this.isSidebarVisible) {
       this.renderer.setAttribute(body, 'data-sidebar', 'default')
-    } else {
-      this.renderer.setAttribute(body, 'data-sidebar', 'hidden')
-    }
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
     this.updateOnWindowResize()
@@ -57,12 +54,9 @@ export class TopbarComponent {
 
   updateOnWindowResize() {
     const body = document.body
-    if (window.innerWidth < 1040) {
-      this.renderer.setAttribute(body, 'data-sidebar', 'hidden')
-    } else {
-      this.renderer.setAttribute(body, 'data-sidebar', 'default')
-    }
+    this.renderer.setAttribute(body, 'data-sidebar', 'default')
   }
+  
   openFullscreen() {
     const elem: any = document.documentElement
     console.log(this.isFullscreen)

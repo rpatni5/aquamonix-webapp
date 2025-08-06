@@ -237,9 +237,9 @@ li {
         }
     }
 
-    .logo-box {
-        display: none !important;
-    }
+    // .logo-box {
+    //     display: none !important;
+    // }
 
     .topbar-custom {
         left: 0px !important;
@@ -355,19 +355,19 @@ body[data-menu-color="dark"] {
 }
 
 
-body[data-sidebar="hidden"] {
-    .app-sidebar-menu {
-        width: 0px;
-    }
+// body[data-sidebar="hidden"] {
+//     .app-sidebar-menu {
+//         width: 0px;
+//     }
 
-    .topbar-custom {
-        left: 0px;
-    }
+//     .topbar-custom {
+//         left: 0px;
+//     }
 
-    .content-page {
-        margin-left: 0px;
-    }
-}
+//     .content-page {
+//         margin-left: 0px;
+//     }
+// }
 
 // body[data-sidebar="default"] {
 //     .app-sidebar-menu {
