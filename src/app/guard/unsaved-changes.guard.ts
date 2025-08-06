@@ -7,6 +7,7 @@ import { ProgramService } from '../services/program.service';
 import { NotificationService } from '../utils/notification.service';
 import { PreviousRouteService } from '../services/previous-route.service';
 import { dummyData } from '../data/device-data';
+import { SharedProgramService } from '../utils/sharedService/sharedProgram';
 
 
 @Injectable({ providedIn: 'root' })
@@ -17,7 +18,8 @@ export class AuthGuard implements CanActivate {
     private notificationService: NotificationService,
     private ngZone: NgZone,
     private router: Router,
-    private previousRouteService: PreviousRouteService
+    private previousRouteService: PreviousRouteService,
+    private sharedProgramService: SharedProgramService,
 
   ) { }
 
@@ -102,6 +104,10 @@ export class AuthGuard implements CanActivate {
   }
 
   private handleSave(): void {
+    const program = this.sharedProgramService.getProgram();
+    const programsArray = Array.isArray(program) ? program : [program];
+
+    this.programService.setSelectedPrograms(programsArray);
     this.programService.sendCommandSentSuccessfully();
     this.clearProgramLocalStorage();
     this.notificationService?.notify(

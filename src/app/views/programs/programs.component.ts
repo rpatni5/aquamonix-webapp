@@ -57,7 +57,14 @@ export class ProgramsComponent {
     this.programs = Object.keys(programsMeta).map(key => {
       const meta = programsMeta[key];
       const progStatus = ProgramStatus[key];
-      const selectedProgram = this.selectedProgram?.find((s: any) => s.id === key);
+      let selectedProgram = null;
+
+      if (Array.isArray(this.selectedProgram)) {
+        selectedProgram = this.selectedProgram.find((s: any) => s.id === key);
+      } else if (this.selectedProgram?.id === key) {
+        selectedProgram = this.selectedProgram;
+      }
+      
   
       const startConditions = progStatus?.StartConditions?.Items || {};
       const dayTable = progStatus?.DayTable || [];
