@@ -69,26 +69,19 @@ export class StarttimesComponent implements UnsavedChanges {
       if (saved && saved.programId === programId) {
         this.startTimes = saved.startTimes;
         this.selectedDays = saved.selectedDays;
-        if (!this.sharedProgramService.hasStartTimesChanged()) {
-          this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
-          this.originalSelectedDays = [...this.selectedDays];
-        }
       } else {
         this.patchStartTimes(programData.StartConditions?.Items || {});
         this.selectedDays = programData.DayTable || new Array(14).fill(false);
-        if (!this.sharedProgramService.hasStartTimesChanged()) {
-          this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
-          this.originalSelectedDays = [...this.selectedDays];
-        }
       }
       this.startTimes.forEach(time => {
         if (time.time !== 'Off') {
           time.enabled = true;
         }
       });
+      this.originalStartTimes = JSON.parse(JSON.stringify(this.startTimes));
+      this.originalSelectedDays = [...this.selectedDays];
+    
       this.checkForChanges();
-     
-
     }
   }
 
