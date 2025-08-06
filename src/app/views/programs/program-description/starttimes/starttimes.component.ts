@@ -81,12 +81,13 @@ export class StarttimesComponent implements UnsavedChanges {
           this.originalSelectedDays = [...this.selectedDays];
         }
       }
-      this.checkForChanges();
       this.startTimes.forEach(time => {
         if (time.time !== 'Off') {
           time.enabled = true;
         }
       });
+      this.checkForChanges();
+     
 
     }
   }

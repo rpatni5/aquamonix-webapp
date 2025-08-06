@@ -73,14 +73,12 @@ export class AuthGuard implements CanActivate {
 
             const slugMatch = returnUrl.match(/program-\d+/);
             const slug = slugMatch ? slugMatch[0] : null;
-            
             if (!slug || !validSlugs.includes(slug)) {
               this.handleDiscard();
-            }else{
+            } else {
               this.ngZone.run(() => {
                 this.router.navigateByUrl(returnUrl!);
               });
-  
             }
 
             return false;
@@ -92,9 +90,11 @@ export class AuthGuard implements CanActivate {
   }
 
   private hasLocalStorageChanges(): boolean {
+    const program = this.sharedProgramService.getProgram();
+    const programId = this.getProgramIdFromName(program?.name);
     const keysToCheck = [
-      'startTimesStruct_1',
-      'dayTableStruct_1',
+      `startTimesStruct_${programId}`,
+      `dayTableStruct_${programId}`,
       'selectedPumps',
       'stationGroupDataAll',
       'waterBoost',
@@ -102,6 +102,12 @@ export class AuthGuard implements CanActivate {
     ];
     return keysToCheck.some((key) => !!localStorage.getItem(key));
   }
+
+  private getProgramIdFromName(name: string): string {
+    const match = name?.match(/\d+$/);
+    return match ? match[0] : '1';
+  }
+
 
   private handleSave(): void {
     const program = this.sharedProgramService.getProgram();
@@ -128,10 +134,12 @@ export class AuthGuard implements CanActivate {
   }
 
   private clearProgramLocalStorage(): void {
+    const program = this.sharedProgramService.getProgram();
+    const programId = this.getProgramIdFromName(program?.name);
     const keys = [
-      'savedStartTimes_1',
-      'startTimesStruct_1',
-      'dayTableStruct_1',
+      `startTimesStruct_${programId}`,
+      `dayTableStruct_${programId}`,
+      `savedStartTimes_${programId}`,
       'selectedPumps',
       'stationGroupDataAll',
       'waterBoost',
