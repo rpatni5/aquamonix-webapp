@@ -7,7 +7,8 @@
         </div>
         <div class="d-flex align-items-center">
             <div class=" d-flex justify-content-center gap-2">
-                <button class="btn success-btn-colr px-2 py-1  d-inline-flex align-items-center gap-2 fw-semibold watering"
+                <button
+                    class="btn success-btn-colr px-2 py-1  d-inline-flex align-items-center gap-2 fw-semibold watering"
                     (click)="startWatering()" *ngIf="hasSelectedStations()">
                     <i class="mdi mdi-water mdi-18px"></i> Start Watering
                 </button>
@@ -16,11 +17,12 @@
                     Test Output
                 </button> -->
             </div>
-            <div class="form-check">
-                <label class="form-check-label py-1" for="selectAll">Select All</label>
-                <input type="checkbox" class="form-check-input station-checkbox mx-1 py-1" id="selectAll"
+            <div class="form-check d-flex align-items-center">
+                <input type="checkbox" class="form-check-input station-checkbox me-2" id="selectAll"
                     [checked]="areAllSelected()" (change)="toggleSelectAll($event.target.checked)" />
+                <label class="form-check-label m-0" for="selectAll">Select All</label>
             </div>
+
         </div>
     </div>
     <div class="card-container">

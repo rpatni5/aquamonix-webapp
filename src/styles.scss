@@ -99,6 +99,8 @@ body.sidebar-collapsed .sidebar-stop-button-container {
 
 .text-main {
     color: #007cb9 !important;
+    font-size: 18px !important;
+
 }
 
 .text-lightBold {
@@ -283,7 +285,7 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     background: white !important;
     border-radius: 10px !important;
     min-width: 280px !important;
-    max-width: 340px !important;
+    max-width: 382px !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
 }
 
@@ -334,8 +336,8 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
 @media (max-width: 768px) {
     app-sidebar {
         width: 100%;
-        height: auto!important;
-        position: absolute!important;
+        height: auto !important;
+        position: absolute !important;
         z-index: 1030 !important;
     }
 
@@ -348,22 +350,81 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
 
 
 .logo-box {
-    position: fixed!important;
-    padding: 0 20px!important;
-    top: 0!important;
-    transition: all .1s ease-out!important;
+    position: fixed !important;
+    padding: 0 20px !important;
+    top: 0 !important;
+    transition: all .1s ease-out !important;
 
     .logo {
         span.logo-lg {
-            display: block!important;
+            display: block !important;
         }
 
         span.logo-sm {
-            display: none!important;
+            display: none !important;
         }
     }
 
     .logo-light {
-        display: none!important;
+        display: none !important;
     }
 }
+
+#sidebar-menu>ul>li>a {
+    font-size: 1.079rem !important;
+}
+
+h2 {
+    font-size: 2.3rem !important;
+}
+
+h5 {
+    font-size: 1.5rem !important;
+}
+
+.text-muted.pt-1 {
+    font-size: 18px !important;
+}
+
+h2.text-secondary {
+    font-size: 1.75rem !important;
+}
+
+h4.text-secondary {
+    font-size: 1.70rem !important;
+}
+
+
+.breadcrumb,
+.breadcrumb-item,
+.breadcrumb-item a {
+    font-size: 18px;
+}
+
+.watering {
+    border-radius: 8px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+    padding-left: 10px !important;
+    padding-right: 15px !important;
+    font-size: 17px !important;
+}
+
+.text-label {
+    color: rgb(36, 29, 29) !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+
+button,
+.btn {
+    font-size: 16px !important;
+}
+
+.modal-body {
+    font-size: 17px!important;
+}
+
+.modal-footer .btn {
+    font-size: 16px!important;
+}
+

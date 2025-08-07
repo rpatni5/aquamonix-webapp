@@ -3,6 +3,7 @@
   height: 38px;
   text-align: center;
   background-color: #fff;
+  font-size: 17px;
 }
 
 .time-checkbox {
@@ -79,7 +80,7 @@
 }
 
 .day-box i {
-  font-size: 30px;
+  font-size: 32px;
 
 }
 
@@ -91,4 +92,8 @@
     cursor: not-allowed;
     pointer-events: none;
   }
+}
+
+.program-description-container .start-time-label {
+  font-size: 17px;
 }

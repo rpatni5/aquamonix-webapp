@@ -7,7 +7,7 @@
         <div class="alert-time">
           {{ alert.DateTimeUtc }}
         </div>
-        <div [style.color]="getSeverityColor(alert.Severity)">
+        <div class="alert-message" [style.color]="getSeverityColor(alert.Severity)">
           {{ alert.Description }}
         </div>
       </div>

@@ -11,6 +11,10 @@
     padding: 5px !important;
 }
 
+#stationModal  .modal-title  {
+    font-size: 19px !important;
+}
+
 #stationModal {
     max-height: 600px !important;
 }
@@ -27,6 +31,7 @@
     margin-bottom: 20px !important;
     width: 150px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    font-size: 17px !important;
 }
 
 
@@ -57,7 +62,7 @@
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
-    font-size: 14px;
+    font-size: 17px;
 
     th {
         background-color: #f1f3f5;
@@ -120,4 +125,13 @@
 .confirm-box p {
     margin-bottom: 1rem;
     font-size: 0.95rem;
+}
+
+.card-body {
+    font-size: 18px; 
+  }
+  
+
+  .card-title {
+    font-size: 24.5px !important;
 }

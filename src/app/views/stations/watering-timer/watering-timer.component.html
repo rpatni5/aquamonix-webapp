@@ -12,16 +12,16 @@
         </nav>
     </div>
     <div class="card-container">
-        <div class="bg-light p-3 mb-2 fw-bold text-dark border-bottom">Set Timer</div>
+        <div class="bg-light p-3 mb-2 fw-bold text-dark border-bottom section-header">Set Timer</div>
         <div class="d-flex justify-content-center align-items-center px-3 py-2 border-bottom">
-            <div class="fw-semibold m-3">Select Time -</div>
-            <div class="d-flex justify-content-center align-items-center position-relative text-primary fw-semibold"
+            <div class="fw-semibold m-3 section-header">Select Time -</div>
+            <div class="d-flex justify-content-center align-items-center position-relative text-primary fw-semibold section-header"
                 (click)="openPopup = true">
                 {{selectedTimeDisplay}}
             </div>
         </div>
 
-        <div class="bg-light p-3 mt-3 fw-bold text-dark border-bottom">Select Pumps</div>
+        <div class="bg-light p-3 mt-3 fw-bold text-dark border-bottom section-header">Select Pumps</div>
         <div class="list-group">
             <div class="list-group-item d-flex justify-content-between align-items-center mb-2 p-3"
                 *ngFor="let pump of pumps" (click)="togglePumpSelection(pump)">
@@ -33,7 +33,7 @@
 
         <div class="d-flex justify-content-center align-items-center px-3 py-2">
             <button
-                class="btn  floating-start-button success-btn-colr px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold"
+                class="btn  floating-start-button success-btn-colr px-4 py-2  d-inline-flex align-items-center gap-2 fw-semibold watering"
                 (click)="confirmWatering()">
                 <i class="mdi mdi-water"></i> Start Watering
             </button>
