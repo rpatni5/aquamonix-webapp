@@ -41,7 +41,7 @@ export const MENU_ITEMS: MenuItemType[] = [
   {
     key: 'layout',
     label: 'Layout',
-    icon: 'layout',
+    icon: 'map-pin',
     url: '/layout',
   },
   {
