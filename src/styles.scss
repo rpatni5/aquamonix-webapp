@@ -45,7 +45,10 @@
 .app-sidebar-menu ngx-simplebar {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto; 
+    padding-top: 10px;
 }
 
 #sidebar-menu {
@@ -55,6 +58,7 @@
     flex-direction: column;
     min-height: 0;
 }
+
 
 #side-menu {
     flex: 1 1 auto;
@@ -332,7 +336,7 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     app-sidebar {
         width: 100%;
         height: auto !important;
@@ -457,7 +461,6 @@ button,
     display: flex;
     align-items: center !important;
     justify-content: center !important;
-    z-index: 9999 !important;
 }
 
 .modal-content {
@@ -472,4 +475,32 @@ button,
 #sidebar-menu a[aria-controls="layout"] i {
     color: red !important;
     fill: red !important;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+#app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.content-page {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.content {
+    min-height: fit-content;
+}
+
+
+body {
+    padding-bottom: 0 !important
 }

@@ -86,3 +86,48 @@
 .section-header {
     font-size: 21px;
 }
+
+
+@media (max-width: 800px) {
+    .content-page {
+        overflow: hidden !important;
+    }
+
+    .card-container {
+        height: calc(100vh - 190px);
+        overflow-y: auto !important;
+    }
+
+    .list-group {
+        padding-bottom: 80px;
+    }
+
+    .floating-start-button {
+        margin-bottom: 15px;
+    }
+}
+@media (max-width: 600px) {
+    .content-page {
+        overflow: hidden !important;
+        height: 100% !important;
+    }
+
+    .card-container {
+        height: 100% !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    #app-layout {
+        overflow: hidden !important;
+    }
+
+    .card-container {
+        padding-bottom: 90px !important;
+    }
+
+    .floating-start-button {
+        margin-bottom: 15px !important;
+    }
+}
+

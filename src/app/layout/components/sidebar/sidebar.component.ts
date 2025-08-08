@@ -24,7 +24,7 @@ import { ProgramService } from '@/app/services/program.service'
     NgbCollapseModule,
   ],
   templateUrl: './sidebar.component.html',
-  styles: ``,
+  styleUrl: './sidebar.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
@@ -131,6 +131,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       })
     }
   }
+  
   onStopClick() {
     const modalElement = document.getElementById('confirmStopIrrigationModal') as HTMLElement;
     const modal = new (window as any).bootstrap.Modal(modalElement);
