@@ -47,7 +47,7 @@
     flex-direction: column;
     flex: 1 1 auto;
     min-height: 0;
-    overflow-y: auto; 
+    overflow-y: auto;
     padding-top: 10px;
 }
 
@@ -374,9 +374,14 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
 }
 
 #sidebar-menu>ul>li>a {
-    font-size: 1.555 rem;
+    font-size: 1.8 rem !important;
     font-weight: bold !important;
 }
+
+::ng-deep #sidebar-menu>a {
+    font-size: 1.8rem !important;
+}
+
 
 h2 {
     font-size: 2.76rem !important;
@@ -503,4 +508,14 @@ body {
 
 body {
     padding-bottom: 0 !important
+}
+
+#sidebar-menu>ul>li>a {
+    color: #007cb9;
+    display: block;
+    padding: 10px 20px;
+    position: relative;
+    transition: all 0.4s;
+    font-size: 18px !important;
+    font-weight: 500;
 }
