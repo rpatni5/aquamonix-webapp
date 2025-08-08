@@ -8,7 +8,7 @@
     <div *ngFor="let section of sensorSections" class="mb-1">
       <ng-container
         *ngIf="visibleItemsBySection && visibleItemsBySection[section.key] && visibleItemsBySection[section.key].length > 0">
-        <small class="text-muted  label d-block mt-3 mb-0">{{ section.label }}:</small>
+        <span class="text-muted  label d-block mt-3 mb-0">{{ section.label }}:</span>
         <div *ngFor="let item of visibleItemsBySection[section.key] || []" class="d-flex justify-content-between py-2 ">
           <span class="fw-medium sensor-name">{{ item.name }}</span>
           <span [ngStyle]="{ color: severityColors[item.severity] || 'black' }" class="value">
