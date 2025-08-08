@@ -1,9 +1,13 @@
 <div class="container-fluid alerts-container pt-2">
   <h2 class="mb-3 text-secondary">System Status</h2>
 
+
+  <div class="p-3 program-card rounded shadow-sm bg-white mb-3">
+    <img src="assets/images/aqua/trendimg.png" alt="Trend Chart" class="img-fluid rounded" />
+  </div>
+
   <div class=" p-3 program-card rounded shadow-sm bg-white mb-3">
     <div class="d-flex justify-content-between align-items-center my-2">
-      <h5 class="mb-0 fw-bold">Device Details</h5>
     </div>
     <div *ngFor="let section of sensorSections" class="mb-1">
       <ng-container
@@ -18,4 +22,22 @@
       </ng-container>
     </div>
   </div>
+
+  <div class="p-3 program-card rounded shadow-sm bg-white mb-5">
+    <h6 class="text-danger fw-bold  mt-3 files">Files</h6>
+    <div class="d-flex ">
+      <div class="file-item flex-fill ">
+        <img src="assets/images/aqua/pdfi.png" alt="PDF" class="pdf-icon" />
+        <span class="file-name">As-Con.pdf</span>
+      </div>
+      <div class="file-item flex-fill gap-4">
+        <img src="assets/images/aqua/pdfi.png" alt="PDF" class="pdf-icon" />
+        <span class="file-name">Pump test.pdf</span>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
 </div>

@@ -40,6 +40,11 @@ export const VIEWS_ROUTES: Route[] = [
     loadChildren: () => import('./programs/program-route').then(m => m.Program_Routes),
   },
   {
+    path: 'layout',
+    loadComponent: () => import('./layout/layout/layout.component').then(m => m.LayoutComponent),
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'settings',
     loadComponent: () => import('./settings/settings.component').then(m => m.SettingsComponent),
     canActivate: [AuthGuard],

@@ -39,6 +39,12 @@ export const MENU_ITEMS: MenuItemType[] = [
     url: '/programs',
   },
   {
+    key: 'layout',
+    label: 'Layout',
+    icon: 'layout',
+    url: '/layout',
+  },
+  {
     key: 'settings',
     label: 'Settings',
     icon: 'settings',
