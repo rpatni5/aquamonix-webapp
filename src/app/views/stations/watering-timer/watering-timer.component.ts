@@ -10,6 +10,7 @@ import flatpickr from "flatpickr";
 
 @Component({
   selector: 'app-watering-timer',
+  standalone: true,
   imports: [FormsModule, CommonModule, RouterModule, TimerComponent],
   templateUrl: './watering-timer.component.html',
   styleUrl: './watering-timer.component.scss'
@@ -20,9 +21,9 @@ export class WateringTimerComponent {
   selectedTime: any;
   selectedStations: any[] = [];
   openPopup = false;
-  selectedTimeDisplay = '00:00';
+  selectedTimeDisplay = '00:30';
   selectedHour: number = 0;
-  selectedMinute: number = 0;
+  selectedMinute: number = 30;
 
   constructor(
     private stationService: StationService,

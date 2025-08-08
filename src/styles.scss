@@ -421,10 +421,49 @@ button,
 }
 
 .modal-body {
-    font-size: 17px!important;
+    font-size: 17px !important;
 }
 
 .modal-footer .btn {
-    font-size: 16px!important;
+    font-size: 16px !important;
 }
 
+
+// ......popup zindex and centerd .....
+.modal {
+    z-index: 20000 !important;
+}
+
+.modal-backdrop {
+    z-index: 19999 !important;
+}
+
+.modal-dialog {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+}
+
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 9999 !important;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 10px;
+    min-width: 280px;
+    max-width: 320px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
