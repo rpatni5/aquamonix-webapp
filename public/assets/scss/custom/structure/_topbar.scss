@@ -10,7 +10,7 @@
     right: 0;
     height: $topbar-height;
     box-shadow: $box-shadow-sm;
-    z-index: 1000;
+    z-index: 0;
     transition: all .1s ease-out;
 
     .topnav-menu {
