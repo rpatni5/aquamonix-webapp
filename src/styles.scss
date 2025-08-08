@@ -309,8 +309,8 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     app-sidebar {
         width: 100%;
         height: auto;
-        position: absolute;
-        z-index: 1100;
+        // position: absolute;
+        // z-index: 1100;
     }
 
     app-topbar {
@@ -330,8 +330,8 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     app-sidebar {
         width: 100%;
         height: auto;
-        position: absolute;
-        z-index: 1500;
+        // position: absolute;
+        // z-index: 1500;
     }
 
 }
@@ -340,8 +340,8 @@ body[data-sidebar="hidden"] .sidebar-stop-button-container {
     app-sidebar {
         width: 100%;
         height: auto !important;
-        position: absolute !important;
-        z-index: 1030 !important;
+        // position: absolute !important;
+        // z-index: 1030 !important;
     }
 
     app-topbar {
@@ -519,3 +519,4 @@ body {
     font-size: 18px !important;
     font-weight: 500;
 }
+
